@@ -18,7 +18,7 @@ const height = h - margin.top - margin.bottom;
 //     .style("opacity", 0);
 
 
-let graphYear = 2014;
+
 let numCols = Math.floor(Math.sqrt(500));
 
 const svg = d3.select("#graph1")
@@ -41,7 +41,7 @@ const sliderYears = d3.sliderBottom()
     .ticks(5)
     .step(1)
     .tickFormat(d3.format('.0f'))
-    .default(2014);
+    .default(2018);
 
 var gStep = d3
     .select('div#slider-step')
@@ -57,7 +57,6 @@ d3.select('p#value-step').text(sliderYears.value());
 let mastergraph1 = function(dataInput) {
 
     svg.selectAll("rect")
-    // .data(function(d){ return d.values})
         .data(d3.map( dataInput, function(d){return d.issuer_company } ).keys())
         .enter()
         .append("rect")
@@ -78,11 +77,15 @@ let mastergraph1 = function(dataInput) {
 }; // end of Mastergraph1 function
 
 let updateGraph = function(year) {
-    let t = d3.transition()
-        .duration(2000);
 
-    let rects  = d3.selectAll("rect")
-        .data(d3.map( year, function(d){return d.issuer_company } ).keys());
+    let t = d3.transition()
+        .duration(100);
+
+    let rects = svg.selectAll("rect")
+        .data(d3.map( year, function(d){return d.issuer_company } ).keys())
+
+    // let rects  = d3.selectAll("rect")
+    //     .data(d3.map( year, function(d){return d.issuer_company } ).keys());
 
     // exit
     rects
@@ -90,11 +93,19 @@ let updateGraph = function(year) {
         .remove();
 
     let blocks = rects
+        .data(d3.map( year, function(d){return d.issuer_company } ).keys())
         .enter()
         .append("rect")
         .attr('class','blocks')
         .attr("height", 0)
-        .attr("y", height)
+        .attr("y", function(d, i){
+            let rowIndex = Math.floor(i/numCols);
+            return  rowIndex * 15
+        })
+        .attr("x", function(d, i){
+            let colIndex = i % numCols;
+            return colIndex * 15
+        })
         .attr('width', 12);
 
 
@@ -113,37 +124,38 @@ let updateGraph = function(year) {
         .style("stroke", "E5E5E5");
 };
 
+
+
 // load the data
 let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
     .then(function(data) {
-
         // convert years from strings to numbers
         data.forEach( function(d) {return d.year = +d.year });
 
-        // select only the data for the single year that is defined in the global scope or from the slider
-        let getYearData = function( dataSource, yearInputFromSlider ) {
-            return (dataSource.filter( d => d.year === yearInputFromSlider ));
-            };
-        // let yearData = data.filter((d) => { return d.year === graphYear; });
-
-        // create dataset for graph that shows first before slider is triggered
-        let startYearData = getYearData(data, graphYear);
+        let getYearData = function( data, yearInputFromSlider) {
+            return (data.filter( function(d) {return d.year === yearInputFromSlider }));
+        };
+        let startYearData = getYearData(data, 2018);
 
         mastergraph1(startYearData);
 
         // tiggering the updateGraph function
         sliderYears.on('onchange', val => {
-            let updatedData = getYearData(data, val)
+
+            let updatedData = getYearData(data, val);
             //console.log("updated data: " + updatedData[1].year); // ! does work
             updateGraph(updatedData);
             d3.select('p#value-step').text(val);
-            });
+        });
 
     })
     .catch(function(error){
         console.log('data load error')
     });
 
+    // select only the data for the single year that is defined in the global scope or from the slider
+
+    // create dataset for graph that shows first before slider is triggered, based on first year
 
 
 
