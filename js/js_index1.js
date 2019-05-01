@@ -54,10 +54,28 @@ var gStep = d3
 gStep.call(sliderYears);
 d3.select('p#value-step').text(sliderYears.value());
 
-let mastergraph1 = function(dataInput) {
+
+
+let mastergraph = function(dataInput) {
+
+
+    // select companies only
+    let companies = d3.map( dataInput, function(d){return d.issuer_company } ).keys();
+
+    let getShStroke = (company) => {
+           dataInput.forEach((datarow)=>{
+            if (datarow.issuer_company === company) {
+                if (datarow.count_sharehold_propo > 0)
+                    { return true}
+                else { return false}
+            }
+        })
+        }; // end of getShStroke
+
+
 
     svg.selectAll("rect")
-        .data(d3.map( dataInput, function(d){return d.issuer_company } ).keys())
+        .data(companies )
         .enter()
         .append("rect")
         .attr("width", 12)
@@ -71,21 +89,28 @@ let mastergraph1 = function(dataInput) {
             return  rowIndex * 15
         })
         .attr("r", 6)
-        .style("fill", 'red')
-        .style("stroke", "E5E5E5");
+        .attr("stroke", (d) => { console.log(getShStroke(d))
+        })
+        .attr("fill", 'None')
 
 }; // end of Mastergraph1 function
 
-let updateGraph = function(year) {
+let updateGraph = function(yearData) {
+    let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
+
+    // // function to get shareholder targeted comps
+    // let getShareh = (yearData) => {
+    //     d3.map( yearData, function(d){return d.issuer_company } ).keys())
+    //     if (yearData.) {
+    //
+    //     }
+    // };
 
     let t = d3.transition()
         .duration(100);
 
     let rects = svg.selectAll("rect")
-        .data(d3.map( year, function(d){return d.issuer_company } ).keys())
-
-    // let rects  = d3.selectAll("rect")
-    //     .data(d3.map( year, function(d){return d.issuer_company } ).keys());
+        .data(companies);
 
     // exit
     rects
@@ -93,7 +118,7 @@ let updateGraph = function(year) {
         .remove();
 
     let blocks = rects
-        .data(d3.map( year, function(d){return d.issuer_company } ).keys())
+        .data(companies )
         .enter()
         .append("rect")
         .attr('class','blocks')
@@ -121,7 +146,8 @@ let updateGraph = function(year) {
         })
         .attr("width", 12)
         .attr("height", 12)
-        .style("stroke", "E5E5E5");
+        .style("stroke", "#b5b2aa")
+        .style('fill', 'none')
 };
 
 
@@ -132,16 +158,20 @@ let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
         // convert years from strings to numbers
         data.forEach( function(d) {return d.year = +d.year });
 
+        // get data from slider
         let getYearData = function( data, yearInputFromSlider) {
             return (data.filter( function(d) {return d.year === yearInputFromSlider }));
         };
         let startYearData = getYearData(data, 2018);
 
-        mastergraph1(startYearData);
+
+
+
+        // start with a graph
+        mastergraph(startYearData);
 
         // tiggering the updateGraph function
         sliderYears.on('onchange', val => {
-
             let updatedData = getYearData(data, val);
             //console.log("updated data: " + updatedData[1].year); // ! does work
             updateGraph(updatedData);
@@ -149,9 +179,9 @@ let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
         });
 
     })
-    .catch(function(error){
-        console.log('data load error')
-    });
+    // .catch(function(error){
+    //     console.log('data load error')
+    // });
 
     // select only the data for the single year that is defined in the global scope or from the slider
 
