@@ -56,21 +56,28 @@ d3.select('p#value-step').text(sliderYears.value());
 
 
 
-let mastergraph = function(dataInput) {
-
+let mastergraph = function(yearData) {
+    console.log(yearData);
 
     // select companies only
-    let companies = d3.map( dataInput, function(d){return d.issuer_company } ).keys();
+    let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
 
     let getShStroke = (company) => {
-           dataInput.forEach((datarow)=>{
+           let shaStroke = "#C2C2C2";
+           let againstManFill = "None";
+
+        yearData.forEach( ( datarow ) => {
             if (datarow.issuer_company === company) {
-                if (datarow.count_sharehold_propo > 0)
-                    { return true}
-                else { return false}
+                let shaPropCount = +datarow.count_sharehold_propo;
+                let againstMgmt = +datarow.count_against_mgmt;
+                if ( shaPropCount > 0 )
+                    { shaStroke = "#f25c00"}
+                if ( againstMgmt > 0)
+                    { againstManFill = "#FFD275" }
             }
-        })
-        }; // end of getShStroke
+        });
+        return [shaStroke, againstManFill];
+    }; // end of getShStroke
 
 
 
@@ -89,22 +96,33 @@ let mastergraph = function(dataInput) {
             return  rowIndex * 15
         })
         .attr("r", 6)
-        .attr("stroke", (d) => { console.log(getShStroke(d))
-        })
-        .attr("fill", 'None')
+        .attr("stroke", (d) => { return getShStroke(d)[0] })
+        .attr("fill", (d) => { return getShStroke(d)[1] })
 
 }; // end of Mastergraph1 function
 
 let updateGraph = function(yearData) {
+
+    // select companies only
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
 
-    // // function to get shareholder targeted comps
-    // let getShareh = (yearData) => {
-    //     d3.map( yearData, function(d){return d.issuer_company } ).keys())
-    //     if (yearData.) {
-    //
-    //     }
-    // };
+    let getShStroke = (company) => {
+        let shaStroke = "#C2C2C2";
+        let againstManFill = "None";
+
+        yearData.forEach( ( datarow ) => {
+            if (datarow.issuer_company === company) {
+                let shaPropCount = +datarow.count_sharehold_propo;
+                let againstMgmt = +datarow.count_against_mgmt;
+                if ( shaPropCount > 0 )
+                { shaStroke = "#f25c00"}
+                if ( againstMgmt > 0)
+                { againstManFill = "#FFD275" }
+            }
+        });
+        return [shaStroke, againstManFill];
+    }; // end of getShStroke
+
 
     let t = d3.transition()
         .duration(100);
@@ -146,8 +164,8 @@ let updateGraph = function(yearData) {
         })
         .attr("width", 12)
         .attr("height", 12)
-        .style("stroke", "#b5b2aa")
-        .style('fill', 'none')
+        .style("stroke", (d)=>{return getShStroke(d)[0]})
+        .style('fill', (d)=>{return getShStroke(d)[1]})
 };
 
 
@@ -155,17 +173,15 @@ let updateGraph = function(yearData) {
 // load the data
 let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
     .then(function(data) {
+
         // convert years from strings to numbers
-        data.forEach( function(d) {return d.year = +d.year });
+        data.forEach( function(d) { return d.year = +d.year });
 
         // get data from slider
         let getYearData = function( data, yearInputFromSlider) {
             return (data.filter( function(d) {return d.year === yearInputFromSlider }));
         };
         let startYearData = getYearData(data, 2018);
-
-
-
 
         // start with a graph
         mastergraph(startYearData);
@@ -179,9 +195,9 @@ let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
         });
 
     })
-    // .catch(function(error){
-    //     console.log('data load error')
-    // });
+    .catch(function(error){
+        console.log('data load error')
+    });
 
     // select only the data for the single year that is defined in the global scope or from the slider
 
