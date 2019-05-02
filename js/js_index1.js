@@ -1,12 +1,12 @@
-const w = window.innerWidth;
-const h = window.innerHeight;
+const w = window.innerWidth * 0.3;
+const h = 500;
 
 
 const margin = {
     right: 40,
     left: 40,
     top: 40,
-    bottom: 40
+    bottom: 10
 };
 
 const width = w - margin.right - margin.left;
@@ -52,7 +52,8 @@ var gStep = d3
     .attr('transform', 'translate(30,30)');
 
 gStep.call(sliderYears);
-d3.select('p#value-step').text(sliderYears.value());
+//d3.select('p#value-step').text(sliderYears.value());
+d3.select('#main-title').text("How did the largest asset managers vote in " + sliderYears.value() + "?");
 
 
 
@@ -191,7 +192,8 @@ let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
             let updatedData = getYearData(data, val);
             //console.log("updated data: " + updatedData[1].year); // ! does work
             updateGraph(updatedData);
-            d3.select('p#value-step').text(val);
+            //d3.select('p#value-step').text(val);
+            d3.select('#main-title').text("How did the largest asset managers vote in " + val + "?");
         });
 
     })
