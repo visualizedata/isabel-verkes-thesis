@@ -33,7 +33,7 @@ const svg = d3.select("#graph1")
 
 
 
-// add a slider:
+// add a slider to communicate with each graph:
 const sliderYears = d3.sliderBottom()
     .min([2014])
     .max([2018])
@@ -56,25 +56,27 @@ gStep.call(sliderYears);
 d3.select('#main-title').text("How did the largest asset managers vote in " + sliderYears.value() + "?");
 
 
+////////////////////////////
+// ###  Graph functions ###
+////////////////////////////
 
 let mastergraph = function(yearData) {
-    console.log(yearData);
 
     // select companies only
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
 
     let getShStroke = (company) => {
-           let shaStroke = "#C2C2C2";
-           let againstManFill = "None";
+        let shaStroke = "#C2C2C2";
+        let againstManFill = "None";
 
         yearData.forEach( ( datarow ) => {
             if (datarow.issuer_company === company) {
                 let shaPropCount = +datarow.count_sharehold_propo;
                 let againstMgmt = +datarow.count_against_mgmt;
                 if ( shaPropCount > 0 )
-                    { shaStroke = "#f25c00"}
+                { shaStroke = "#f25c00"}
                 if ( againstMgmt > 0)
-                    { againstManFill = "#FFD275" }
+                { againstManFill = "#FFD275" }
             }
         });
         return [shaStroke, againstManFill];
@@ -101,7 +103,6 @@ let mastergraph = function(yearData) {
         .attr("fill", (d) => { return getShStroke(d)[1] })
 
 }; // end of Mastergraph1 function
-
 let updateGraph = function(yearData) {
 
     // select companies only
@@ -170,6 +171,9 @@ let updateGraph = function(yearData) {
 };
 
 
+///////////////////////////
+// ###  Graph 1 - BR   ###
+///////////////////////////
 
 // load the data
 let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
@@ -200,16 +204,42 @@ let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
     .catch(function(error){
         console.log('data load error')
     });
+/////////////
+// ### Graph 2 - VANG ###
+///////////////////////////
 
-    // select only the data for the single year that is defined in the global scope or from the slider
+// load the data
+let dataBR = d3.csv('Data/BrDataSP500_allyears.csv')
+    .then(function(data) {
 
-    // create dataset for graph that shows first before slider is triggered, based on first year
+        // convert years from strings to numbers
+        data.forEach( function(d) { return d.year = +d.year });
 
+        // get data from slider
+        let getYearData = function( data, yearInputFromSlider) {
+            return (data.filter( function(d) {return d.year === yearInputFromSlider }));
+        };
+        let startYearData = getYearData(data, 2018);
+        console.log(startYearData)
+        //
+        // start with a graph
+        mastergraph(startYearData);
 
+        // // tiggering the updateGraph function
+        // sliderYears.on('onchange', val => {
+        //     let updatedData = getYearData(data, val);
+        //     //console.log("updated data: " + updatedData[1].year); // ! does work
+        //     updateGraph(updatedData);
+        //     //d3.select('p#value-step').text(val);
+        //     d3.select('#main-title').text("How did the largest asset managers vote in " + val + "?");
+        // });
 
+    })
+    .catch(function(error){
+        console.log('data load error')
+    });
 
-
-
-
+// select only the data for the single year that is defined in the global scope or from the slider
+// create dataset for graph that shows first before slider is triggered, based on first year
 
 
