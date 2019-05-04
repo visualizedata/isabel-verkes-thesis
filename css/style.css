@@ -56,6 +56,12 @@
 }
 
 
+/*EFFECTS IN SQUARE GRAPH*/
+/*#hoverAtCompany {*/
+    /*width: 14px;*/
+    /*height: 14px;*/
+/*}*/
+
 /*BUTTONS TO SET CATEGORIES*/
 .button:focus {
     outline: none;
@@ -117,3 +123,8 @@
     stroke-linecap: square;
     cursor: initial;
 }
+
+/*.rectangles:hover {*/
+    /*width: 15px;*/
+    /*height: 15px;*/
+/*}*/

@@ -12,15 +12,10 @@ const margin = {
 const width = w - margin.right - margin.left;
 const height = h - margin.top - margin.bottom;
 
-// const tooltip = d3.select("body")
-//     .append("div")
-//     .attr("class", "tooltip")
-//     .style("opacity", 0);
-
-
 
 let numCols = Math.floor(Math.sqrt(500));
 
+// set areas for graphs
 const graph1 = d3.select("#graph1")
     .append("svg")
     .attr("id", "chart1")
@@ -44,6 +39,13 @@ const graph3 = d3.select("#graph3")
     .attr("height", h)
     .append("g")
     .attr("transform", "translate(0" + margin.left + "," + margin.top + ")");
+
+// prepare tooltips
+let tooltip = d3.select('#subtitle')
+    .attr('class', 'tooltip')
+    // .style('opacity', 0);
+
+
 
 // build the first graph, appears before the slider was touched
 
@@ -88,8 +90,9 @@ let mastergraph = function(yearData, graphNr) {
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
 
     let getShStroke = (company) => {
+
         let shaStroke = "#C2C2C2";
-        let againstManFill = "None";
+        let againstManFill = "#FFFFFF";
 
         yearData.forEach( ( datarow ) => {
             if (datarow.issuer_company === company) {
@@ -105,10 +108,11 @@ let mastergraph = function(yearData, graphNr) {
     }; // end of getShStroke
 
 
-    graphNr.selectAll("rect")
-        .data(companies )
+    let sqs = graphNr.selectAll("rect")
+        .data(companies)
         .enter()
         .append("rect")
+        .attr("class","rectangles")
         .attr("width", 12)
         .attr("height", 12)
         .attr("x", function(d, i){
@@ -118,10 +122,54 @@ let mastergraph = function(yearData, graphNr) {
         .attr("y", function(d, i){
             let rowIndex = Math.floor(i/numCols);
             return  rowIndex * 15
+        });
+
+
+    sqs.attr("stroke", (d) => { return getShStroke(d)[0] })
+        .attr("fill", (d) => { return getShStroke(d)[1] });
+
+
+        sqs.on('mouseover', function(d)  {
+
+            let companyName = d;
+            tooltip
+                .transition()
+                .duration(100)
+                .style('opacity', 0.9);
+            tooltip
+                .html(() =>  {return "on proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
+                .style("left", d + "px")
+                .style("top", d + "px");
+
+            if ( this !== d3.select('circle:last-child').node()) {
+                    this.parentElement.appendChild(this)};
+
+            let rect = d3.select(this)
+                .attr("class", "selectedSq")
+                .attr("transform", "translate(-2, -2)")
+                .attr("height", 19)
+                .attr("width", 19)
+                .attr("stroke-width", 4);
+
         })
-        .attr("r", 6)
-        .attr("stroke", (d) => { return getShStroke(d)[0] })
-        .attr("fill", (d) => { return getShStroke(d)[1] })
+        .on( 'mouseout', function (d) {
+
+            let rects = d3.selectAll('rect')
+                .classed("selectedSq", false)
+                .attr('mouse','pointer')
+                .attr("transform", "translate(0, 0)")
+                .attr("height", 12)
+                .attr("width", 12)
+                .attr("stroke-width", 1);
+
+            tooltip
+                .html(() => {return "on proxy issues at S&P 500 companies" })
+                .transition()
+                .duration(100)
+                .style('opacity', 0.9);
+        });
+
+
 
 }; // end of Mastergraph1 function
 
@@ -145,7 +193,7 @@ let updateGraph = function(yearData, graphNr) {
             }
         });
         return [shaStroke, againstManFill];
-    }; // end of getShStroke  
+    }; // end of getShStroke
 
 
     let t = d3.transition()

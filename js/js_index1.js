@@ -194,7 +194,7 @@ let data = d3.csv('Data/Vanguard_proposals_all_years.csv')
         mastergraph(startYearData);
 
         // tiggering the updateGraph function
-        sliderYears.on('onchange', val => {
+        sliderYears.on( 'onchange', val => {
             let updatedData = getYearData(data, val);
             //console.log("updated data: " + updatedData[1].year); // ! does work
             updateGraph(updatedData);
