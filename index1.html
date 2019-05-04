@@ -13,32 +13,54 @@
     <!-- load css -->
     <link rel="stylesheet" href="css/style.css">
 
-
 </head>
 
 <body>
     <div class='container-title'>
-        <h1 id="main-title">How did the largest asset managers vote?</h1>
-        <h4 id="subtitle"></h4>
+        <h1 id="main-title">How the world's largest asset managers voted</h1>
+        <h4 id="subtitle">on shareholder proposals in the S&P</h4>
+
     </div>
 
     <div class='container'>
 
-        <div id="graph1"> </div>
+        <div class='container-graph'>
+            <h3 class="GraphFundTitle">BlackRock</h3>
+            <div id="graph1"></div>
+        </div>
 
-        <div svg id="graph2"> </div>
+        <div class='container-graph'>
+            <h3 class="GraphFundTitle">Vanguard</h3>
+            <div id="graph2"></div>
+        </div>
 
-        <div id="graph3"></div>
+        <div class='container-graph'>
+            <h3 class="GraphFundTitle">StateStreet</h3>
+            <div id="graph3"></div>
+        </div>
 
     </div>
 
     <div class='container-controls'>
         <div class="slider">
-            <!--<div class="col-sm-2"><p id="value-step"></p></div>-->
-            <!--<div class="col-sm"><div id="slider-step"></div></div>-->
             <div> <p id="value-step"></p></div>
             <div> <div id="slider-step"></div></div>
         </div>
+
+        <div class='container-issues'>
+            <p class="issue-text">Select by </p>
+            <button class="button">
+                Environmental
+            </button>
+            <button class="button">
+                Social
+            </button>
+            <button class="button">
+                Governance
+            </button>
+            <p class ="issue-text">issues</p>
+        </div>
+
     </div>
 
 </body>

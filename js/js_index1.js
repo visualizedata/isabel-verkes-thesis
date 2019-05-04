@@ -3,9 +3,9 @@ const h = 500;
 
 
 const margin = {
-    right: 40,
-    left: 40,
-    top: 40,
+    right: 10,
+    left: 10,
+    top: 10,
     bottom: 10
 };
 
@@ -103,6 +103,8 @@ let mastergraph = function(yearData) {
         .attr("fill", (d) => { return getShStroke(d)[1] })
 
 }; // end of Mastergraph1 function
+
+// Update graph
 let updateGraph = function(yearData) {
 
     // select companies only
@@ -220,7 +222,7 @@ let dataBR = d3.csv('Data/BrDataSP500_allyears.csv')
             return (data.filter( function(d) {return d.year === yearInputFromSlider }));
         };
         let startYearData = getYearData(data, 2018);
-        console.log(startYearData)
+        console.log(startYearData);
         //
         // start with a graph
         mastergraph(startYearData);

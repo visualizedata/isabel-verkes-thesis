@@ -1,11 +1,11 @@
-const w = window.innerWidth * 0.3;
-const h = 500;
+const w = 400;
+const h = 400;
 
 
 const margin = {
-    right: 40,
-    left: 40,
-    top: 40,
+    right: 10,
+    left: 10,
+    top: 10,
     bottom: 10
 };
 
@@ -37,7 +37,7 @@ const graph2 = d3.select("#graph2")
     .append("g")
     .attr("transform", "translate(0" + margin.left + "," + margin.top + ")");
 
-const graph3 = d3.select("#graph2")
+const graph3 = d3.select("#graph3")
     .append("svg")
     .attr("id", "chart3")
     .attr("width", w)
@@ -145,11 +145,11 @@ let updateGraph = function(yearData, graphNr) {
             }
         });
         return [shaStroke, againstManFill];
-    }; // end of getShStroke
+    }; // end of getShStroke  
 
 
     let t = d3.transition()
-        .duration(100);
+        .duration(1000);
 
     let rects = graphNr.selectAll("rect")
         .data(companies);
@@ -164,7 +164,7 @@ let updateGraph = function(yearData, graphNr) {
         .enter()
         .append("rect")
         .attr('class','blocks')
-        .attr("height", 0)
+        .attr("height", 6)
         .attr("y", function(d, i){
             let rowIndex = Math.floor(i/numCols);
             return  rowIndex * 15
@@ -173,7 +173,7 @@ let updateGraph = function(yearData, graphNr) {
             let colIndex = i % numCols;
             return colIndex * 15
         })
-        .attr('width', 12);
+        .attr('width', 10);
 
 
     blocks.merge(rects)
@@ -288,6 +288,6 @@ sliderYears.on("onchange", val => {
     let StStDataUpdate = getYearData(dataStSt, val);
     updateGraph(StStDataUpdate, graph3);
 
-})
+});
 
 
