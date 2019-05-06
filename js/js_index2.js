@@ -84,6 +84,20 @@ let getYearData = function( data, yearInputFromSlider) {
     return (data.filter( function(d) {return d.year === yearInputFromSlider }));
 };
 
+// to move the SVG element to the front
+d3.selection.prototype.moveToFront = function() {
+    return this.each(function(){
+        this.parentNode.appendChild(this);
+    });
+};
+
+let getCompanyClass = function(d) {return d.split('*').join('').split("!").join('').split('.').join('').split(',').join('').split('&').join('').split("'").join('').split(' ').join('_').toLowerCase()};
+
+let change_environ_btn_clicked = function(d){
+    
+    return
+}
+
 let mastergraph = function(yearData, graphNr) {
 
     // select companies only
@@ -107,12 +121,10 @@ let mastergraph = function(yearData, graphNr) {
         return [shaStroke, againstManFill];
     }; // end of getShStroke
 
-
     let sqs = graphNr.selectAll("rect")
         .data(companies)
         .enter()
         .append("rect")
-        .attr("class","rectangles")
         .attr("width", 12)
         .attr("height", 12)
         .attr("x", function(d, i){
@@ -122,16 +134,18 @@ let mastergraph = function(yearData, graphNr) {
         .attr("y", function(d, i){
             let rowIndex = Math.floor(i/numCols);
             return  rowIndex * 15
+        })
+        .attr("stroke", (d) => { return getShStroke(d)[0] })
+        .attr("fill", (d) => { return getShStroke(d)[1] })
+        .attr("class",function(d){
+            let companyClass = getCompanyClass(d)
+            return "c" + companyClass + "__rect"
         });
 
 
-    sqs.attr("stroke", (d) => { return getShStroke(d)[0] })
-        .attr("fill", (d) => { return getShStroke(d)[1] });
-
-
         sqs.on('mouseover', function(d)  {
-
             let companyName = d;
+
             tooltip
                 .transition()
                 .duration(100)
@@ -141,26 +155,37 @@ let mastergraph = function(yearData, graphNr) {
                 .style("left", d + "px")
                 .style("top", d + "px");
 
-            if ( this !== d3.select('circle:last-child').node()) {
+            if ( this !== d3.select('rect:last-child').node()) {
                     this.parentElement.appendChild(this)};
+            //
+            // let rect = d3.select(this)
+            //     .attr("class", "selectedSq")
+            //     .attr("transform", "translate(-2, -2)")
+            //     .attr("height", 19)
+            //     .attr("width", 19)
+            //     .attr("stroke-width", 4);
 
-            let rect = d3.select(this)
-                .attr("class", "selectedSq")
-                .attr("transform", "translate(-2, -2)")
-                .attr("height", 19)
-                .attr("width", 19)
-                .attr("stroke-width", 4);
+            let companyClass = getCompanyClass(d)
+
+            d3.selectAll('.c'+ companyClass + "__rect")
+                .moveToFront()
+                .classed('selectedSq',true);
 
         })
         .on( 'mouseout', function (d) {
+            let companyClass = getCompanyClass(d)
 
-            let rects = d3.selectAll('rect')
-                .classed("selectedSq", false)
-                .attr('mouse','pointer')
-                .attr("transform", "translate(0, 0)")
-                .attr("height", 12)
-                .attr("width", 12)
-                .attr("stroke-width", 1);
+            d3.selectAll('.c'+ companyClass + "__rect")
+                .classed('selectedSq',false);
+
+            //
+            // let rects = d3.selectAll('rect')
+            //     .classed("selectedSq", false)
+            //     .attr('mouse','pointer')
+            //     .attr("transform", "translate(0, 0)")
+            //     .attr("height", 12)
+            //     .attr("width", 12)
+            //     .attr("stroke-width", 1);
 
             tooltip
                 .html(() => {return "on proxy issues at S&P 500 companies" })
@@ -169,7 +194,9 @@ let mastergraph = function(yearData, graphNr) {
                 .style('opacity', 0.9);
         });
 
-
+        d3.select("#environ_btn").on('click', function(d) {
+            console.log('asdd function here')
+        })
 
 }; // end of Mastergraph1 function
 
@@ -199,8 +226,11 @@ let updateGraph = function(yearData, graphNr) {
     let t = d3.transition()
         .duration(1000);
 
+    //d3.selectAll('rect').classed('selectedSq',false)
     let rects = graphNr.selectAll("rect")
+        .classed('selectedSq',false)
         .data(companies);
+
 
     // exit
     rects
@@ -221,10 +251,18 @@ let updateGraph = function(yearData, graphNr) {
             let colIndex = i % numCols;
             return colIndex * 15
         })
-        .attr('width', 10);
+        .attr('width', 10)
+        .attr("class",function(d){
+            let companyClass = getCompanyClass(d)
+            return "c" + cleanComp + "__rect"
+        })
+        .classed('selectedSq',false)
+        .classed(function(d){
+            let companyClass = getCompanyClass(d);
+            return '.c'+ companyClass + "__rect" }, false);
 
 
-    blocks.merge(rects)
+    let sqs = blocks.merge(rects)
         .transition(t)
         .attr("x", function(d, i){
             let colIndex = i % numCols;
@@ -238,9 +276,36 @@ let updateGraph = function(yearData, graphNr) {
         .attr("height", 12)
         .style("stroke", (d)=>{return getShStroke(d)[0]})
         .style('fill', (d)=>{return getShStroke(d)[1]})
+        .on('mouseover', function(d)  {
+            let companyName = d;
+
+            tooltip
+                .transition()
+                .duration(100)
+                .style('opacity', 0.9);
+            tooltip
+                .html(() =>  {return "on proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
+                .style("left", d + "px")
+                .style("top", d + "px");
+
+            d3.selectAll('.c'+ companyClass + "__rect")
+                .moveToFront()
+                .classed('selectedSq',true);
+        })
+        .on( 'mouseout', function (d) {
+            let companyClass = getCompanyClass(d)
+
+            d3.selectAll('.c'+ companyClass + "__rect")
+                .classed('selectedSq',false);
+
+            tooltip
+                .html(() => {return "on proxy issues at S&P 500 companies" })
+                .transition()
+                .duration(100)
+                .style('opacity', 0.9);
+        });
+
 };
-
-
 
 
 ///////////////////////////
@@ -257,7 +322,7 @@ d3.csv('Data/BrDataSP500_allyears.csv')
 
         // get data from slider
         let startYearData = getYearData(data, 2018);
-
+        console.log(startYearData)
         // start with a graph
         mastergraph(startYearData, graph1);
         return dataBr = data;
