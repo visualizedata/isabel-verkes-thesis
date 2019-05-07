@@ -102,7 +102,7 @@ let mastergraph = function(yearData, graphNr) {
     let getShStroke = (company) => {
 
         let shaStroke = "#C2C2C2";
-        let againstManFill = "#FFFFFF";
+        let againstManFill = "#ffffff";
 
         yearData.forEach( ( datarow ) => {
             if (datarow.issuer_company === company) {
@@ -200,7 +200,7 @@ let updateGraph = function(yearData, graphNr) {
 
     let getShStroke = (company) => {
         let shaStroke = "#C2C2C2";
-        let againstManFill = "None";
+        let againstManFill = "#ffffff";
 
         yearData.forEach( ( datarow ) => {
             if (datarow.issuer_company === company) {
@@ -303,6 +303,115 @@ let updateGraph = function(yearData, graphNr) {
 
 };
 
+let updateGrap_hEnviron = function(yearData, graphNr) {
+
+    // select unique companies only
+    let companies = d3.map( yearData, function(d){return d.comp} ).keys();
+    // console.log(companies);
+    // console.log(yearData);
+    let getStrokeText = (company) => {
+        let environPropNr = "#a6c256";
+        let againstManFill = "#ff6f77";
+            yearData.forEach( ( datarow ) => {
+                if (datarow.comp === company) {
+                    let shaPropCount = +datarow.count_sharehold_propo;
+                    let againstMgmt = +datarow.count_against_mgmt;
+                if ( shaPropCount > 0 )
+                    { shaStroke = "#f25c00"}
+                if ( againstMgmt > 0)
+                    { againstManFill = "#FFD275" };
+            }
+    //     });
+    //     return [shaStroke, againstManFill];
+    // }; // end of getShStroke
+    //
+    //
+    // let t = d3.transition()
+    //     .duration(1000);
+    //
+    // //d3.selectAll('rect').classed('selectedSq',false)
+    // let rects = graphNr.selectAll("rect")
+    //     .classed('selectedSq',false)
+    //     .data(companies);
+    // // exit
+    // rects
+    //     .exit()
+    //     .remove();
+    //
+    //
+    // let blocks = rects
+    //     .data(companies )
+    //     .enter()
+    //     .append("rect")
+    //     .attr('class','blocks')
+    //     .attr("height", 6)
+    //     .attr("y", function(d, i){
+    //         let rowIndex = Math.floor(i/numCols);
+    //         return  rowIndex * 15
+    //     })
+    //     .attr("x", function(d, i){
+    //         let colIndex = i % numCols;
+    //         return colIndex * 15
+    //     })
+    //     .attr('width', 10)
+    //     .classed('selectedSq',false)
+    //     .attr("removeClass",function(d){
+    //         let companyClass = getCompanyClass(d);
+    //         return "c" + companyClass + "__rect"
+    //     });
+    //
+    //
+    // let sqs = blocks.merge(rects)
+    //     .transition(t)
+    //     .attr("x", function(d, i){
+    //         let colIndex = i % numCols;
+    //         return colIndex * 15
+    //     })
+    //     .attr("y", function(d, i){
+    //         let rowIndex = Math.floor(i/numCols);
+    //         return  rowIndex * 15
+    //     })
+    //     .attr("width", 12)
+    //     .attr("height", 12)
+    //     .style("stroke", (d)=>{return getShStroke(d)[0]})
+    //     .style('fill', (d)=>{return getShStroke(d)[1]})
+    //     .attr("class",function(d){
+    //         let companyClass = getCompanyClass(d);
+    //         return "c" + companyClass + "__rect"
+    //     });
+    //
+    // blocks.on('mouseover', function(d)  {
+    //     let companyName = d;
+    //     let companyClass = getCompanyClass(d);
+    //
+    //     d3.selectAll('.c'+ companyClass + "__rect")
+    //         .moveToFront()
+    //         .classed('selectedSq',true);
+    //
+    //     tooltip
+    //         .transition()
+    //         .duration(100)
+    //         .style('opacity', 0.9);
+    //     tooltip
+    //         .html(() =>  {return "on proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
+    //         .style("left", d + "px")
+    //         .style("top", d + "px");
+    //
+    // })
+    //     .on( 'mouseout', function (d) {
+    //         let companyClass = getCompanyClass(d);
+    //
+    //         d3.selectAll('.c'+ companyClass + "__rect")
+    //             .classed('selectedSq',false);
+    //
+    //         tooltip
+    //             .html(() => {return "on proxy issues at S&P 500 companies" })
+    //             .transition()
+    //             .duration(100)
+    //             .style('opacity', 0.9);
+    //     });
+
+};
 ///////////////////////////
 // ###  Graph 1 - BR   ###
 ///////////////////////////
@@ -443,13 +552,19 @@ let getdataEnviron = function(year) {
 };
 
 
-d3.select("#environ_btn").on('click', function(d, i) {
+d3.select("#environ_btn").on('click', function(d) {
     let environYearData = getdataEnviron(thisYear); // get data for each fund
     let BrEnviron = environYearData[0];
     let VangEnviron = environYearData[1];
     let StStEnviron = environYearData[2];
-    console.log(VangEnviron);
+    //console.log(VangEnviron);
 
+
+    //updateGrap_hEnviron(BrEnviron, graph1);
+    //updateGrap_hEnviron(VangEnviron, graph2);
+    //updateGrap_hEnviron(StStEnviron, graph3);
+
+    // add title things
     //d3.select("#propText").html(()=>)
 
 });
