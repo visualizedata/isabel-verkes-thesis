@@ -50,7 +50,6 @@ let tooltip = d3.select('#subtitle')
 // build the first graph, appears before the slider was touched
 
 
-
 // add a slider to communicate with each graph:
 let sliderYears = d3.sliderBottom()
     .min([2014])
@@ -80,6 +79,8 @@ gStep.call(sliderYears);
 
 //Preparing dataformatter and 2 functions for graphs
 
+let thisYear = 2018;
+
 let getYearData = function( data, yearInputFromSlider) {
     return (data.filter( function(d) {return d.year === yearInputFromSlider }));
 };
@@ -93,16 +94,11 @@ d3.selection.prototype.moveToFront = function() {
 
 let getCompanyClass = function(d) {return d.split('*').join('').split("!").join('').split('.').join('').split(',').join('').split('&').join('').split("'").join('').split(' ').join('_').toLowerCase()};
 
-let change_environ_btn_clicked = function(d){
-    
-    return
-}
 
 let mastergraph = function(yearData, graphNr) {
-
     // select companies only
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
-
+    //console.log(yearData[0]);
     let getShStroke = (company) => {
 
         let shaStroke = "#C2C2C2";
@@ -138,7 +134,7 @@ let mastergraph = function(yearData, graphNr) {
         .attr("stroke", (d) => { return getShStroke(d)[0] })
         .attr("fill", (d) => { return getShStroke(d)[1] })
         .attr("class",function(d){
-            let companyClass = getCompanyClass(d)
+            let companyClass = getCompanyClass(d);
             return "c" + companyClass + "__rect"
         });
 
@@ -194,9 +190,6 @@ let mastergraph = function(yearData, graphNr) {
                 .style('opacity', 0.9);
         });
 
-        d3.select("#environ_btn").on('click', function(d) {
-            console.log('asdd function here')
-        })
 
 }; // end of Mastergraph1 function
 
@@ -230,12 +223,11 @@ let updateGraph = function(yearData, graphNr) {
     let rects = graphNr.selectAll("rect")
         .classed('selectedSq',false)
         .data(companies);
-
-
     // exit
     rects
         .exit()
         .remove();
+
 
     let blocks = rects
         .data(companies )
@@ -252,14 +244,11 @@ let updateGraph = function(yearData, graphNr) {
             return colIndex * 15
         })
         .attr('width', 10)
-        .attr("class",function(d){
-            let companyClass = getCompanyClass(d)
-            return "c" + cleanComp + "__rect"
-        })
         .classed('selectedSq',false)
-        .classed(function(d){
+        .attr("removeClass",function(d){
             let companyClass = getCompanyClass(d);
-            return '.c'+ companyClass + "__rect" }, false);
+            return "c" + companyClass + "__rect"
+        });
 
 
     let sqs = blocks.merge(rects)
@@ -276,8 +265,18 @@ let updateGraph = function(yearData, graphNr) {
         .attr("height", 12)
         .style("stroke", (d)=>{return getShStroke(d)[0]})
         .style('fill', (d)=>{return getShStroke(d)[1]})
-        .on('mouseover', function(d)  {
-            let companyName = d;
+        .attr("class",function(d){
+            let companyClass = getCompanyClass(d);
+            return "c" + companyClass + "__rect"
+            });
+
+        blocks.on('mouseover', function(d)  {
+                let companyName = d;
+                let companyClass = getCompanyClass(d);
+
+            d3.selectAll('.c'+ companyClass + "__rect")
+                .moveToFront()
+                .classed('selectedSq',true);
 
             tooltip
                 .transition()
@@ -288,12 +287,9 @@ let updateGraph = function(yearData, graphNr) {
                 .style("left", d + "px")
                 .style("top", d + "px");
 
-            d3.selectAll('.c'+ companyClass + "__rect")
-                .moveToFront()
-                .classed('selectedSq',true);
         })
         .on( 'mouseout', function (d) {
-            let companyClass = getCompanyClass(d)
+            let companyClass = getCompanyClass(d);
 
             d3.selectAll('.c'+ companyClass + "__rect")
                 .classed('selectedSq',false);
@@ -306,7 +302,6 @@ let updateGraph = function(yearData, graphNr) {
         });
 
 };
-
 
 ///////////////////////////
 // ###  Graph 1 - BR   ###
@@ -322,7 +317,7 @@ d3.csv('Data/BrDataSP500_allyears.csv')
 
         // get data from slider
         let startYearData = getYearData(data, 2018);
-        console.log(startYearData)
+
         // start with a graph
         mastergraph(startYearData, graph1);
         return dataBr = data;
@@ -372,15 +367,7 @@ d3.csv('Data/StStDataSP500_allyears.csv')
         let startYearData = getYearData(data, 2018);
         mastergraph(startYearData, graph3);
 
-        dataStSt = data;
-
-        // let updatedDataStSt = getYearData(data, StStupdateYear );
-        // console.log(updatedDataStSt)
-        //console.log("updated data: " + updatedData[1].year); // ! does work
-
-        //     //d3.select('p#value-step').text(val);
-        //     //d3.select('#main-title').text("How did the largest asset managers vote in " + val + "?");
-        // });
+        return dataStSt = data;
 
     })
     .catch(function(error){
@@ -390,7 +377,7 @@ d3.csv('Data/StStDataSP500_allyears.csv')
 
 sliderYears.on("onchange", val => {
     d3.select('#main-title').text("How did the largest asset managers vote in " + val + "?");
-    // let StStdata = getStStData(val);
+
     let BrDataUpdate = getYearData(dataBr, val);
     updateGraph( BrDataUpdate, graph1);
 
@@ -400,7 +387,69 @@ sliderYears.on("onchange", val => {
 
     let StStDataUpdate = getYearData(dataStSt, val);
     updateGraph(StStDataUpdate, graph3);
+    // this changes the global variable?
+
+    //return thisYear = val;
 
 });
 
 
+//  selection for Environmental props
+let getdataEnviron = function(year) {
+    let VangDataForProp = getYearData(dataVang, year);
+    let VangCompaniesEnvFilter = [];
+    let BRDataForProp = getYearData(dataBr, year);
+    let BrCompaniesEnvFilter = [];
+    let StStDataForProp = getYearData(dataStSt, year);
+    let StStCompaniesEnvFilter = [];
+
+    VangDataForProp.forEach( ( datarow ) => {
+        let environProp = +datarow.environ_prop;
+        if ( environProp  > 0 ) {
+            let prop  = datarow.proposal;
+            let propnr = datarow.prop_nr;
+            let comp = datarow.issuer_company;
+            let voted = datarow.against_mgmt;
+
+            if ( environProp > 0 )
+                { VangCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted:voted} ) }
+        }
+    });
+
+    BRDataForProp.forEach( ( datarow ) => {
+        let environProp = +datarow.environ_prop;
+        if ( environProp  > 0 ) {
+            let prop  = datarow.proposal;
+            let propnr = datarow.prop_nr;
+            let comp = datarow.issuer_company;
+            let voted = datarow.against_mgmt;
+            if ( environProp > 0 )
+            { BrCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted: voted } ) }
+        }
+    });
+
+    StStDataForProp.forEach( ( datarow ) => {
+        let environProp = +datarow.environ_prop;
+        if ( environProp  > 0 ) {
+            let prop  = datarow.proposal;
+            let propnr = datarow.prop_nr;
+            let comp = datarow.issuer_company;
+            let voted = datarow.against_mgmt;
+            if ( environProp > 0 )
+            { StStCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted: voted} ) }
+        }
+    });
+    return [BrCompaniesEnvFilter, VangCompaniesEnvFilter, StStCompaniesEnvFilter];
+};
+
+
+d3.select("#environ_btn").on('click', function(d, i) {
+    let environYearData = getdataEnviron(thisYear); // get data for each fund
+    let BrEnviron = environYearData[0];
+    let VangEnviron = environYearData[1];
+    let StStEnviron = environYearData[2];
+    console.log(VangEnviron);
+
+    //d3.select("#propText").html(()=>)
+
+});
