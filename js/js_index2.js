@@ -42,9 +42,8 @@ const graph3 = d3.select("#graph3")
 
 // prepare tooltips
 let tooltip = d3.select('#subtitle')
-    .attr('class', 'tooltip')
-    // .style('opacity', 0);
-
+    .attr('class', 'tooltip');
+let switchEnviron = "off";
 
 
 // build the first graph, appears before the slider was touched
@@ -69,7 +68,6 @@ var gStep = d3
     .attr('transform', 'translate(30,30)');
 
 gStep.call(sliderYears);
-//d3.select('p#value-step').text(sliderYears.value());
 
 
 
@@ -103,18 +101,25 @@ let mastergraph = function(yearData, graphNr) {
 
         let shaStroke = "#C2C2C2";
         let againstManFill = "#ffffff";
+        let environPropText = []; // getting the text for the environ proposals, why not an array?
 
         yearData.forEach( ( datarow ) => {
             if (datarow.issuer_company === company) {
                 let shaPropCount = +datarow.count_sharehold_propo;
                 let againstMgmt = +datarow.count_against_mgmt;
+                let environProp = +datarow.environ_prop;
+                let prop = datarow.proposal;
+
                 if ( shaPropCount > 0 )
                 { shaStroke = "#f25c00"}
                 if ( againstMgmt > 0)
                 { againstManFill = "#FFD275" }
+                if (environProp > 0) {
+                    environPropText.push(prop);
+                }
             }
         });
-        return [shaStroke, againstManFill];
+        return [shaStroke, againstManFill, environPropText];
     }; // end of getShStroke
 
     let sqs = graphNr.selectAll("rect")
@@ -152,24 +157,24 @@ let mastergraph = function(yearData, graphNr) {
                 .style("top", d + "px");
 
             if ( this !== d3.select('rect:last-child').node()) {
-                    this.parentElement.appendChild(this)};
-            //
-            // let rect = d3.select(this)
-            //     .attr("class", "selectedSq")
-            //     .attr("transform", "translate(-2, -2)")
-            //     .attr("height", 19)
-            //     .attr("width", 19)
-            //     .attr("stroke-width", 4);
+                    this.parentElement.appendChild(this) }
 
-            let companyClass = getCompanyClass(d)
+            let companyClass = getCompanyClass(d);
 
             d3.selectAll('.c'+ companyClass + "__rect")
                 .moveToFront()
                 .classed('selectedSq',true);
 
-        })
+            if (switchEnviron === "on"){
+                d3.select("#propText").html((d)=>{
+                    //console.log('lkjsdlfkj') }
+                    return getShStroke(d)[2] }
+                )}
+
+
+        }) // end of mouseover
         .on( 'mouseout', function (d) {
-            let companyClass = getCompanyClass(d)
+            let companyClass = getCompanyClass(d);
 
             d3.selectAll('.c'+ companyClass + "__rect")
                 .classed('selectedSq',false);
@@ -283,10 +288,10 @@ let updateGraph = function(yearData, graphNr) {
                 .duration(100)
                 .style('opacity', 0.9);
             tooltip
-                .html(() =>  {return "on proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
+                .html(() =>  {
+                    return "on proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
                 .style("left", d + "px")
                 .style("top", d + "px");
-
         })
         .on( 'mouseout', function (d) {
             let companyClass = getCompanyClass(d);
@@ -303,101 +308,108 @@ let updateGraph = function(yearData, graphNr) {
 
 };
 
-let updateGrap_hEnviron = function(yearData, graphNr) {
+let updateGrap_Environ = function(yearData, graphNr) {
 
     // select unique companies only
-    let companies = d3.map( yearData, function(d){return d.comp} ).keys();
-    // console.log(companies);
-    // console.log(yearData);
+
+    let companies = d3.map( yearData, function(d){ return d.comp} ).keys();
+    console.log(companies);
+
     let getStrokeText = (company) => {
-        let environPropNr = "#a6c256";
-        let againstManFill = "#ff6f77";
+
+        let againstManFill = "#c2581b";
+        let prop;
             yearData.forEach( ( datarow ) => {
                 if (datarow.comp === company) {
-                    let shaPropCount = +datarow.count_sharehold_propo;
-                    let againstMgmt = +datarow.count_against_mgmt;
-                if ( shaPropCount > 0 )
-                    { shaStroke = "#f25c00"}
-                if ( againstMgmt > 0)
-                    { againstManFill = "#FFD275" };
-            }
-    //     });
-    //     return [shaStroke, againstManFill];
-    // }; // end of getShStroke
-    //
-    //
-    // let t = d3.transition()
-    //     .duration(1000);
-    //
-    // //d3.selectAll('rect').classed('selectedSq',false)
-    // let rects = graphNr.selectAll("rect")
-    //     .classed('selectedSq',false)
-    //     .data(companies);
-    // // exit
-    // rects
-    //     .exit()
-    //     .remove();
-    //
-    //
-    // let blocks = rects
-    //     .data(companies )
-    //     .enter()
-    //     .append("rect")
-    //     .attr('class','blocks')
-    //     .attr("height", 6)
-    //     .attr("y", function(d, i){
-    //         let rowIndex = Math.floor(i/numCols);
-    //         return  rowIndex * 15
-    //     })
-    //     .attr("x", function(d, i){
-    //         let colIndex = i % numCols;
-    //         return colIndex * 15
-    //     })
-    //     .attr('width', 10)
-    //     .classed('selectedSq',false)
-    //     .attr("removeClass",function(d){
-    //         let companyClass = getCompanyClass(d);
-    //         return "c" + companyClass + "__rect"
-    //     });
-    //
-    //
-    // let sqs = blocks.merge(rects)
-    //     .transition(t)
-    //     .attr("x", function(d, i){
-    //         let colIndex = i % numCols;
-    //         return colIndex * 15
-    //     })
-    //     .attr("y", function(d, i){
-    //         let rowIndex = Math.floor(i/numCols);
-    //         return  rowIndex * 15
-    //     })
-    //     .attr("width", 12)
-    //     .attr("height", 12)
-    //     .style("stroke", (d)=>{return getShStroke(d)[0]})
-    //     .style('fill', (d)=>{return getShStroke(d)[1]})
-    //     .attr("class",function(d){
-    //         let companyClass = getCompanyClass(d);
-    //         return "c" + companyClass + "__rect"
-    //     });
-    //
+                    prop = +datarow.prop;
+                    let propnr = +datarow.propnr;
+                    let voted = datarow.voted;
+                    if ( voted === "FOR MGMT" )
+                            { againstManFill = "#f2bb20" }
+                }
+        });
+        return againstManFill;
+    }; // end of getShStroke
+
+
+    let t = d3.transition()
+        .duration(1000);
+
+    //d3.selectAll('rect').classed('selectedSq',false)
+    let rects = graphNr.selectAll("rect")
+        .classed('selectedSq',false)
+        .data(companies);
+    // exit
+    rects
+        .exit()
+        .remove();
+
+
+    let blocks = rects
+        .data(companies )
+        .enter()
+        .append("rect")
+        .attr('class','blocks')
+        .attr("height", 6)
+        .style("stroke", "None")
+        .attr("y", function(d, i){
+            let rowIndex = Math.floor(i/numCols);
+            return  rowIndex * 15
+        })
+        .attr("x", function(d, i){
+            let colIndex = i % numCols;
+            return colIndex * 15
+        })
+        .attr('width', 10)
+        .classed('selectedSq',false)
+        .attr("removeClass",function(d){
+            let companyClass = getCompanyClass(d);
+            return "c" + companyClass + "__rect"
+        });
+
+
+    let sqs = blocks.merge(rects)
+        .transition(t)
+        .attr("x", function(d, i){
+            let colIndex = i % numCols;
+            return colIndex * 15
+        })
+        .attr("y", function(d, i){
+            let rowIndex = Math.floor(i/numCols);
+            return  rowIndex * 15
+        })
+        .attr("width", 12)
+        .attr("height", 12)
+        .style("stroke", "None")
+        .style('fill', (d)=>{return getStrokeText(d)})
+        .attr("class",function(d){
+            let companyClass = getCompanyClass(d);
+            return "c" + companyClass + "__rect"
+        });
+
+    // d3.select('.graph-container')
+
     // blocks.on('mouseover', function(d)  {
-    //     let companyName = d;
-    //     let companyClass = getCompanyClass(d);
-    //
-    //     d3.selectAll('.c'+ companyClass + "__rect")
-    //         .moveToFront()
-    //         .classed('selectedSq',true);
-    //
-    //     tooltip
-    //         .transition()
-    //         .duration(100)
-    //         .style('opacity', 0.9);
-    //     tooltip
-    //         .html(() =>  {return "on proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
-    //         .style("left", d + "px")
-    //         .style("top", d + "px");
-    //
-    // })
+    //     // let companyName = d;
+    //     // let companyClass = getCompanyClass(d);
+    //     //
+    //     // d3.selectAll('.c'+ companyClass + "__rect")
+    //     //     .moveToFront()
+    //     //     .classed('selectedSq',true);
+    //     //
+    //     // tooltip
+    //     //     .transition()
+    //     //     .duration(100)
+    //     //     .style('opacity', 0.9);
+    //     // tooltip
+    //     //     .html(() =>  {return "on proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
+    //     //     .style("left", d + "px")
+    //     //     .style("top", d + "px");
+    //     //
+    //     // console.log(companyName);
+    //     // //d3.select("#propText").html((d)=>{})
+
+    //})
     //     .on( 'mouseout', function (d) {
     //         let companyClass = getCompanyClass(d);
     //
@@ -493,12 +505,29 @@ sliderYears.on("onchange", val => {
     let VangDataUpdate = getYearData(dataVang, val);
     updateGraph(VangDataUpdate , graph2);
 
-
     let StStDataUpdate = getYearData(dataStSt, val);
     updateGraph(StStDataUpdate, graph3);
     // this changes the global variable?
 
-    //return thisYear = val;
+    d3.select("#environ_btn").on('click', function(d) {
+        let environYearData = getdataEnviron(val); // get data for each fund
+        let BrEnviron = environYearData[0];
+        let VangEnviron = environYearData[1];
+        let StStEnviron = environYearData[2];
+
+        updateGrap_Environ(VangEnviron, graph1);
+        updateGrap_Environ(BrEnviron, graph2);
+        updateGrap_Environ(StStEnviron, graph3);
+
+
+        //add title things
+        let selectsq = d3.select('.selectedSq');
+        console.log("this is the selection: "+ selectsq);
+        //d3.select("#propText").html((d,i)=>{return BrEnviron.prop})
+
+    });
+
+    return thisYear = val;
 
 });
 
@@ -519,9 +548,7 @@ let getdataEnviron = function(year) {
             let propnr = datarow.prop_nr;
             let comp = datarow.issuer_company;
             let voted = datarow.against_mgmt;
-
-            if ( environProp > 0 )
-                { VangCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted:voted} ) }
+            VangCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted:voted} )
         }
     });
 
@@ -532,10 +559,10 @@ let getdataEnviron = function(year) {
             let propnr = datarow.prop_nr;
             let comp = datarow.issuer_company;
             let voted = datarow.against_mgmt;
-            if ( environProp > 0 )
-            { BrCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted: voted } ) }
+            BrCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted:voted} )
         }
     });
+
 
     StStDataForProp.forEach( ( datarow ) => {
         let environProp = +datarow.environ_prop;
@@ -544,10 +571,11 @@ let getdataEnviron = function(year) {
             let propnr = datarow.prop_nr;
             let comp = datarow.issuer_company;
             let voted = datarow.against_mgmt;
-            if ( environProp > 0 )
-            { StStCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted: voted} ) }
+            StStCompaniesEnvFilter.push( { comp:comp, propnr:propnr, prop:prop, voted:voted} )
         }
     });
+
+
     return [BrCompaniesEnvFilter, VangCompaniesEnvFilter, StStCompaniesEnvFilter];
 };
 
@@ -557,14 +585,16 @@ d3.select("#environ_btn").on('click', function(d) {
     let BrEnviron = environYearData[0];
     let VangEnviron = environYearData[1];
     let StStEnviron = environYearData[2];
-    //console.log(VangEnviron);
 
+    updateGrap_Environ (BrEnviron, graph1);
+    updateGrap_Environ (VangEnviron, graph2);
+    updateGrap_Environ (StStEnviron, graph3);
+    console.log(environYearData[0]);
+    switchEnviron = "on";
 
-    //updateGrap_hEnviron(BrEnviron, graph1);
-    //updateGrap_hEnviron(VangEnviron, graph2);
-    //updateGrap_hEnviron(StStEnviron, graph3);
+    //add title things
+    // let selectsq = d3.select('.selectedSq');
+    // console.log("this is the selection: "+ selectsq);
 
-    // add title things
-    //d3.select("#propText").html(()=>)
 
 });

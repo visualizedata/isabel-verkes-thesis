@@ -1,5 +1,71 @@
 @import url('https://fonts.googleapis.com/css?family=Gilda+Display|Playfair+Display|Roboto');
 
+body{
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    border-top:2px solid black;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin: 5% 0 5% 10%;
+}
+header h1 {
+    font-family: 'Gilda Display', serif;
+    font-size: 4em;
+    margin: 5px 0 0 0;
+}
+h4 {
+    opacity: .6;
+    font-size: small;
+    margin: 0 0;
+}
+
+header h3 {
+    font-family: 'Roboto', sans-serif;
+    color: #ec7d26;
+    margin: 10px 0 ;
+}
+
+header .intro
+    {  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+#sections, #sections2 {
+    width: 340px;
+    margin: auto 12%;
+}
+
+#sections > div{
+    background: white;
+    opacity: .2;
+    margin-bottom: 200px;
+}
+#sections > div:last-child{
+    margin-bottom: 400px;
+}
+#sections > div.graph-scroll-active{
+    opacity: 1;
+}
+
+#sections2 > div{
+    background: white;
+    opacity: .2;
+    margin-bottom: 200px;
+}
+#sections2 > div:last-child{
+    margin-bottom: 400px;
+}
+#sections2 > div.graph-scroll-active{
+    opacity: 1;
+}
+
+
+/* newer part hereafter ?????*/
+
 
 .container-title {
     display: flex;
@@ -49,7 +115,8 @@
 
 .container-graph #propText {
     position: absolute;
-    display: inline-block;
+    /*display: inline-block;*/
+    display: None;
     background-color: rgba(255, 0, 0, 0.5);
     min-width: 15%;
     max-width: 60%;
@@ -83,7 +150,7 @@
     font-family: 'Roboto', sans-serif;
     min-width: 50px;
     max-width: 200px;
-    min-height: 10px;
+    min-height: 40px;
     max-height: 30px;
     /*display: block;*/
     padding: 0 .5em;
@@ -113,6 +180,12 @@
     background-color: rgba(212, 212, 212, 0.38);
     color: black;
 }
+
+.button a {
+    text-decoration: none;
+
+}
+
 
 
 .container-issues {

@@ -134,7 +134,7 @@
                 .on('keydown.gscroll' + eventId, keydown)
 
             resize()
-            if (window['gscrollTimer' + eventId]) window['gscrollTimer' + eventId].stop()
+            if (window['gscrollTimer' + eventId]) window['gscrollTimer' + eventId].stop();
             window['gscrollTimer' + eventId] = d3.timer(reposition);
 
             return rv
