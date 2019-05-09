@@ -8,44 +8,51 @@ body{
 header {
     border-top:2px solid black;
     height: 100vh;
-    background-image: url("https://pbs.twimg.com/media/CrMFKBxXEAAX4Lw?format=jpg&name=medium");
+    background-image: url("https://github.com/IsVer/mst/blob/master/Data/img/vfinx.png?raw=true");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
-    /*background-image: url("https://images.barrons.com/im-48143?width=1260&aspect_ratio=1.5");*/
 }
 
 .header-class {
-    margin: 10% 0 0 10%;
+    margin: 23% 0 0 20%;
     display: flex;
     flex-direction: column;
     width: 60%;
+    opacity: 1;
+    z-index: 2;
+    align-self: center;
 }
 header h1 {
     font-family: 'Gilda Display', serif;
     font-size: 5em;
     margin-bottom: 0;
 }
+
 h4 {
     opacity: .6;
 }
 
 header h3 {
     color: #ec7d26;
+    opacity: 1;
+    letter-spacing: 2px;
 
 }
 
-header .intro
-    {  font-family: 'Source Sans Pro', sans-serif;
-    /*background-color: rgba(255, 255, 255, 0.29);*/
-    /*z-index: 4;*/
-}
 
 #skipBotton {
-    margin-top: 20%;
-    margin-left: 50%;
+    margin-top: 13%;
+    margin-left: 34%;
 }
 
+.intro-container {
+    margin: 0 0 0 9%;
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    text-align: justify;
+}
 
 .container-1 {
     max-width: 90%;
@@ -71,11 +78,15 @@ header .intro
     stroke-width: 3;
 }
 
+.tooltip-graphPassive{
+    pointer-events: none;
+}
 
 
 #sections, #sections2 {
     width: 30%;
     margin-left: 10%;
+    line-height: 1.5em
 }
 
 
@@ -103,14 +114,10 @@ header .intro
     opacity: 1;
 }
 
-#section-JBogle img {
 
-    /*//animation: type 4s steps(60, end);*/
-}
 
 #section-JBogle {
-    background-color: black;
-    width: initial;
+    /*width: 60%;*/
     /*//animation: type 4s steps(60, end);*/
 }
 

@@ -136,7 +136,7 @@ function render(){
         .attr("width",() => { return width + margin.left + margin.right})
         .attr("height",() => { return height + margin.top + margin.bottom});
 
-    let color = d3.scaleOrdinal( d3.schemeSet2 );
+    let color = d3.scaleOrdinal( ["#b3b4b3","#d4d4d4"]);
 
     // @param: Graph 1: Stack Layout
     const stack =  d3.stack().keys([ 'Indexmutualfunds', 'IndexETFs' ]);
@@ -160,12 +160,13 @@ function render(){
         .data( stack_data )
         .enter()
         .append( 'g' )
+        .attr("class", "bargraph1")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .style( 'fill', function( d, i ){ return color( i ); });
 
     // Graph 1: Prep the tooltip bits, initial display is hidden
     const tooltip = svg.append("g")
-        .attr("class", "tooltip")
+        .attr("class", "tooltip-graphPassive")
         .style("display", "none");
     tooltip.append("rect")
         .attr("width", 60)
@@ -182,12 +183,37 @@ function render(){
     const resetGraphs = function() {
         svg.style("opacity", "0");
     };
+
+    const getBogle_img = function() {
+        d3.selectAll(".bargraph1")
+            .style("opacity", 0);
+        d3.selectAll(".legend")
+            .style("opacity", 0);
+        tooltip.style("display", "none");
+
+        svg.append("svg:image")
+            .style("opacity", 1)
+            // .transition()
+            // .duration(1000)
+            .attr('x', 1)
+            .attr('y', 0)
+            .attr("class", "bogle_img")
+            .attr('width', 900)
+            .attr('height', 300)
+            .attr("xlink:href", "https://github.com/IsVer/mst/blob/master/Data/img/bogle.jpeg?raw=true")
+
+    };
+
+
     const drawbars = function() {
-        svg.style('opacity', '0')
-            .style('opacity', '1');
+        d3.select(".bogle_img").remove();
+        d3.selectAll(".bargraph1")
+            .transition()
+            .duration(100)
+            .style("opacity", 1);
 
         // Bars
-        groups.selectAll('rect')
+        let bars = groups.selectAll('rect')
             .data(function (d) {
                 return d;
             })
@@ -210,7 +236,6 @@ function render(){
                 tooltip.style("display", "none");
             })
             .on("mousemove", function (d) {
-                console.log('hallo')
                 var xPosition = d3.mouse(this)[0] - 5;
                 var yPosition = d3.mouse(this)[1] - 5;
                 tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
@@ -242,8 +267,8 @@ function render(){
             .text("Market shares of index-based Mutual Funds and ETFs");
 
         // Handmade legend
-        svg.append("rect").attr("class", 'legend').attr("x",100).attr("y",130).attr('width',10).attr('height',10).style("fill", "rgb(252, 141, 98)");
-        svg.append("rect").attr("class", 'legend').attr("x",100).attr("y",160).attr('width',10).attr('height',10).style("fill", "#69b3a2");
+        svg.append("rect").attr("class", 'legend').attr("x",100).attr("y",130).attr('width',10).attr('height',10).style("fill", "#d4d4d4");
+        svg.append("rect").attr("class", 'legend').attr("x",100).attr("y",160).attr('width',10).attr('height',10).style("fill", "#b3b4b3");
         svg.append("text").attr("class", 'legend').attr("x", 113).attr("y", 135).text("ETFs").style("font-size", "11px").attr("alignment-baseline","middle");
         svg.append("text").attr("class", 'legend').attr("x", 113).attr("y", 166).text("Mutual Funds").style("font-size", "11px").attr("alignment-baseline","middle");
 
@@ -265,7 +290,7 @@ function render(){
 
         // Prep the tooltip bits, initial display is hidden
         const tooltip = svg.append("g")
-            .attr("class", "tooltip")
+            .attr("class", "tooltip-graphPassive")
             .style("display", "none");
 
         tooltip.append("rect")
@@ -299,10 +324,10 @@ function render(){
             .on("mouseover", function() { tooltip.style("display", null); })
             .on("mouseout", function() { tooltip.style("display", "none"); })
             .on("mousemove", function(d) {
-                var xPosition = d3.mouse(this)[0] - 5;
-                var yPosition = d3.mouse(this)[1] - 5;
+                var xPosition = d3.mouse(this)[0] - 7;
+                var yPosition = d3.mouse(this)[1] - 7;
                 tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-                tooltip.select("text").text( d.activeMutualFexpense );
+                //tooltip.select("text").text( d.activeMutualFexpense );
             });
 
         // add axis for lines
@@ -325,24 +350,27 @@ function render(){
     }; // end draw line function
 
     // Apply to graph scroll
-    var gs = d3.graphScroll()
+    let gs = d3.graphScroll()
         .container(d3.select('.container-1'))
         .graph(d3.selectAll('container-1 #graph'))
         .eventId('uniqueId1')  // namespace for scroll and resize events
         .sections(d3.selectAll('.container-1 #sections > div'))
         .offset(innerWidth < 900 ? innerHeight - 30 : 200)
         .on('active', function(i){
-            if (i == 0) {
-                resetGraphs();
+            if (i === 0) {
+
+                getBogle_img();
             }
-            else if (i == 1)
-            {   svg.style('opacity', '1');
-                return drawbars();
-            }
-            else if (i == 2) {
-                svg.transition().duration(1000);
+            else if (i === 1)
+                {  svg.style('opacity', '1');
+                    return drawbars();
+                }
+            else if (i === 2)
+            {    svg.transition().duration(1000);
                 return drawLine()
             }
+            //else if (i === 3) {}
+
             // .transition()
             // .style('fill', colors[i])
         });

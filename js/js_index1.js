@@ -136,7 +136,7 @@ function render(){
         .attr("width",() => { return width + margin.left + margin.right})
         .attr("height",() => { return height + margin.top + margin.bottom});
 
-    let color = d3.scaleOrdinal( d3.schemeSet2 );
+    let color = d3.scaleOrdinal( ["#7a7b7a","#454645"]);
 
     // @param: Graph 1: Stack Layout
     const stack =  d3.stack().keys([ 'Indexmutualfunds', 'IndexETFs' ]);
