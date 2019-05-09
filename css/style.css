@@ -47,11 +47,12 @@ header h3 {
 }
 
 .intro-container {
-    margin: 0 0 0 9%;
+    margin: 0 0 0 18%;
     display: flex;
     flex-direction: column;
     max-width: 60%;
     text-align: justify;
+    line-height: 1.5em
 }
 
 .container-1 {
@@ -68,13 +69,13 @@ header h3 {
 }
 .line {
     fill: none;
-    stroke: #ffab00;
+    stroke: #ec7d26;
     stroke-width: 3;
 }
 
 .line2 {
     fill: none;
-    stroke: #1a53ff;
+    stroke: #1e1f1e;
     stroke-width: 3;
 }
 
@@ -86,7 +87,7 @@ header h3 {
 #sections, #sections2 {
     width: 30%;
     margin-left: 10%;
-    line-height: 1.5em
+    line-height: 1.5em;
 }
 
 
@@ -115,10 +116,29 @@ header h3 {
 }
 
 
+#title_Section-JBogle {
+    margin: 2% 0 0 20%;
+}
+.section-JBogle {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 20%;
+    max-width: 80%;
+    text-align: justify;
+    line-height: 1.5em
+}
 
-#section-JBogle {
-    /*width: 60%;*/
-    /*//animation: type 4s steps(60, end);*/
+#photo_Section-JBogle {
+    width: 30%;
+    height: 30%;
+}
+
+div.graph-scroll-active #section-JBogle {
+    margin-bottom: 0;
+}
+
+.bogle_img {
+    margin-bottom: 0;
 }
 
 /* newer part hereafter ?????*/

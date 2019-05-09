@@ -184,25 +184,24 @@ function render(){
         svg.style("opacity", "0");
     };
 
-    const getBogle_img = function() {
-        d3.selectAll(".bargraph1")
-            .style("opacity", 0);
-        d3.selectAll(".legend")
-            .style("opacity", 0);
-        tooltip.style("display", "none");
-
-        svg.append("svg:image")
-            .style("opacity", 1)
-            // .transition()
-            // .duration(1000)
-            .attr('x', 1)
-            .attr('y', 0)
-            .attr("class", "bogle_img")
-            .attr('width', 900)
-            .attr('height', 300)
-            .attr("xlink:href", "https://github.com/IsVer/mst/blob/master/Data/img/bogle.jpeg?raw=true")
-
-    };
+    // const getBogle_img = function() {
+    //     d3.selectAll(".bargraph1")
+    //         .style("opacity", 0);
+    //     d3.selectAll(".legend")
+    //         .style("opacity", 0);
+    //     tooltip.style("display", "none");
+    //     d3.select(".tooltip-graphPassive")
+    //         .style("opacity", 0);
+    //
+    //     svg.append("svg:image")
+    //         .style("opacity", 1)
+    //         .attr('x', -50)
+    //         .attr('y', 30)
+    //         .attr("class", "bogle_img")
+    //         .attr('width', 900)
+    //         .attr('height', 250)
+    //         .attr("xlink:href", "https://github.com/IsVer/mst/blob/master/Data/img/Asset%201.png?raw=truex")
+    // };
 
 
     const drawbars = function() {
@@ -358,15 +357,16 @@ function render(){
         .offset(innerWidth < 900 ? innerHeight - 30 : 200)
         .on('active', function(i){
             if (i === 0) {
-
-                getBogle_img();
+                resetGraphs()
             }
             else if (i === 1)
-                {  svg.style('opacity', '1');
-                    return drawbars();
-                }
+            {   svg.transition().duration(1000);
+                svg.style('opacity', '1');
+                return drawbars();
+            }
+
             else if (i === 2)
-            {    svg.transition().duration(1000);
+            {  svg.transition().duration(1000);
                 return drawLine()
             }
             //else if (i === 3) {}
