@@ -149,15 +149,20 @@ div.graph-scroll-active #section-JBogle {
 /* part on concentration hereafter */
 
 #title-concentration-graph {
-    margin: 9% 0 0 50%;
+    margin: 9% 0 0 9%;
 
 }
 .concentration-graph {
     display: flex;
     flex-direction: row;
-    margin-left: 50%;
+    margin-left: 9%;
     max-width: 70%;
     line-height: 1.5em;
+}
+
+.concentration-graph img {
+    margin-top: 3%;
+    margin-right: 2%;
 }
 
 .concentration-graph div {
