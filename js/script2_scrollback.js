@@ -119,11 +119,11 @@ function render(){
     if (oldWidth === innerWidth) return;
     oldWidth = innerWidth;
 
-    const margin = { top: 10, right: 50, bottom: 20, left: 50 };
+    const margin = { top: 10, right: 70, bottom: 20, left: 70 };
     // let width = d3.select('#graph').node().offsetWidth ;
     // let height = d3.select('#graph').node().offsetHeight ;
-    let width = d3.select('#graph').node().offsetWidth ;
-    let height = 400;
+    let width = d3.select('#graph').node().offsetWidth - 40;
+    let height = 300;
 
     if (innerWidth <= 925){
         width = innerWidth;
@@ -247,11 +247,14 @@ function render(){
             .attr("transform", "translate(0," + height + ")")
             .attr("font-weight", "lighter")
             .attr("font-family", "Source Sans Pro, sans-serif")
+            .style("opacity", 0.6)
             .call(d3.axisBottom(x_scale_graph1).tickFormat((d) => d+2005));
 
         groups.append("g") // y-axis
             .attr("class", "axis")
             .attr("font-family", "Source Sans Pro, sans-serif")
+            .style("opacity", 0.6)
+            .style("font-weight","lighter")
             .call(d3.axisLeft(y_scale_graph1).ticks(null, 's').tickFormat(d => d + "%"))
             .append("text")
             .attr("x", 2)
@@ -261,9 +264,9 @@ function render(){
             .attr("font-weight", "lighter")
             .attr("font-family", "Source Sans Pro, sans-serif")
             .attr("text-anchor", "center")
-            .attr("transform","rotate(-90),translate(-4, -55)")
+            .attr("transform","rotate(-90),translate(-9, -55)")
             .style("color", "#696969")
-            .text("Market shares of index-based Mutual Funds and ETFs");
+            .text("Market share of Mutual Funds and ETFs");
 
         // Handmade legend
         svg.append("rect").attr("class", 'legend').attr("x",100).attr("y",130).attr('width',10).attr('height',10).style("fill", "#d4d4d4");
@@ -293,15 +296,15 @@ function render(){
             .style("display", "none");
 
         tooltip.append("rect")
-            .attr("width", 60)
+            .attr("width", 150)
             .attr("height", 20)
             .attr("fill", "white")
             .style("opacity", 0.5);
 
         tooltip.append("text")
-            .attr("x", 30)
+            .attr("x", 3)
             .attr("dy", "1.2em")
-            .style("text-anchor", "middle")
+            .style("text-anchor", "start")
             .attr("font-size", "12px");
 
 
@@ -311,7 +314,17 @@ function render(){
             .curve(d3.curveMonotoneX);
         groups.append("path")
             .attr("class", "line") // class for styling
-            .attr("d", line(dataGraph1)); // calls the line generator
+            .attr("d", line(dataGraph1)) // calls the line generator
+            .on("mouseover", function() { tooltip
+                .style("display", null); })
+            .on("mouseout", function() { tooltip.style("display", "none"); })
+            .on("mousemove", function(d) {
+                var xPosition = d3.mouse(this)[0] - 5;
+                var yPosition = d3.mouse(this)[1] - 5;
+                tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")")
+                tooltip.select("text")
+                    .text("Costs of passive investing");
+            });
 
         const line2 = d3.line()
             .x((d,i) => x_scaleLine( i ) )
@@ -320,30 +333,34 @@ function render(){
         groups.append("path")
             .attr("class", "line2") // class for styling
             .attr("d", line2(dataGraph1)) // calls the line generator
-            .on("mouseover", function() { tooltip.style("display", null); })
+            .on("mouseover", function() { tooltip
+                .style("display", null); })
             .on("mouseout", function() { tooltip.style("display", "none"); })
             .on("mousemove", function(d) {
-                var xPosition = d3.mouse(this)[0] - 7;
-                var yPosition = d3.mouse(this)[1] - 7;
-                tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-                //tooltip.select("text").text( d.activeMutualFexpense );
+                var xPosition = d3.mouse(this)[0] - 5;
+                var yPosition = d3.mouse(this)[1] - 5;
+                tooltip
+                    .attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                tooltip.select("text").text( "Costs of active investing");
             });
 
         // add axis for lines
         groups.append("g") // y-axis
             .attr("class", "axis")
             .attr("transform","translate(" + (width) + ")")
+            .style("opacity", 0.6)
+            .style("font-weight","lighter")
             .call(d3.axisRight(y_scaleLine).ticks(null, 's').tickFormat(d => d))
             .append("text")
             // .attr("x", 2)
             // .attr("y", y_scaleLine(y_scaleLine.ticks().pop()) + 0.5)
             .attr("dy", "0.32em")
             .attr("fill", "#696969")
-            // .attr("font-weight", "bold")
+            .style("font-weight","lighter")
             .attr("font-family", "Source Sans Pro', sans-serif")
             .style("color", "#696969")
-            .attr("transform","rotate(-90), translate(-68,35)")
-            .text("Expense Ratio");
+            .attr("transform","rotate(-90), translate(-168,35)")
+            .text("Costs of investing (as Expense Ratio)");
 
 
     }; // end draw line function

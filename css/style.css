@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Gilda+Display|Playfair+Display|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Gilda+Display|Playfair+Display|Roboto|Roboto:400i');
 
 body{
     margin: 0 auto;
@@ -79,8 +79,13 @@ header h3 {
     stroke-width: 3;
 }
 
+.axis {
+    opacity: .7;
+}
+
 .tooltip-graphPassive{
     pointer-events: none;
+    display:inline-block;
 }
 
 
@@ -97,7 +102,7 @@ header h3 {
     margin-bottom: 200px;
 }
 #sections > div:last-child{
-    margin-bottom: 400px;
+    margin-bottom: 25px;
 }
 #sections > div.graph-scroll-active{
     opacity: 1;
@@ -109,7 +114,7 @@ header h3 {
     margin-bottom: 200px;
 }
 #sections2 > div:last-child{
-    margin-bottom: 400px;
+    margin-bottom: 25px;
 }
 #sections2 > div.graph-scroll-active{
     opacity: 1;
@@ -141,7 +146,24 @@ div.graph-scroll-active #section-JBogle {
     margin-bottom: 0;
 }
 
-/* newer part hereafter ?????*/
+/* part on concentration hereafter */
+
+#title-concentration-graph {
+    margin: 9% 0 0 50%;
+
+}
+.concentration-graph {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50%;
+    max-width: 70%;
+    line-height: 1.5em;
+}
+
+.concentration-graph div {
+    max-width: 40%;
+    margin-right: 5%;
+}
 
 
 .container-title {
