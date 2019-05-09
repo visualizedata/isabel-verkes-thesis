@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>thesis</title>
+
+    <!-- load js libraries -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="js/graph-scroll.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- load css -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+    <div class="header-class">
+    <h1>Passive activism</h1>
+    <h3>on the unintented influence of index-based investment managers</h3>
+
+    <div class="intro">
+        <p>"The Stock Market is Having its Best Start in 21 Years," reported Sounds great. But what does it mean?</p>
+        <p>Not much for most people - unless this is reflecting an upward trend in the long run. Most people are not really affected by daily market fluctuations. Not only because they have a relatively very small stake in the stock market , but also because an increasing amount of people invests through passive funds that thrive with long-term growth, rather than short-lasting spikes.</p>
+    </div>
+
+    <button class="button" id="skipBotton" >
+        <A HREF="#skipIntroLINK">skip intro</A>
+    </button>
+    </div>
+</header>
+
+
+
+<!--Each single graph has a container -->
+<div id='container' class='container-1'>
+
+
+    <img src="Data/img/bogle.jpeg">
+
+
+    <div id='graph'></div>
+    <div class=section_class id='sections'>
+
+        <div id="section-JBogle">
+            <h3>Stay the course</h3>
+            takes a selection of explanatory text sections and dispatches events as different sections are scrolled into to view. These active events are used to update a
+
+        </div>
+
+        <div>
+            <h3>The rise of passive investment</h3>
+            takes a selection of explanatory text sections and dispatches events as different sections are scrolled into to view. These active events are used to update a graph's state.
+        </div>
+
+        <div>
+            <h3>The rise of passive investment</h3>
+            takes a selection of explanatory text sections and dispatches <span class='mono'>active</span> events as different sections are scrolled into to view. These active events are used to update a graph's state.
+        </div>
+
+
+        <div>
+            <h3>Headers and footers</h3>
+            takes a selection of explanatory text sections and dispatches events as different sections are scrolled into to view. These active events are used to update a graph's state.
+
+        </div>
+
+        <div>
+            <h3>Sticky graph</h3>
+            When the graph starts to scroll out of view, keeps the graph element stuck to the top of the page while the text scrolls by.
+
+        </div>
+
+    </div> <!--end of sections div-->
+
+</div> <!--end of container div-->
+
+
+
+
+
+
+    <A NAME="skipIntroLINK"></A>
+    <div class='container-title'>
+        <h1 id="main-title">How the world's largest asset managers voted in 2018</h1>
+        <h4 id="subtitle">on proxy issues at S&P 500 companies</h4>
+
+    </div>
+
+    <div class='container-all-graphs'>
+
+        <div class='container-graph'>
+            <h3 class="GraphFundTitle">BlackRock</h3>
+            <div id="graph1"></div>
+        </div>
+
+        <div class='container-graph'>
+            <h3 class="GraphFundTitle">Vanguard</h3>
+            <div id="graph2"></div>
+        </div>
+
+        <div class='container-graph'>
+            <h3 class="GraphFundTitle">StateStreet</h3>
+            <div id="graph3"></div>
+        </div>
+
+    </div>
+
+    <div class='container-graph'>
+        <div id="propText"></div>
+    </div>
+
+    <div class='container-controls'>
+        <div class="slider">
+            <div> <p id="value-step"></p></div>
+            <div> <div id="slider-step"></div></div>
+        </div>
+
+        <div class='container-issues'>
+            <p class="issue-text">Select by </p>
+            <button class="button" id="environ_btn">
+                environmental
+            </button>
+            <!--<button class="button" id="social_btn">-->
+                <!--Social-->
+            <!--</button>-->
+            <!--<button class="button" id="govern_btn">-->
+                <!--Governance-->
+            <!--</button>-->
+            <p class ="issue-text">issues</p>
+        </div>
+
+    </div>
+
+</body>
+
+
+
+<script src="js/js_index2.js"></script>
+<script src="js/script2_scrollback.js"></script>
+</html>

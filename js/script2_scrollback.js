@@ -116,8 +116,8 @@ const dataGraph1 = [
 
 function render(){
 
-    if (oldWidth == innerWidth) return;
-    oldWidth = innerWidth
+    if (oldWidth === innerWidth) return;
+    oldWidth = innerWidth;
 
     const margin = { top: 10, right: 50, bottom: 20, left: 50 };
     // let width = d3.select('#graph').node().offsetWidth ;
@@ -330,13 +330,13 @@ function render(){
         .graph(d3.selectAll('container-1 #graph'))
         .eventId('uniqueId1')  // namespace for scroll and resize events
         .sections(d3.selectAll('.container-1 #sections > div'))
-        // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+        .offset(innerWidth < 900 ? innerHeight - 30 : 200)
         .on('active', function(i){
             if (i == 0) {
                 resetGraphs();
             }
             else if (i == 1)
-            { svg.style('opacity', '1')
+            {   svg.style('opacity', '1');
                 return drawbars();
             }
             else if (i == 2) {
@@ -410,87 +410,87 @@ function render(){
     // and in the next step set the opacity to zero.
     // Happy coding!
 
-    let checked = false
-    const waffle2 = function(nrCompanies){
-
-        if (checked == false) {
-            checked = true;
-            console.log("2", checked);
-
-            secondWaffleGroup.selectAll(".rect")
-                .data(nrCompanies)
-                .enter()
-                .append("rect")
-                .attr('class', "waffle2")
-                .attr("width", 12)
-                .attr("height", 12)
-                .attr("x", function(d, i){
-                    var colIndex = (438 + i) % numCols;
-                    return colIndex * 18
-                })
-                .attr("y", function(d, i){
-                    var rowIndex = Math.floor((438 + i) /numCols );
-                    return rowIndex * 18
-                })
-                .attr("r", 6)
-                .style("fill", "#ec7d26")
-                .style("stroke", "none")
-                .attr("opacity", 1);
-        } else {
-            checked = false;
-            d3.select("#waffle2-group").selectAll("rect").attr("opacity", 0);
-        }
-    };
-
-    const waffle3 = function(){
-        console.log("3");
-        // if global var is active
-        numCols = 8;
-        const waffle1sq = d3.selectAll(".waffle1")
-            .transition()
-            .duration(500)
-            .style('opacity', 0);
-
-        const wafflesq2 = d3.selectAll('.waffle2')
-            .attr("class", '.waffle3')
-            .transition()
-            .duration(500)
-            .attr("width", 22)
-            .attr("height", 22)
-            .attr("x", function(d, i){
-                var colIndex = i % numCols;
-                return colIndex * 24
-            })
-            .attr("y", function(d, i){
-                var rowIndex = Math.floor(i / numCols );
-                return rowIndex * 24
-            });
-
-    };
-
-
-    let gs2 = d3.graphScroll()
-        .container(d3.select('.container-2'))
-        .graph(d3.selectAll('.container-2 #graph2'))
-        .eventId('uniqueId2')  // namespace for scroll and resize events
-        .sections(d3.selectAll('.container-2 #sections2 > div'))
-        .on('active', function(i){
-            if (i == 0) {
-                resetGraphs()
-            }
-            if (i == 1)
-            {
-                return waffle(d3.range(500))}
-            if (i == 2)  {
-                return waffle2(d3.range(62))
-            }
-            if (i == 3)  {
-                return waffle3()
-            }
-        });
-
-    d3.select('#source')
-        .style({'margin-bottom': window.innerHeight - 450 + 'px', padding: '100px'})
+    // let checked = false;
+    // const waffle2 = function(nrCompanies){
+    //
+    //     if (checked == false) {
+    //         checked = true;
+    //         console.log("2", checked);
+    //
+    //         secondWaffleGroup.selectAll(".rect")
+    //             .data(nrCompanies)
+    //             .enter()
+    //             .append("rect")
+    //             .attr('class', "waffle2")
+    //             .attr("width", 12)
+    //             .attr("height", 12)
+    //             .attr("x", function(d, i){
+    //                 var colIndex = (438 + i) % numCols;
+    //                 return colIndex * 18
+    //             })
+    //             .attr("y", function(d, i){
+    //                 var rowIndex = Math.floor((438 + i) /numCols );
+    //                 return rowIndex * 18
+    //             })
+    //             .attr("r", 6)
+    //             .style("fill", "#ec7d26")
+    //             .style("stroke", "none")
+    //             .attr("opacity", 1);
+    //     } else {
+    //         checked = false;
+    //         d3.select("#waffle2-group").selectAll("rect").attr("opacity", 0);
+    //     }
+    // };
+    //
+    // const waffle3 = function(){
+    //     console.log("3");
+    //     // if global var is active
+    //     numCols = 8;
+    //     const waffle1sq = d3.selectAll(".waffle1")
+    //         .transition()
+    //         .duration(500)
+    //         .style('opacity', 0);
+    //
+    //     const wafflesq2 = d3.selectAll('.waffle2')
+    //         .attr("class", '.waffle3')
+    //         .transition()
+    //         .duration(500)
+    //         .attr("width", 22)
+    //         .attr("height", 22)
+    //         .attr("x", function(d, i){
+    //             var colIndex = i % numCols;
+    //             return colIndex * 24
+    //         })
+    //         .attr("y", function(d, i){
+    //             var rowIndex = Math.floor(i / numCols );
+    //             return rowIndex * 24
+    //         });
+    //
+    // };
+    //
+    //
+    // let gs2 = d3.graphScroll()
+    //     .container(d3.select('.container-2'))
+    //     .graph(d3.selectAll('.container-2 #graph2'))
+    //     .eventId('uniqueId2')  // namespace for scroll and resize events
+    //     .sections(d3.selectAll('.container-2 #sections2 > div'))
+    //     .on('active', function(i){
+    //         if (i == 0) {
+    //             resetGraphs()
+    //         }
+    //         if (i == 1)
+    //         {
+    //             return waffle(d3.range(500))}
+    //         if (i == 2)  {
+    //             return waffle2(d3.range(62))
+    //         }
+    //         if (i == 3)  {
+    //             return waffle3()
+    //         }
+    //     });
+    //
+    // d3.select('#source')
+    //     .style({'margin-bottom': window.innerHeight - 450 + 'px', padding: '100px'})
 
 }; //end of render function
 

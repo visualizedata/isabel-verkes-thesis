@@ -2,42 +2,82 @@
 
 body{
     margin: 0 auto;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
 header {
     border-top:2px solid black;
-    width: 60%;
+    height: 100vh;
+    background-image: url("https://pbs.twimg.com/media/CrMFKBxXEAAX4Lw?format=jpg&name=medium");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    /*background-image: url("https://images.barrons.com/im-48143?width=1260&aspect_ratio=1.5");*/
+}
+
+.header-class {
+    margin: 10% 0 0 10%;
     display: flex;
     flex-direction: column;
-    margin: 5% 0 5% 10%;
+    width: 60%;
 }
 header h1 {
     font-family: 'Gilda Display', serif;
-    font-size: 4em;
-    margin: 5px 0 0 0;
+    font-size: 5em;
+    margin-bottom: 0;
 }
 h4 {
     opacity: .6;
-    font-size: small;
-    margin: 0 0;
 }
 
 header h3 {
-    font-family: 'Roboto', sans-serif;
     color: #ec7d26;
-    margin: 10px 0 ;
+
 }
 
 header .intro
     {  font-family: 'Source Sans Pro', sans-serif;
+    /*background-color: rgba(255, 255, 255, 0.29);*/
+    /*z-index: 4;*/
 }
+
+#skipBotton {
+    margin-top: 20%;
+    margin-left: 50%;
+}
+
+
+.container-1 {
+    max-width: 90%;
+}
+#graph{
+    margin-left: 40px;
+    width: 700px;
+    max-width: 800px;
+    position: -webkit-sticky;
+    position: sticky;
+    top:20%;
+    float: right;
+}
+.line {
+    fill: none;
+    stroke: #ffab00;
+    stroke-width: 3;
+}
+
+.line2 {
+    fill: none;
+    stroke: #1a53ff;
+    stroke-width: 3;
+}
+
 
 
 #sections, #sections2 {
-    width: 340px;
-    margin: auto 12%;
+    width: 30%;
+    margin-left: 10%;
 }
+
 
 #sections > div{
     background: white;
@@ -63,6 +103,16 @@ header .intro
     opacity: 1;
 }
 
+#section-JBogle img {
+
+    /*//animation: type 4s steps(60, end);*/
+}
+
+#section-JBogle {
+    background-color: black;
+    width: initial;
+    /*//animation: type 4s steps(60, end);*/
+}
 
 /* newer part hereafter ?????*/
 
@@ -88,12 +138,15 @@ header .intro
     color: dimgrey;
 }
 
-.container {
+.container-all-graphs {
+    max-width: 1400px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
 }
+
 
 .container-graph {
      display: flex;
@@ -161,7 +214,7 @@ header .intro
     letter-spacing: 1px;
     color: #696969;
     font-size: 14px;
-    border: 2px solid #c2c2c2;
+    border: 1px solid #c2c2c2;
     cursor: pointer;
 }
 .button::after {
@@ -183,7 +236,8 @@ header .intro
 
 .button a {
     text-decoration: none;
-
+    color: gray;
+    stroke-width: 0.3;
 }
 
 
