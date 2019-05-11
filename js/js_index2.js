@@ -244,10 +244,10 @@ let updateGraph = function(yearData, graphNr) {
         })
         .attr('width', 10)
         .classed('selectedSq',false)
-        .attr("removeClass",function(d){
+        .classed(function(d){
             let companyClass = getCompanyClass(d);
             return "c" + companyClass + "__rect"
-        });
+        }, false);
 
 
     let sqs = blocks.merge(rects)
@@ -356,10 +356,10 @@ let updateGrap_Environ = function(yearData, graphNr) {
         })
         .attr('width', 10)
         .classed('selectedSq',false)
-        .attr("removeClass",function(d){
+        .classed(function(d){
             let companyClass = getCompanyClass(d);
             return "c" + companyClass + "__rect"
-        });
+        }, false);
 
 
     let sqs = blocks.merge(rects)

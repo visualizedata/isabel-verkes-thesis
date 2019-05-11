@@ -77,7 +77,7 @@ header h3 {
 
 #text-under-intro{
     position: relative;
-    margin: 11% auto 0 45%;
+    margin: 11% auto 0 42%;
     font-size: smaller;
     max-width: 30%;
     background-color: white;
@@ -105,14 +105,14 @@ header h3 {
 .text-after-quote div {
     margin: 0 5% 10% 0;
 }
-.container-1 {
+.container-1, .container-2 {
     max-width: 90%;
 }
 
 .graph-section-titles {
     font-family: 'Arvo', serif;
 }
-#graph{
+#graph, #graph2{
     margin-left: 40px;
     width: 700px;
     max-width: 800px;
@@ -222,7 +222,7 @@ div.graph-scroll-active #section-JBogle {
 .concentration-graph div {
     margin-top: 4%;
     max-width: 30%;
-    margin-left: 5%;
+    /*margin-left: 5%;*/
 }
 
 .container-title {
@@ -232,16 +232,26 @@ div.graph-scroll-active #section-JBogle {
 }
 
 .under-concentration {
-    margin: 0 0 0 10%;
+    margin: 0 0 5% 9%;
     max-width: 55%;
     text-align: justify;
 }
+
+/*part with case studies*/
+
+
+
+
+
+
+
+
 
 #main-title {
     /* HOW DID THE MAIN ASSET MANAGERS VOTE? */
     font-size: 2em;
     font-max-size: 120%;
-    font-family: 'Gilda Display', serif;
+    font-family: 'Arvo', serif;
     color: #000000;
     letter-spacing: 2px;
 }
@@ -277,7 +287,7 @@ div.graph-scroll-active #section-JBogle {
 
 .container-graph h3{
     align-self: flex-start;
-    margin-left: 8%;
+    /*margin-left: 8%;*/
 }
 
 .container-graph #propText {

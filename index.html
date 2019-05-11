@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>thesis</title>
+    <title>Passive Activism</title>
 
     <!-- load js libraries -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -43,7 +43,7 @@
     </div>
 
 
-        <p class = "quote"> "Don’t look for the needle in the haystack. Just buy the haystack.” <br> <span style="font-size: .5em; color: gray";> Index-investing in Bogle's terms.</span> </p>
+        <p class = "quote"> "Don’t look for the needle in the haystack. Just buy the haystack.” <br> <span style="font-size: .5em; color: gray"> Index-investing in Bogle's terms.</span> </p>
 
 
 <!--First section of scroll effects -->
@@ -66,7 +66,7 @@
         </div>
 
         <div>
-            <p> As this concept proved itself over time, more and more people are buying index-based investments such as mutual funds and exchange traded funds (ETFs). <br> <br> Index-based investing has more than doubled in the past 10 years, accounting now for a 35% share of the total U.S. stock market. This trend is likely to continue.</p>
+            <p> As this concept proved itself over time, more and more people are buying index-based investments such as mutual funds and exchange traded funds (ETFs). <br> <br> The share of index-based investing has more than doubled during the past 10 years, accounting now for a 35%. This trend is likely to continue.</p> <p>What if this passes the tipping point of 50%?</p>
         </div>
 
 
@@ -87,67 +87,95 @@
             <br><br>Index investors are ultimately passive. They let funds vote on their behalf.</p>
         </div>
     </div>
-<div class="under-concentration"> <p>As a result, a few institutional investors will have voting control of virtually every large US corporation. The concentration of assets under management translates into concentrated voting power at shareholder meetings. Today about 35% of the total US stock ownership is index-based. <br>What if this passes the tipping point of 50%?</p>
+<div class="under-concentration"> <p>As a result, the same few asset management companies who are the largest index fund providers in terms of assets under management, are increasingly the ones with the decisive votes at shareholder meetings. The concentration of assets under management translates into concentrated shareholder control.
+    <br> And in contrast to active investors, index funds follow the index and won't buy or sell based on companies (expected) performance. For as long as a company is in an index tracked by a fund, these few asset managers are eternal shareholders, representing large or even majority stakes in virtually every large company.<br>
 </div>
 
 
-    <A NAME="skipIntroLINK"></A>
-    <div class='container-title'>
-        <h1 id="main-title">How the world's largest asset managers voted in 2018</h1>
-        <h4 id="subtitle">on proxy issues at S&P 500 companies</h4>
 
-    </div>
+<!--new scroll graph container-->
 
-    <div class='container-all-graphs'>
+<div id='container' class='container-2'>
+    <div id='graph2'></div>
+    <div id='sections2'>
 
-        <div class='container-graph'>
-            <h3 class="GraphFundTitle">BlackRock</h3>
-            <div id="graph1"></div>
+        <div>
+            <h3 class="graph-section-titles"> Where do shareholders care about? </h3>
+            <p>Every year, shareholders vote on proposals that address the company's fundamental strategic, financial or regulatory matters. The latest year shows a surge in shareholder activism.<br><br> Proposals come from the company management or shareholders trying to push the company in a certain direction ("activist shareholders").</p>
         </div>
 
-        <div class='container-graph'>
-            <h3 class="GraphFundTitle">Vanguard</h3>
-            <div id="graph2"></div>
+        <div>
+            <p>Besides the usual governance issues, there has been a rise in social and environmental proposals in the past years. Proposals related to climate change, the largest sub-topic in this category, were supported by a record level of 32.8% on average. More than in previous years, but few environmental proposals get majority support.</p>
         </div>
 
-        <div class='container-graph'>
-            <h3 class="GraphFundTitle">StateStreet</h3>
-            <div id="graph3"></div>
+        <div>
+            <h3 class="graph-section-titles"> Voting guidelines versus votes</h3>
+            <p>Large asset managers can more than before swing a vote on these issues, moving companies towards more sustainable goals resonates with index funds as long-term investors. <br> <br>The 3 largest fund managers all mention their strong commitment to enhancing companies' environmental foundations.</p>
         </div>
 
-    </div>
 
-    <div class='container-graph'>
-        <div id="propText"></div>
-    </div>
 
-    <div class='container-controls'>
-        <div class="slider">
-            <div> <p id="value-step"></p></div>
-            <div> <div id="slider-step"></div></div>
-        </div>
+</div> <!--end of sections div-->
 
-        <div class='container-issues'>
-            <p class="issue-text">Select by </p>
-            <button class="button" id="environ_btn">
-                environmental
-            </button>
-            <!--<button class="button" id="social_btn">-->
-                <!--Social-->
+</div> <!--end of container div-->
+
+
+
+
+
+
+
+    <!--<A NAME="skipIntroLINK"></A>-->
+    <!--<div class='container-title'>-->
+        <!--<h1 id="main-title">How the world's largest asset managers voted in 2018</h1>-->
+        <!--<h4 id="subtitle">on proxy issues at S&P 500 companies</h4>-->
+
+    <!--</div>-->
+
+    <!--<div class='container-all-graphs'>-->
+
+        <!--<div class='container-graph'>-->
+            <!--<h3 class="GraphFundTitle">BlackRock</h3>-->
+            <!--<div id="graph1"></div>-->
+        <!--</div>-->
+
+        <!--<div class='container-graph'>-->
+            <!--<h3 class="GraphFundTitle">Vanguard</h3>-->
+            <!--<div id="graph2"></div>-->
+        <!--</div>-->
+
+        <!--<div class='container-graph'>-->
+            <!--<h3 class="GraphFundTitle">StateStreet</h3>-->
+            <!--<div id="graph3"></div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+    <!--<div class='container-graph'>-->
+        <!--<div id="propText"></div>-->
+    <!--</div>-->
+
+    <!--<div class='container-controls'>-->
+        <!--<div class="slider">-->
+            <!--<div> <p id="value-step"></p></div>-->
+            <!--<div> <div id="slider-step"></div></div>-->
+        <!--</div>-->
+
+        <!--<div class='container-issues'>-->
+            <!--<p class="issue-text">Select by </p>-->
+            <!--<button class="button" id="environ_btn">-->
+                <!--environmental-->
             <!--</button>-->
-            <!--<button class="button" id="govern_btn">-->
-                <!--Governance-->
-            <!--</button>-->
-            <p class ="issue-text">issues</p>
-        </div>
+            <!--<p class ="issue-text">issues</p>-->
+        <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
-</body>
+<!--</body>-->
 
 
 
-    <script src="js/js_index2.js"></script>
+    <!--<script src="js/js_index2.js"></script>-->
     <script src="js/script2_scrollback.js"></script>
 
 </html>

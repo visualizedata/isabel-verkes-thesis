@@ -393,7 +393,132 @@ function render(){
             // .style('fill', colors[i])
         });
 
+// Graph 2 : waffle graph
+    const svg2 = d3.select('.container-2 #graph2').html('')
+        .append('svg')
+        .attr("width",() => { return width + margin.left + margin.right})
+        .attr("height",() => { return height + margin.top + margin.bottom});
 
+
+    let numCols = 23;
+    const waffle = function(nrCompanies){
+        let numCols = 23;
+        let groups2 =  svg2.append( 'g' )
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        groups2.selectAll(".rect")
+            .data(nrCompanies)
+            .enter()
+            .append("rect")
+            .attr('class', "waffle1")
+            .attr("width", 12)
+            .attr("height", 12)
+            .attr("x", function(d, i){
+                var colIndex = i % numCols;
+                return colIndex * 18
+            })
+            .attr("y", function(d, i){
+                var rowIndex = Math.floor(i/numCols);
+                return rowIndex * 18
+            })
+            .attr("r", 6)
+            .style("fill", "#c2c2c2")
+            .style("stroke", "none");
+
+    };
+
+    const waffle2 = function(nrCompanies){
+
+        let groups2 =  svg2.append( 'g' )
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        groups2.selectAll(".rect")
+            .data(nrCompanies)
+            .enter()
+            .append("rect")
+            .attr('class', "waffle2")
+            .attr("width", 12)
+            .attr("height", 12)
+            .attr("x", function(d, i){
+                var colIndex = (438 + i) % numCols;
+                return colIndex * 18
+            })
+            .attr("y", function(d, i){
+                var rowIndex = Math.floor((438 + i) /numCols );
+                return rowIndex * 18
+            })
+            .attr("r", 6)
+            .style("fill", "#ec7d26")
+            .style("stroke", "none");
+
+        groups2.selectAll(".waffle3")
+            .remove();
+    };
+
+    const waffle3 = function(){
+        // if global var is active
+        numCols = 8;
+        const waffle1sq = d3.selectAll(".waffle1")
+            .transition()
+            .duration(500)
+            .style('opacity', 0);
+
+        const wafflesq2 = d3.selectAll('.waffle2')
+            .attr("class", '.waffle3')
+            .transition()
+            .duration(500)
+            .attr("width", 22)
+            .attr("height", 22)
+            .attr("x", function(d, i){
+                var colIndex = i % numCols;
+                return colIndex * 24
+            })
+            .attr("y", function(d, i){
+                var rowIndex = Math.floor(i / numCols );
+                return rowIndex * 24
+            });
+
+    };
+
+
+    let gs2 = d3.graphScroll()
+        .container(d3.select('.container-2'))
+        .graph(d3.selectAll('.container-2 #graph2'))
+        .eventId('uniqueId2')  // namespace for scroll and resize events
+        .sections(d3.selectAll('.container-2 #sections2 > div'))
+        .on('active', function(i){
+            if (i === 0) {
+                resetGraphs()
+            }
+            if (i === 1)
+            { return waffle(d3.range(500))}
+            if (i === 2)  {
+                return waffle2(d3.range(62))
+            }
+            if (i === 3)  {
+                return waffle3()
+            }
+        });
+
+    // let gs2 = d3.graphScroll()
+    //     .container(d3.select('.container-2'))
+    //     .graph(d3.selectAll('.container-2 #graph2'))
+    //     .eventId('uniqueId2')  // namespace for scroll and resize events
+    //     .sections(d3.selectAll('.container-2 #sections2 > div'))
+    //     .on('active', function(i){
+    //         if (i == 0) {
+    //             resetGraphs()
+    //         }
+    //         if (i == 1)
+    //         {
+    //             return waffle(d3.range(500))}
+    //         if (i == 2)  {
+    //             return waffle2(d3.range(62))
+    //         }
+    //         if (i == 3)  {
+    //             return waffle3()
+    //         }
+    //     });
 
 }; //end of render function
 
