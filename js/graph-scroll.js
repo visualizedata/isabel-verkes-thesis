@@ -18,10 +18,10 @@
             containerStart = 0,
             belowStart,
             eventId = Math.random(),
-            offset = 200
+            offset = 300;
 
         function reposition(){
-            var i1 = 0
+            var i1 = 0;
             sectionPos.forEach(function(d, i){
                 if (d < pageYOffset - containerStart + offset) i1 = i
             })
@@ -38,7 +38,7 @@
                 container.classed('graph-scroll-fixed', isFixed)
             }
 
-            if (isBelow) i1 = n - 1
+            if (isBelow) i1 = n - 1;
 
             if (i != i1){
                 sections.classed('graph-scroll-active', function(d, i){ return i === i1 })
@@ -58,10 +58,10 @@
             })
 
             var containerBB = container.node().getBoundingClientRect()
-            var graphHeight = graph.node() ? graph.node().getBoundingClientRect().height : 0
+            var graphHeight = graph.node() ? graph.node().getBoundingClientRect().height : 0;
 
-            containerStart = containerBB.top + pageYOffset
-            belowStart = containerBB.bottom - graphHeight + pageYOffset
+            containerStart = containerBB.top + pageYOffset;
+            belowStart = containerBB.bottom - graphHeight + pageYOffset;
         }
 
         function keydown() {
@@ -84,7 +84,7 @@
                 default: return
             }
 
-            var i1 = Math.max(0, Math.min(i + delta, n - 1))
+            var i1 = Math.max(0, Math.min(i + delta, n - 1));
             if (i1 == i) return // let browser handle scrolling past last section
             d3.select(document.documentElement)
                 .interrupt()
@@ -148,7 +148,7 @@
         rv.offset = function(_x) {
             if(!_x) return offset
 
-            offset = _x
+            offset = _x;
             return rv
         }
 

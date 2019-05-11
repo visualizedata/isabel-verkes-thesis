@@ -17,51 +17,62 @@
 
 <header>
     <div class="header-class">
-    <h1>Passive activism</h1>
-    <h3>on the unintented influence of index-based investment managers</h3>
-
-    <button class="button" id="skipBotton" >
-        <A HREF="#skipIntroLINK">skip intro</A>
-    </button>
-    </div>
+        <div class="header-Big_title">
+                <h1>Passive activism</h1>
+                <h3>on the unintented influence of index-based investment managers</h3>
+            </div>
+            <div class="intro-container">
+                <p>This graph shows the price evolution of Vanguard's S&P 500 index fund since its inception. Over the last years, millions of Americans bought funds inspired by this one. <br>It was not always like that. The fund initially struggled for recognition and dollars. Right after its launch in 1976 this passive fund was dubbed "un-American" and "Bogle's folly". <br> Today, index-based investing is one of the most successful financial inventions of the previous century. It became so normal that it changed the fabric of financial markets.</p>
+            </div> <!--end of intro-container-->
+    </div> <!--end of header-class-->
+    <p id="text-under-intro"> I. VERKES - THESIS MAY 2019</p>
 </header>
 
+<!--<button class="button" id="skipBotton" >-->
+    <!--<A HREF="#skipIntroLINK">skip intro</A>-->
+<!--</button>-->
 
-<div>
-    <div class="intro-container">
-        <p>The above graph shows the price evolution of Vanguard's S&P 500 index fund since its inception. Over the years, it did just as good as the market: which is not bad. But right after the launch of this index fund in 1976 it was dubbed "un-American" or a "folly". The fund initially struggled for attention (and dollars).
-            Why stay the course, if you can be a winner by beating the market? Because most people can't, especially not in the long term. Today, index-based investing appears to be one of the most successful financial inventions of the previous century. </p>
 
+
+    <!--<h3 id="title_Section-JBogle">John Bogle</h3>-->
+    <div class="section-JBogle">
+        <p><span style= "font-size: xx-large; font-family: 'Arvo', serif" >T</span>he key figure behind this development is John Bogle, who passed away earlier this year. Bogle brought indexing to the mass as the founder of Vanguard, currently the worlds largest mutual fund-provider. Bogle brought some of the upside of capitalism to normal people, in a famously uncapitalist manner.<br> <br>
+            Throughout his life Bogle advocated for financial inclusion by giving retail investors better and smarter options to participate in capital markets. For him, index-based investing was crucial to this larger objective. But in his last writings, he is raising a warning for the unintended negative externalities caused by the success of indexing. Why? This visual article takes a look. </p>
+        <img src="Data/img/Bogle11.svg" id="photo_Section-JBogle">
+        <!--<img src="https://github.com/IsVer/mst/blob/master/Data/img/Asset%201.png?raw=true" id="photo_Section-JBogle">-->
     </div>
-</div>
 
-<!--Each single graph has a container -->
+
+        <p class = "quote"> "Don’t look for the needle in the haystack. Just buy the haystack.” <br> <span style="font-size: .5em; color: gray";> Index-investing in Bogle's terms.</span> </p>
+
+
+<!--First section of scroll effects -->
 <div id='container' class='container-1'>
 
-    <h3 id="title_Section-JBogle">John Bolge</h3>
-    <div class="section-JBogle">
-        <p>The key figure behind this is John Bogle, who passed away earlier this year. Bogle created indexing as we know as the founder of Vanguard, today's the worlds largest mutual fund-provider. He brought the upside of capitalism to the normal people, in a famously uncapitalist manner. Throughout his life he was a advocate for indexing and democratizing capital markets. But in his last writings, he is raising a warning for the unintended negative externalities caused by the success of indexing. </p>
-        <img src="https://github.com/IsVer/mst/blob/master/Data/img/Asset%201.png?raw=true" id="photo_Section-JBogle">
-    </div>
 
+    <div class="text-after-quote">
+        <div>
+            <p>Index funds are portfolios based on market indexes (like the S&P 500) instead of individual stock selection, meaning lower management costs. "That is lazy. Why not pick the right stocks and beat the market?"</p>
+        </div>
+        <div><p>Because most people can't, especially not in the long term. Actively looking at investment opportunities is not for everybody, and hiring someone to pick a good set of diversified stocks is costly. That is what Bogle saw like no other. </p>
+        </div>
+    </div> <!--<end of text after quote-->
 
     <div id='graph'></div>
     <div class=section_class id='sections'>
-
-
         <div>
-            <p>Indexing in Bogle's terms: “Don't look for the needle in the haystack. Just buy the haystack!” </p>
+            <h3 class="graph-section-titles">The rise of passive investment</h3>
+            <p> By pooling their money in an index fund, investors can spread their risks across a diversified pool of companies. The result is little effort, less risk, reasonable returns at lower costs.</p>
         </div>
 
         <div>
-            <h3>The rise of passive investment</h3>
-            <p> More and more people followed Bogle's vision.  By indexing people can spread their risks and returns across a diversified pool of companies, at relatively low costs with low entrance barriers. Instead of picking individual stocks, more investors have been joining index-based funds. Index-investing is boring but powerful; it lets the market do its work for you.</p>
+            <p> As this concept proved itself over time, more and more people are buying index-based investments such as mutual funds and exchange traded funds (ETFs). <br> <br> Index-based investing has more than doubled in the past 10 years, accounting now for a 35% share of the total U.S. stock market. This trend is likely to continue.</p>
         </div>
 
 
         <div>
-            <h3>Low cost, higher net returns</h3>
-            Bogle saw early that succesful investing is not only about the potential gains, as a result from outsmarting the average investor. Instead, he focused on minimizing the inevitable loss: the costs implied by investing. The <span style = "color:#ec7d26" > expense ratios for index-based </span> investing are so low that on a net basis, it may beat the more costly active investment strategies.
+            <h3 class="graph-section-titles">Low costs,  higher net returns</h3>
+            Bogle saw early that succesful investing is not only about the potential gains, as a result from outsmarting the average investor. <br><br> Instead, he focused on minimizing the inevitable loss: the costs implied by investing. The <span style = "color:#ec7d26" > expense ratios for index-based </span> investing are so low that on a net basis, it may beat the more costly active investment strategies.
         </div>
 
     </div> <!--end of sections div-->
@@ -69,14 +80,15 @@
 </div> <!--end of container div-->
 
 
-<h3 id="title-concentration-graph">The flipside of success</h3>
+<h3 id="title-concentration-graph" class="graph-section-titles">The flipside of success</h3>
     <div class="concentration-graph">
-        <img src="Data/img/Asset 29@4x.png" width="50%" height="50%">
-        <div> <p>Often when an innovative solution takes away certain issues, new ones are created. In his last writings, Bogle warns for the negative implications that unbridled growth of indexing might have on the governance of corporate America. Index investors are ultimately passive. They let funds vote on their behalf. The inflow into index funds likely continues to increase more than other investments.</p></div>
-        <div> <p>As a result, a few institutional investors will have voting control of virtually every large US corporation. The concentration of assets under management translates into concentrated voting power at shareholder meetings. Today about 35% of the total US stock ownership is index-based. What if this passes the tipping point of 50%?</p></div>
-
+        <img src="Data/img/concentration_2.svg">
+        <div> <p>The innovations that solve existing problems can create new ones. <br> <br> In his last writings, Bogle warns for the negative implications that unbridled growth of indexing might have on the governance of corporate America.
+            <br><br>Index investors are ultimately passive. They let funds vote on their behalf.</p>
+        </div>
     </div>
-
+<div class="under-concentration"> <p>As a result, a few institutional investors will have voting control of virtually every large US corporation. The concentration of assets under management translates into concentrated voting power at shareholder meetings. Today about 35% of the total US stock ownership is index-based. <br>What if this passes the tipping point of 50%?</p>
+</div>
 
 
     <A NAME="skipIntroLINK"></A>

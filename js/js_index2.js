@@ -43,7 +43,7 @@ const graph3 = d3.select("#graph3")
 // prepare tooltips
 let tooltip = d3.select('#subtitle')
     .attr('class', 'tooltip');
-let switchEnviron = "off";
+let switchEnviron = "master";
 
 
 // build the first graph, appears before the slider was touched
@@ -165,12 +165,6 @@ let mastergraph = function(yearData, graphNr) {
                 .moveToFront()
                 .classed('selectedSq',true);
 
-            if (switchEnviron === "on"){
-                d3.select("#propText").html((d)=>{
-                    //console.log('lkjsdlfkj') }
-                    return getShStroke(d)[2] }
-                )}
-
 
         }) // end of mouseover
         .on( 'mouseout', function (d) {
@@ -199,7 +193,7 @@ let mastergraph = function(yearData, graphNr) {
 }; // end of Mastergraph1 function
 
 let updateGraph = function(yearData, graphNr) {
-
+    console.log(yearData);
     // select companies only
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
 
@@ -313,7 +307,7 @@ let updateGrap_Environ = function(yearData, graphNr) {
     // select unique companies only
 
     let companies = d3.map( yearData, function(d){ return d.comp} ).keys();
-    console.log(companies);
+
 
     let getStrokeText = (company) => {
 
@@ -478,6 +472,7 @@ d3.csv('Data/Vanguard_proposals_all_years.csv')
 
 // load the data
 let dataStSt;
+let dataStStSorted;
 d3.csv('Data/StStDataSP500_allyears.csv')
     .then(function(data) {
 
@@ -488,7 +483,8 @@ d3.csv('Data/StStDataSP500_allyears.csv')
         let startYearData = getYearData(data, 2018);
         mastergraph(startYearData, graph3);
 
-        return dataStSt = data;
+        dataStSt = data;
+
 
     })
     .catch(function(error){
@@ -515,14 +511,14 @@ sliderYears.on("onchange", val => {
         let VangEnviron = environYearData[1];
         let StStEnviron = environYearData[2];
 
-        updateGrap_Environ(VangEnviron, graph1);
-        updateGrap_Environ(BrEnviron, graph2);
+        updateGrap_Environ(BrEnviron, graph1);
+        updateGrap_Environ(VangEnviron, graph2);
         updateGrap_Environ(StStEnviron, graph3);
 
 
         //add title things
         let selectsq = d3.select('.selectedSq');
-        console.log("this is the selection: "+ selectsq);
+        //console.log("this is the selection: "+ selectsq);
         //d3.select("#propText").html((d,i)=>{return BrEnviron.prop})
 
     });
@@ -579,8 +575,7 @@ let getdataEnviron = function(year) {
     return [BrCompaniesEnvFilter, VangCompaniesEnvFilter, StStCompaniesEnvFilter];
 };
 
-
-d3.select("#environ_btn").on('click', function(d) {
+const createEnviron = function() {
     let environYearData = getdataEnviron(thisYear); // get data for each fund
     let BrEnviron = environYearData[0];
     let VangEnviron = environYearData[1];
@@ -590,11 +585,31 @@ d3.select("#environ_btn").on('click', function(d) {
     updateGrap_Environ (VangEnviron, graph2);
     updateGrap_Environ (StStEnviron, graph3);
     console.log(environYearData[0]);
-    switchEnviron = "on";
 
+
+}
+
+d3.select("#environ_btn").on('click', function(d) {
+
+    if (switchEnviron === "eviron") {
+        switchEnviron = "master";
+        let BrDataUpdate = getYearData(dataBr, thisYear);
+        updateGraph( BrDataUpdate, graph1);
+
+        let VangDataUpdate = getYearData(dataVang, thisYear);
+        updateGraph(VangDataUpdate , graph2);
+
+        let StStDataUpdate = getYearData(dataStSt, thisYear);
+        updateGraph(StStDataUpdate, graph3);
+    } else {
+        switchEnviron = "eviron";
+        return createEnviron()
+    }
+
+});
     //add title things
     // let selectsq = d3.select('.selectedSq');
     // console.log("this is the selection: "+ selectsq);
 
 
-});
+

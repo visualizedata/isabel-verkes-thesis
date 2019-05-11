@@ -119,7 +119,7 @@ function render(){
     if (oldWidth === innerWidth) return;
     oldWidth = innerWidth;
 
-    const margin = { top: 10, right: 70, bottom: 20, left: 70 };
+    const margin = { top: 40, right: 70, bottom: 20, left: 70 };
     // let width = d3.select('#graph').node().offsetWidth ;
     // let height = d3.select('#graph').node().offsetHeight ;
     let width = d3.select('#graph').node().offsetWidth - 40;
@@ -146,7 +146,7 @@ function render(){
     let x_scale_graph1 =   d3.scaleBand()
         .domain(d3.range(dataGraph1.length))
         .range([0, width])
-        .paddingInner(0.05);
+        .paddingInner(0.09);
     let y_scale_graph1  = d3.scaleLinear()
         .domain([
             0, d3.max( dataGraph1, function(d){
@@ -181,7 +181,7 @@ function render(){
 
     // Graph 1: Functions and a reset
     const resetGraphs = function() {
-        svg.style("opacity", "0");
+        svg.style("opacity", 0);
     };
 
     // const getBogle_img = function() {
@@ -247,13 +247,13 @@ function render(){
             .attr("transform", "translate(0," + height + ")")
             .attr("font-weight", "lighter")
             .attr("font-family", "Source Sans Pro, sans-serif")
-            .style("opacity", 0.6)
+            .style("opacity", 0.5)
             .call(d3.axisBottom(x_scale_graph1).tickFormat((d) => d+2005));
 
         groups.append("g") // y-axis
             .attr("class", "axis")
             .attr("font-family", "Source Sans Pro, sans-serif")
-            .style("opacity", 0.6)
+            .style("opacity", 0.5)
             .style("font-weight","lighter")
             .call(d3.axisLeft(y_scale_graph1).ticks(null, 's').tickFormat(d => d + "%"))
             .append("text")
@@ -371,19 +371,20 @@ function render(){
         .graph(d3.selectAll('container-1 #graph'))
         .eventId('uniqueId1')  // namespace for scroll and resize events
         .sections(d3.selectAll('.container-1 #sections > div'))
-        .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+        .offset(innerWidth < 900 ? innerHeight - 30 : 100)
         .on('active', function(i){
             if (i === 0) {
-                resetGraphs()
+               return resetGraphs()
             }
             else if (i === 1)
-            {   svg.transition().duration(1000);
+            {    svg.transition().duration(1000);
                 svg.style('opacity', '1');
                 return drawbars();
             }
 
             else if (i === 2)
-            {  svg.transition().duration(1000);
+            {
+                svg.transition().duration(1000);
                 return drawLine()
             }
             //else if (i === 3) {}
@@ -393,149 +394,6 @@ function render(){
         });
 
 
-    // Graph 2 : waffle graph
-    const svg2 = d3.select('.container-2 #graph2').html('')
-        .append('svg')
-        .attr("width",() => { return width + margin.left + margin.right})
-        .attr("height",() => { return height + margin.top + margin.bottom});
-
-    const translateGroup = svg2.append('g')
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        .attr('id', 'translate-group');
-
-    // Felix: Instead of appending groups on scroll I'm making buckets for the waffles
-    // and use them as containers for the changes
-    // to prevent appending new groups on every scroll event
-
-    translateGroup.append('g')
-        .attr('id', 'waffle1-group');
-
-    translateGroup.append('g')
-        .attr('id', 'waffle2-group');
-
-    // Felix: With these two variables I access the groups in the functions
-
-    const firstWaffleGroup = d3.select('#waffle1-group');
-    const secondWaffleGroup = d3.select('#waffle2-group');
-
-
-    let numCols = 23;
-    const waffle = function(nrCompanies){
-        let numCols = 23;
-
-        firstWaffleGroup.selectAll(".rect")
-            .data(nrCompanies)
-            .enter()
-            .append("rect")
-            .attr('class', "waffle1")
-            .attr("width", 12)
-            .attr("height", 12)
-            .attr("x", function(d, i){
-                var colIndex = i % numCols;
-                return colIndex * 18
-            })
-            .attr("y", function(d, i){
-                var rowIndex = Math.floor(i/numCols);
-                return rowIndex * 18
-            })
-            .attr("r", 6)
-            .style("fill", "#c2c2c2")
-            .style("stroke", "none");
-
-    };
-
-    // Felix: With the checked variable I try to identify, if the this scroll
-    // event has been passed already, if so I can apply a different part
-    // of the function (this is not 100% safe, when people reload the page beyond
-    // this point it inverses the logic, have to think of a more failsafe version
-    // you could force starting from the top on reload for example).
-
-    // Felix: This currently just sets the opacity of the orange circles to zero,
-    // but you can also give them the same attributes as befor to make them small again
-    // and in the next step set the opacity to zero.
-    // Happy coding!
-
-    // let checked = false;
-    // const waffle2 = function(nrCompanies){
-    //
-    //     if (checked == false) {
-    //         checked = true;
-    //         console.log("2", checked);
-    //
-    //         secondWaffleGroup.selectAll(".rect")
-    //             .data(nrCompanies)
-    //             .enter()
-    //             .append("rect")
-    //             .attr('class', "waffle2")
-    //             .attr("width", 12)
-    //             .attr("height", 12)
-    //             .attr("x", function(d, i){
-    //                 var colIndex = (438 + i) % numCols;
-    //                 return colIndex * 18
-    //             })
-    //             .attr("y", function(d, i){
-    //                 var rowIndex = Math.floor((438 + i) /numCols );
-    //                 return rowIndex * 18
-    //             })
-    //             .attr("r", 6)
-    //             .style("fill", "#ec7d26")
-    //             .style("stroke", "none")
-    //             .attr("opacity", 1);
-    //     } else {
-    //         checked = false;
-    //         d3.select("#waffle2-group").selectAll("rect").attr("opacity", 0);
-    //     }
-    // };
-    //
-    // const waffle3 = function(){
-    //     console.log("3");
-    //     // if global var is active
-    //     numCols = 8;
-    //     const waffle1sq = d3.selectAll(".waffle1")
-    //         .transition()
-    //         .duration(500)
-    //         .style('opacity', 0);
-    //
-    //     const wafflesq2 = d3.selectAll('.waffle2')
-    //         .attr("class", '.waffle3')
-    //         .transition()
-    //         .duration(500)
-    //         .attr("width", 22)
-    //         .attr("height", 22)
-    //         .attr("x", function(d, i){
-    //             var colIndex = i % numCols;
-    //             return colIndex * 24
-    //         })
-    //         .attr("y", function(d, i){
-    //             var rowIndex = Math.floor(i / numCols );
-    //             return rowIndex * 24
-    //         });
-    //
-    // };
-    //
-    //
-    // let gs2 = d3.graphScroll()
-    //     .container(d3.select('.container-2'))
-    //     .graph(d3.selectAll('.container-2 #graph2'))
-    //     .eventId('uniqueId2')  // namespace for scroll and resize events
-    //     .sections(d3.selectAll('.container-2 #sections2 > div'))
-    //     .on('active', function(i){
-    //         if (i == 0) {
-    //             resetGraphs()
-    //         }
-    //         if (i == 1)
-    //         {
-    //             return waffle(d3.range(500))}
-    //         if (i == 2)  {
-    //             return waffle2(d3.range(62))
-    //         }
-    //         if (i == 3)  {
-    //             return waffle3()
-    //         }
-    //     });
-    //
-    // d3.select('#source')
-    //     .style({'margin-bottom': window.innerHeight - 450 + 'px', padding: '100px'})
 
 }; //end of render function
 
