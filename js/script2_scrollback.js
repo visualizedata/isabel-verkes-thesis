@@ -188,11 +188,7 @@ function render(){
 
 
     const drawbars = function() {
-        d3.select(".bogle_img").remove();
-        d3.selectAll(".bargraph1")
-            .transition()
-            .duration(100)
-            .style("opacity", 1);
+
 
         // Bars
         let bars = groups.selectAll('rect')
@@ -392,8 +388,10 @@ function render(){
 
 
     const getPropTypes= function() {
-        d3.selectAll(".waffle1")
-            .style("opacity", 0);
+       if (counter2 > 0) {
+           d3.selectAll(".waffle1")
+               .style("opacity", 0)
+       }
         svgTwo.append("svg:image")
             .attr("id", "img_propTypes")
             .attr('x', 0)
@@ -536,11 +534,11 @@ function render(){
         .sections(d3.selectAll('.container-2 #sections2 > div'))
         .on('active', function(i){
             if (i == 0) {
-               getPropTypes()
+               getPropTypes();
                 counter2 = 0;
             }
             if (i === 1) {
-                waffle(waffle1_companies, waffle1_data)
+                waffle(waffle1_companies, waffle1_data);
                 counter2 = 1;
             }
             if (i === 2)  {

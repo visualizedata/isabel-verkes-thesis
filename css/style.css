@@ -97,7 +97,7 @@ header h3 {
 }
 
 .text-after-quote{
-    margin: 0 0 0 20%;
+    margin: 0 3% 0 20%;
     display: flex;
     flex-direction: row;
     width: 90%;
@@ -183,7 +183,7 @@ header h3 {
 .section-JBogle {
     display: flex;
     flex-direction: row;
-    margin: 0 0 0 20%;
+    margin: 0 3% 0 20%;
     max-width: 80%;
     text-align: justify;
     line-height: 1.5em
@@ -237,14 +237,6 @@ div.graph-scroll-active #section-JBogle {
     max-width: 55%;
     text-align: justify;
 }
-
-/*part with case studies*/
-
-
-
-
-
-
 
 
 
