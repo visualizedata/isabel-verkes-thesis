@@ -114,6 +114,15 @@ const dataGraph1 = [
     }
 ]
 let counter2 = -1; // for scroll
+
+// to ensure tooltop divs and hovered-over elements are
+// on the front
+d3.selection.prototype.moveToFront = function() {
+    return this.each(function(){
+        this.parentNode.appendChild(this);
+    });
+};
+
 function render(){
 
     if (oldWidth === innerWidth) return;
@@ -168,7 +177,7 @@ function render(){
     const tooltip = svg.append("g")
         .attr("class", "tooltip-graphPassive")
         .style("display", "none");
-    tooltip.append("rect")
+    tooltip.append("div")
         .attr("width", 60)
         .attr("height", 20)
         .attr("fill", "white")
@@ -179,14 +188,13 @@ function render(){
         .style("text-anchor", "middle")
         .attr("font-size", "12px");
 
-    // Graph 1: Functions and a reset
+    // Graph 1 : Functions and a reset
     const resetGraphs = function() {
         svg.style("opacity", 0);
-        svgTwo.style("opacity", 0);
     };
 
 
-
+    // Graph 1 : Draw first bar chart
     const drawbars = function() {
 
 
@@ -214,8 +222,8 @@ function render(){
                 tooltip.style("display", "none");
             })
             .on("mousemove", function (d) {
-                var xPosition = d3.mouse(this)[0] - 5;
-                var yPosition = d3.mouse(this)[1] - 5;
+                let xPosition = d3.mouse(this)[0] - 5;
+                let yPosition = d3.mouse(this)[1] - 5;
                 tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
                 tooltip.select("text").text((Math.floor((d[1] - d[0]) * 100) / 100).toFixed(1) + "%");
             });
@@ -344,7 +352,7 @@ function render(){
 
     }; // end draw line function
 
-    // Apply to graph scroll
+    // Apply to graph scroll, calling all graph functions
     let gs = d3.graphScroll()
         .container(d3.select('.container-1'))
         .graph(d3.selectAll('container-1 #graph'))
@@ -376,17 +384,13 @@ function render(){
 ///////////////////////////
 // Graph 2 : Prepare SVG//
 
-    let svgTwo = d3.select('.container-2  #graph2')
+
+    let svgTwo = d3.select('.container-2  #graph2').html('')
         .append('svg')
         .attr("width",() => { return width + margin.left + margin.right})
-        .attr("height",() => { return height + margin.top + margin.bottom})
-        .append("g")
-        .attr("transform", "translate(0" + margin.left + "," + margin.top + ")");
-
+        .attr("height",() => { return height + margin.top + margin.bottom});
 
 // Graph 2; votes
-
-
     const getPropTypes= function() {
        if (counter2 > 0) {
            d3.selectAll(".waffle1")
@@ -400,10 +404,10 @@ function render(){
             .attr('height', "80%")
             .style("opacity", 0)
             .transition()
-            .delay(1000)
+            .delay(900)
             .duration(900)
             .style("opacity", 1)
-            .attr("xlink:href", "Data/img/legend1.svg");
+            .attr("xlink:href", "Data/img/legend2.svg");
     };
 
 
@@ -426,9 +430,10 @@ function render(){
 // First waffle function
 
     let waffle = function(nrCompanies, propData) {
-
-       if (counter2 === 0 ) // removing previous graph}
-        {   svgTwo
+        let companies = nrCompanies.reverse();
+        if (counter2 === 0) // removing previous graph}
+        {
+            svgTwo
                 .selectAll("*")
                 .remove()
         }
@@ -436,42 +441,93 @@ function render(){
         numCols = 7;
 
         let getStrokeText = (company) => {
-            let againstManFill = "#9cc253";
-            let prop;
+            let againstManFill;
+            let proposals = [];
+            let countvotedAgainstM = 0;
+            let countvotedForM = 0;
             propData.forEach((datarow) => {
-                if (datarow.comp === company) {
-                    prop = datarow.proposal;
+                if (datarow.issuer_company === company) {
                     let voted = datarow.against_mgmt;
-                    if (voted === "FOR MGMT") {
-                        againstManFill = "#f22d09"
-                    }
+                    let voteToDisplay;
+                    if (voted === "AGAINST") {
+                        countvotedAgainstM += 1;
+                        voteToDisplay = "voted FOR";
+                    } else {
+                        countvotedForM+=1;
+                        voteToDisplay = "voted AGAINST";}
+                    let sentence = datarow.proposal.toLowerCase()
+                    let upper = sentence.charAt(0).toUpperCase() + sentence.substring(1);
+                    proposals.push(upper + " - " + voteToDisplay);
                 }
             });
-            return againstManFill;
-        } // end of get stroke
+
+            if (countvotedAgainstM === 0) {againstManFill = "#b4580d"}
+            else if (countvotedAgainstM === 1) {againstManFill = "#d4c60b"}
+            else if (countvotedAgainstM === 2) {againstManFill = "#bed40b"}
+            else if (countvotedAgainstM === 3) {againstManFill = "#9cc253"}
+            else if (countvotedAgainstM === 4) {againstManFill = "#68902c"}
+            else if (countvotedAgainstM === 5) {againstManFill = "#477c35"}
+            return [againstManFill, proposals];
+        }; // end of get stroke
+
+        let groups2 = svgTwo.selectAll("g")
+            .data(propData)
+            .enter()
+            .append("g");
 
 
-
-        svgTwo.selectAll("rect")
-            .data(nrCompanies)
+       let rects = groups2.selectAll("rect")
+            .data( companies )
             .enter()
             .append("rect")
-            .attr("width", 20)
-            .attr("height", 20)
+            .attr("height",40)
+            .attr("width",40)
             .attr('class', "waffle1")
-            .attr("x", function(d, i){
+            .attr("x", function (d, i) {
                 let colIndex = (i) % numCols;
-                return colIndex * 30
+                return colIndex * 50 ;
             })
-            .attr("y", function(d, i){
-                let rowIndex = Math.floor(i/numCols);
-                return rowIndex * 30
+            .attr("y", function (d, i) {
+                let rowIndex = Math.floor(i / numCols);
+                return rowIndex * 50;
             })
-            .attr("r", 6)
-            .style("fill", (d)=>{
-                return getStrokeText(d)} )
-            .style("stroke", "#c2c2c2");
-    };
+            .style("fill", (d) => {
+                return getStrokeText(d)[0]
+            })
+            .style("stroke", "#f22d09");
+
+        // Graph 2: Prep the tooltip bits, initial display is hidden
+        let tooltip2 = svgTwo.append("g")
+            .attr("class", "tooltip-graphEnviron")
+            .style("display", "none");
+        tooltip2.append("rect")
+            .attr("width", 200)
+            .attr("height", 20)
+            .attr("fill", "white")
+            .style("opacity", 0.5);
+        tooltip2.append("text")
+            .attr("x", 10)
+            .attr("dy", "1.2em")
+            .style("text-anchor", "start")
+            .style("font-family", "Roboto")
+            .attr("font-size", "12px");
+
+            rects.on("mouseenter", function () {
+                tooltip2.style("display", null);
+            })
+            .on("mouseout", function () {
+                tooltip2.style("display", "none");
+            })
+            .on("mousemove", function (d) {
+                let xPosition = d3.mouse(this)[0] + 6;
+                let yPosition = d3.mouse(this)[1] + 6;
+                tooltip2.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                tooltip2.select("text").text(d);
+                tooltip2.attr("class", "tooltipEnvironGraph")
+                d3.select("tooltip2").moveToFront();
+            });
+
+            };// end of waffle function
 
     // const waffle2 = function(nrCompanies){
     //

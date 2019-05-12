@@ -238,6 +238,10 @@ div.graph-scroll-active #section-JBogle {
     text-align: justify;
 }
 
+/*graph on environ issues*/
+.tooltipEnvironGraph {
+    pointer-events: none;
+}
 
 
 #main-title {
@@ -305,13 +309,7 @@ div.graph-scroll-active #section-JBogle {
 }
 
 
-/*EFFECTS IN SQUARE GRAPH*/
-/*#hoverAtCompany {*/
-    /*width: 14px;*/
-    /*height: 14px;*/
-/*}*/
-
-/*BUTTONS TO SET CATEGORIES*/
+/*BUTTON TO SET CATEGORY*/
 .button:focus {
     outline: none;
 }
