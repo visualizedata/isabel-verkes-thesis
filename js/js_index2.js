@@ -340,7 +340,7 @@ let updateGrap_Environ = function(yearData, graphNr) {
 
 
     let blocks = rects
-        .data(companies )
+        .data(companies)
         .enter()
         .append("rect")
         .attr('class','blocks')
@@ -375,7 +375,7 @@ let updateGrap_Environ = function(yearData, graphNr) {
         .attr("width", 12)
         .attr("height", 12)
         .style("stroke", "None")
-        .style('fill', (d)=>{return getStrokeText(d)})
+        //.style('fill', (d)=>{return getStrokeText(d)})
         .attr("class",function(d){
             let companyClass = getCompanyClass(d);
             return "c" + companyClass + "__rect"

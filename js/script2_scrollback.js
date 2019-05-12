@@ -182,26 +182,9 @@ function render(){
     // Graph 1: Functions and a reset
     const resetGraphs = function() {
         svg.style("opacity", 0);
+        svg2.style("opacity", 0);
     };
 
-    // const getBogle_img = function() {
-    //     d3.selectAll(".bargraph1")
-    //         .style("opacity", 0);
-    //     d3.selectAll(".legend")
-    //         .style("opacity", 0);
-    //     tooltip.style("display", "none");
-    //     d3.select(".tooltip-graphPassive")
-    //         .style("opacity", 0);
-    //
-    //     svg.append("svg:image")
-    //         .style("opacity", 1)
-    //         .attr('x', -50)
-    //         .attr('y', 30)
-    //         .attr("class", "bogle_img")
-    //         .attr('width', 900)
-    //         .attr('height', 250)
-    //         .attr("xlink:href", "https://github.com/IsVer/mst/blob/master/Data/img/Asset%201.png?raw=truex")
-    // };
 
 
     const drawbars = function() {
@@ -393,67 +376,127 @@ function render(){
             // .style('fill', colors[i])
         });
 
-// Graph 2 : waffle graph
+
+///////////////////////////
+// Graph 2 : Prepare SVG//
+
     const svg2 = d3.select('.container-2 #graph2').html('')
         .append('svg')
         .attr("width",() => { return width + margin.left + margin.right})
-        .attr("height",() => { return height + margin.top + margin.bottom});
+        .attr("height",() => { return height + margin.top + margin.bottom})
+        .append("g")
+        .attr("transform", "translate(0" + margin.left + "," + margin.top + ")");
 
 
-    let numCols = 23;
-    const waffle = function(nrCompanies){
-        let numCols = 23;
-        let groups2 =  svg2.append( 'g' )
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// Graph 2; votes
 
-        groups2.selectAll(".rect")
+
+    const getPropTypes= function() {
+        d3.selectAll(".waffle1")
+            .style("opacity", 0);
+     svg2.append("svg:image")
+            .attr("id", "img_propTypes")
+            .attr('x', 0)
+            .attr('y', 3)
+            .attr('width', "80%")
+            .attr('height', "80%")
+            .style("opacity", 0)
+            .transition()
+            .delay(1000)
+            .duration(900)
+            .style("opacity", 1)
+            .attr("xlink:href", "Data/img/legend1.svg");
+    };
+
+
+// Graph 2 ; waffle graph
+
+
+    let waffle1_data, waffle1_companies;
+    let numCols;
+
+    d3.csv('Data/Vanguard_ENV_focus.csv')
+        .then(function(data) {
+            waffle1_data = data;
+            waffle1_companies = d3.map( data, function(d){return d.issuer_company } ).keys();
+            console.log(waffle1_companies)
+        })
+        .catch(function(error){
+            console.log('data load error')
+    }); // end of data function
+
+
+    // First waffle function
+
+    let waffle = function(nrCompanies, propData){
+        d3.select("#img_propTypes") // removing previous graph
+            .style("opacity", 0);
+
+        numCols = 7;
+
+        let getStrokeText = (company) => {
+            let againstManFill = "#9cc253";
+            let prop;
+            propData.forEach((datarow) => {
+                if (datarow.comp === company) {
+                    prop = +datarow.proposal;
+                    let voted = datarow.against_mgmt;
+                    if (voted === "FOR MGMT") {
+                        againstManFill = "#f22d09"
+                    }
+                }
+            });
+            return againstManFill;
+        } // end of get stroke
+
+        svg2.selectAll("rect")
             .data(nrCompanies)
             .enter()
             .append("rect")
+            .attr("width", 20)
+            .attr("height", 20)
             .attr('class', "waffle1")
-            .attr("width", 12)
-            .attr("height", 12)
             .attr("x", function(d, i){
-                var colIndex = i % numCols;
-                return colIndex * 18
+                let colIndex = (i) % numCols;
+                return colIndex * 30
             })
             .attr("y", function(d, i){
-                var rowIndex = Math.floor(i/numCols);
-                return rowIndex * 18
+                let rowIndex = Math.floor(i/numCols);
+                return rowIndex * 30
             })
             .attr("r", 6)
-            .style("fill", "#c2c2c2")
-            .style("stroke", "none");
-
+            .style("fill", (d)=>{
+                return getStrokeText(d)} )
+            .style("stroke", "#c2c2c2");
     };
 
-    const waffle2 = function(nrCompanies){
-
-        let groups2 =  svg2.append( 'g' )
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        groups2.selectAll(".rect")
-            .data(nrCompanies)
-            .enter()
-            .append("rect")
-            .attr('class', "waffle2")
-            .attr("width", 12)
-            .attr("height", 12)
-            .attr("x", function(d, i){
-                var colIndex = (438 + i) % numCols;
-                return colIndex * 18
-            })
-            .attr("y", function(d, i){
-                var rowIndex = Math.floor((438 + i) /numCols );
-                return rowIndex * 18
-            })
-            .attr("r", 6)
-            .style("fill", "#ec7d26")
-            .style("stroke", "none");
-
-        groups2.selectAll(".waffle3")
-            .remove();
-    };
+    // const waffle2 = function(nrCompanies){
+    //
+    //     let groups2 =  svg2.append( 'g' )
+    //         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    //
+    //     groups2.selectAll("rect")
+    //         .data(nrCompanies)
+    //         .enter()
+    //         .append("rect")
+    //         .attr('class', "waffle2")
+    //         .attr("width", 30)
+    //         .attr("height", 30)
+    //         .attr("x", function(d, i){
+    //             var colIndex = (438 + i) % numCols;
+    //             return colIndex * 18
+    //         })
+    //         .attr("y", function(d, i){
+    //             var rowIndex = Math.floor((438 + i) /numCols );
+    //             return rowIndex * 18
+    //         })
+    //         .attr("r", 6)
+    //         .style("fill", "#ec7d26")
+    //         .style("stroke", "none");
+    //
+    //     groups2.selectAll(".waffle3")
+    //         .remove();
+    // };
 
     const waffle3 = function(){
         // if global var is active
@@ -467,8 +510,8 @@ function render(){
             .attr("class", '.waffle3')
             .transition()
             .duration(500)
-            .attr("width", 22)
-            .attr("height", 22)
+            .attr("width", 30)
+            .attr("height", 30)
             .attr("x", function(d, i){
                 var colIndex = i % numCols;
                 return colIndex * 24
@@ -480,23 +523,27 @@ function render(){
 
     };
 
-
+    let counter = -1;
     let gs2 = d3.graphScroll()
         .container(d3.select('.container-2'))
         .graph(d3.selectAll('.container-2 #graph2'))
         .eventId('uniqueId2')  // namespace for scroll and resize events
         .sections(d3.selectAll('.container-2 #sections2 > div'))
         .on('active', function(i){
-            if (i === 0) {
-                resetGraphs()
+            if (i < 1) {
+               counter = 0;
+               getPropTypes()
             }
-            if (i === 1)
-            { return waffle(d3.range(500))}
+            if (i === 1) {
+                counter = 1
+                // console.log(waffle1_companies);
+                return waffle(waffle1_companies, waffle1_data)
+            }
             if (i === 2)  {
-                return waffle2(d3.range(62))
+                //return waffle2(d3.range(62))
             }
             if (i === 3)  {
-                return waffle3()
+                //return waffle3()
             }
         });
 
@@ -520,7 +567,7 @@ function render(){
     //         }
     //     });
 
-}; //end of render function
+} //end of render function
 
 render();
 d3.select(window).on('resize', render);

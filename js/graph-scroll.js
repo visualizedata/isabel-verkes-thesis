@@ -43,7 +43,7 @@
             if (i != i1){
                 sections.classed('graph-scroll-active', function(d, i){ return i === i1 })
 
-                dispatch.call('active', null, i1)
+                dispatch.call('active', null, i1);
 
                 i = i1
             }
