@@ -113,7 +113,7 @@ const dataGraph1 = [
         "activeMutualFexpense": 0.55
     }
 ]
-
+let counter2 = -1; // for scroll
 function render(){
 
     if (oldWidth === innerWidth) return;
@@ -182,7 +182,7 @@ function render(){
     // Graph 1: Functions and a reset
     const resetGraphs = function() {
         svg.style("opacity", 0);
-        svg2.style("opacity", 0);
+        svgTwo.style("opacity", 0);
     };
 
 
@@ -380,7 +380,7 @@ function render(){
 ///////////////////////////
 // Graph 2 : Prepare SVG//
 
-    const svg2 = d3.select('.container-2 #graph2').html('')
+    let svgTwo = d3.select('.container-2  #graph2')
         .append('svg')
         .attr("width",() => { return width + margin.left + margin.right})
         .attr("height",() => { return height + margin.top + margin.bottom})
@@ -394,7 +394,7 @@ function render(){
     const getPropTypes= function() {
         d3.selectAll(".waffle1")
             .style("opacity", 0);
-     svg2.append("svg:image")
+        svgTwo.append("svg:image")
             .attr("id", "img_propTypes")
             .attr('x', 0)
             .attr('y', 3)
@@ -419,18 +419,21 @@ function render(){
         .then(function(data) {
             waffle1_data = data;
             waffle1_companies = d3.map( data, function(d){return d.issuer_company } ).keys();
-            console.log(waffle1_companies)
         })
         .catch(function(error){
             console.log('data load error')
     }); // end of data function
 
 
-    // First waffle function
+// First waffle function
 
-    let waffle = function(nrCompanies, propData){
-        d3.select("#img_propTypes") // removing previous graph
-            .style("opacity", 0);
+    let waffle = function(nrCompanies, propData) {
+
+       if (counter2 === 0 ) // removing previous graph}
+        {   svgTwo
+                .selectAll("*")
+                .remove()
+        }
 
         numCols = 7;
 
@@ -439,7 +442,7 @@ function render(){
             let prop;
             propData.forEach((datarow) => {
                 if (datarow.comp === company) {
-                    prop = +datarow.proposal;
+                    prop = datarow.proposal;
                     let voted = datarow.against_mgmt;
                     if (voted === "FOR MGMT") {
                         againstManFill = "#f22d09"
@@ -449,7 +452,9 @@ function render(){
             return againstManFill;
         } // end of get stroke
 
-        svg2.selectAll("rect")
+
+
+        svgTwo.selectAll("rect")
             .data(nrCompanies)
             .enter()
             .append("rect")
@@ -498,46 +503,45 @@ function render(){
     //         .remove();
     // };
 
-    const waffle3 = function(){
-        // if global var is active
-        numCols = 8;
-        const waffle1sq = d3.selectAll(".waffle1")
-            .transition()
-            .duration(500)
-            .style('opacity', 0);
+    // const waffle3 = function(){
+    //     // if global var is active
+    //     numCols = 8;
+    //     const waffle1sq = d3.selectAll(".waffle1")
+    //         .transition()
+    //         .duration(500)
+    //         .style('opacity', 0);
+    //
+    //     const wafflesq2 = d3.selectAll('.waffle2')
+    //         .attr("class", '.waffle3')
+    //         .transition()
+    //         .duration(500)
+    //         .attr("width", 30)
+    //         .attr("height", 30)
+    //         .attr("x", function(d, i){
+    //             var colIndex = i % numCols;
+    //             return colIndex * 24
+    //         })
+    //         .attr("y", function(d, i){
+    //             var rowIndex = Math.floor(i / numCols );
+    //             return rowIndex * 24
+    //         });
+    //
+    // };
 
-        const wafflesq2 = d3.selectAll('.waffle2')
-            .attr("class", '.waffle3')
-            .transition()
-            .duration(500)
-            .attr("width", 30)
-            .attr("height", 30)
-            .attr("x", function(d, i){
-                var colIndex = i % numCols;
-                return colIndex * 24
-            })
-            .attr("y", function(d, i){
-                var rowIndex = Math.floor(i / numCols );
-                return rowIndex * 24
-            });
 
-    };
-
-    let counter = -1;
     let gs2 = d3.graphScroll()
         .container(d3.select('.container-2'))
         .graph(d3.selectAll('.container-2 #graph2'))
         .eventId('uniqueId2')  // namespace for scroll and resize events
         .sections(d3.selectAll('.container-2 #sections2 > div'))
         .on('active', function(i){
-            if (i < 1) {
-               counter = 0;
+            if (i == 0) {
                getPropTypes()
+                counter2 = 0;
             }
             if (i === 1) {
-                counter = 1
-                // console.log(waffle1_companies);
-                return waffle(waffle1_companies, waffle1_data)
+                waffle(waffle1_companies, waffle1_data)
+                counter2 = 1;
             }
             if (i === 2)  {
                 //return waffle2(d3.range(62))
