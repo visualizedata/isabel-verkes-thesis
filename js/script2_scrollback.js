@@ -442,6 +442,7 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
 
     let waffle1_data, waffle1_companies;
     let numCols;
+    let rects;
 
     d3.csv('Data/Vanguard_ENV_focus2.csv')
         .then(function(data) {
@@ -470,10 +471,10 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
                     voteToDisplay = "voted FOR";
                 } else {
                     //countvotedForM+=1;
-                    voteToDisplay = "voted AGAINST";}
+                    voteToDisplay = "voted against in " + datarow.year;}
                 let sentence = datarow.proposal.toLowerCase();
                 let upper = sentence.charAt(0).toUpperCase() + sentence.substring(1);
-                proposals.push(upper + " - " + voteToDisplay);
+                proposals.push(upper + "  -  " + voteToDisplay);
             }
         });
         let countVotes = (countvotedAgainstM/proposals.length)*100;
@@ -483,7 +484,7 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
         return [againstManFill, proposals];
     }; // end of get stroke
 
-    
+
     let waffle = function(nrCompanies, propData) {
 
         if (counter2 <= 1) // removing previous graph}
@@ -501,7 +502,7 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
             .append("g")
             .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
-       let rects = groups2.selectAll("rect")
+       rects = groups2.selectAll("rect")
             .data( nrCompanies )
             .enter()
             .append("rect")
@@ -589,10 +590,6 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
                 d3.select("tooltip2").moveToFront();
             }); // end mousemove
 
-
-                rects.on("click", function (d){
-                    console.log(getStrokeText(d)[1])
-                });
 };// end of waffle function
 
     // const waffle2 = function(nrCompanies){
@@ -648,6 +645,42 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
     //
     // };
 
+    let getPropgraph = function(){
+         d3.selectAll("rect").on("click", function (d){
+                let proparray = getStrokeText(d)[1];
+                proparray = proparray.map((prop)=>{
+                    // prop = prop.replace(/^,\s*/, "");
+                    return "•   " + prop + "<br>"});
+                d3.select("#Environ_proptexts_para")
+                    .classed("Environ_proptexts_ACTIVE", true)
+                    .html( "At "+ d + ", shareholder activists proposed to: <br>" + proparray.join(""))
+            });
+
+    }; // end getPropgraph
+
+    const getPolciies= function() {
+        if (counter2 > 0) {
+            d3.selectAll(".waffle1")
+                .style("opacity", 0);
+            d3.selectAll("#img_propTypes_detail")
+                .style("opacity", 0);
+        }
+        svgTwo.append("svg:image")
+            .attr("id", "img_propTypes")
+            .attr('x', 0)
+            .attr('y', 3)
+            .attr('width', "80%")
+            .attr('height', "80%")
+            .style("opacity", 0)
+            .transition()
+            .delay(900)
+            .duration(900)
+            .style("opacity", 1)
+            .attr("xlink:href", "Data/img/legend2.svg");
+    };
+
+
+
 
     let gs2 = d3.graphScroll()
         .container(d3.select('.container-2'))
@@ -665,9 +698,16 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
             }
             if (i === 2)  {
                 waffle(waffle1_companies, waffle1_data);
+                d3.select("#Environ_proptexts_para")
+                    .classed("Environ_proptexts_ACTIVE", false)
+                    .html(" . ")
+
+                counter2 = 2;
             }
             if (i === 3)  {
-                //return waffle3()
+                getPropgraph();
+                counter2 = 3;
+
             }
         });
 
