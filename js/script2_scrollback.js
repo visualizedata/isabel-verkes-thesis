@@ -128,11 +128,11 @@ function render(){
     if (oldWidth === innerWidth) return;
     oldWidth = innerWidth;
 
-    const margin = { top: 40, right: 70, bottom: 20, left: 70 };
-    // let width = d3.select('#graph').node().offsetWidth ;
-    // let height = d3.select('#graph').node().offsetHeight ;
-    let width = d3.select('#graph').node().offsetWidth - 40;
-    let height = 300;
+    const margin = { top: 10, right: 70, bottom: 30, left: 70 };
+    let width = d3.select('#graph').node().offsetWidth ;
+    let height = d3.select('#graph').node().offsetHeight + 300;
+    //let width = d3.select('#graph').node().offsetWidth - 40;
+    //let height = 300;
 
     if (innerWidth <= 925){
         width = innerWidth;
@@ -384,17 +384,24 @@ function render(){
 ///////////////////////////
 // Graph 2 : Prepare SVG//
 
+const margin2 = { top: 80, right: 70, bottom: 10, left: 70 };
+let width2 = d3.select('#graph2').node().offsetWidth ;
+let height2 = d3.select('#graph2').node().offsetHeight + 400;
+    //let width = d3.select('#graph').node().offsetWidth - 40;
+    //let height = 300;
 
-    let svgTwo = d3.select('.container-2  #graph2').html('')
-        .append('svg')
-        .attr("width",() => { return width + margin.left + margin.right})
-        .attr("height",() => { return height + margin.top + margin.bottom});
+let svgTwo = d3.select('.container-2  #graph2').html('')
+    .append('svg')
+    .attr("width",() => { return width2 + margin2.left + margin2.right})
+    .attr("height",() => { return height2 + margin2.top + margin2.bottom})
 
 // Graph 2; votes
     const getPropTypes= function() {
        if (counter2 > 0) {
            d3.selectAll(".waffle1")
-               .style("opacity", 0)
+               .style("opacity", 0);
+           d3.selectAll("#img_propTypes_detail")
+               .style("opacity", 0);
        }
         svgTwo.append("svg:image")
             .attr("id", "img_propTypes")
@@ -410,6 +417,25 @@ function render(){
             .attr("xlink:href", "Data/img/legend2.svg");
     };
 
+// Graph 2; votes
+    const getPropTypes_detail= function() {
+        if (counter2 >= 0) {
+            svgTwo
+                .selectAll("*")
+                .remove()
+        }
+        svgTwo.append("svg:image")
+            .attr("id", "img_propTypes_detail")
+            .attr('x', 0)
+            .attr('y', 3)
+            .attr('width', "80%")
+            .attr('height', "80%")
+            .transition()
+            .delay(90)
+            .duration(900)
+            .style("opacity", 1)
+            .attr("xlink:href", "Data/img/legend2_detail.svg");
+    };
 
 // Graph 2 ; waffle graph
 
@@ -417,10 +443,11 @@ function render(){
     let waffle1_data, waffle1_companies;
     let numCols;
 
-    d3.csv('Data/Vanguard_ENV_focus.csv')
+    d3.csv('Data/Vanguard_ENV_focus2.csv')
         .then(function(data) {
             waffle1_data = data;
             waffle1_companies = d3.map( data, function(d){return d.issuer_company } ).keys();
+            waffle1_companies = waffle1_companies.reverse();
         })
         .catch(function(error){
             console.log('data load error')
@@ -429,86 +456,121 @@ function render(){
 
 // First waffle function
 
+    let getStrokeText = (company) => {
+        let againstManFill;
+        let proposals = [];
+        let countvotedAgainstM = 0;
+        let countvotedForM = 0;
+        waffle1_data.forEach((datarow) => {
+            if (datarow.issuer_company === company) {
+                let voted = datarow.against_mgmt;
+                let voteToDisplay;
+                if (voted === "AGAINST MGMT") {
+                    countvotedAgainstM += 1;
+                    voteToDisplay = "voted FOR";
+                } else {
+                    //countvotedForM+=1;
+                    voteToDisplay = "voted AGAINST";}
+                let sentence = datarow.proposal.toLowerCase();
+                let upper = sentence.charAt(0).toUpperCase() + sentence.substring(1);
+                proposals.push(upper + " - " + voteToDisplay);
+            }
+        });
+        let countVotes = (countvotedAgainstM/proposals.length)*100;
+        if (countVotes=== 0) {againstManFill = "#535b5b" }
+        else if ((countVotes > 0 ) && (countVotes < 30)) { againstManFill ="#aebd96" }
+        else if ((countVotes > 5)) { againstManFill =  "#6fa836" }
+        return [againstManFill, proposals];
+    }; // end of get stroke
+
+    
     let waffle = function(nrCompanies, propData) {
-        let companies = nrCompanies.reverse();
-        if (counter2 === 0) // removing previous graph}
+
+        if (counter2 <= 1) // removing previous graph}
         {
             svgTwo
                 .selectAll("*")
                 .remove()
         }
 
-        numCols = 7;
-
-        let getStrokeText = (company) => {
-            let againstManFill;
-            let proposals = [];
-            let countvotedAgainstM = 0;
-            let countvotedForM = 0;
-            propData.forEach((datarow) => {
-                if (datarow.issuer_company === company) {
-                    let voted = datarow.against_mgmt;
-                    let voteToDisplay;
-                    if (voted === "AGAINST") {
-                        countvotedAgainstM += 1;
-                        voteToDisplay = "voted FOR";
-                    } else {
-                        countvotedForM+=1;
-                        voteToDisplay = "voted AGAINST";}
-                    let sentence = datarow.proposal.toLowerCase()
-                    let upper = sentence.charAt(0).toUpperCase() + sentence.substring(1);
-                    proposals.push(upper + " - " + voteToDisplay);
-                }
-            });
-
-            if (countvotedAgainstM === 0) {againstManFill = "#b4580d"}
-            else if (countvotedAgainstM === 1) {againstManFill = "#d4c60b"}
-            else if (countvotedAgainstM === 2) {againstManFill = "#bed40b"}
-            else if (countvotedAgainstM === 3) {againstManFill = "#9cc253"}
-            else if (countvotedAgainstM === 4) {againstManFill = "#68902c"}
-            else if (countvotedAgainstM === 5) {againstManFill = "#477c35"}
-            return [againstManFill, proposals];
-        }; // end of get stroke
+        numCols = 8;
 
         let groups2 = svgTwo.selectAll("g")
             .data(propData)
             .enter()
-            .append("g");
-
+            .append("g")
+            .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
        let rects = groups2.selectAll("rect")
-            .data( companies )
+            .data( nrCompanies )
             .enter()
             .append("rect")
             .attr("height",40)
             .attr("width",40)
             .attr('class', "waffle1")
             .attr("x", function (d, i) {
-                let colIndex = (i) % numCols;
+                let colIndex = (i) % 7;
                 return colIndex * 50 ;
             })
             .attr("y", function (d, i) {
-                let rowIndex = Math.floor(i / numCols);
+                let rowIndex = Math.floor(i / 7);
                 return rowIndex * 50;
             })
             .style("fill", (d) => {
                 return getStrokeText(d)[0]
             })
-            .style("stroke", "#f22d09");
+            .style("stroke", "#f22d09")
+            .style("stroke-width", "1.5px");
 
-        // Graph 2: Prep the tooltip bits, initial display is hidden
+        // Graph 2: Prep the tooltip bits, and header
+        let titlegraph2 =  svgTwo.append("text")
+            .attr('class', "waffle1")
+            .attr("x", 67)
+            .attr("y", 20)
+            .text("How Vanguard voted on environmental issues")
+            .style("font-family", "'Arvo', serif");
+        let subtitlegraph2 =  svgTwo.append("text")
+            .attr('class', "waffle1")
+            .attr("x", 67)
+            .attr("dy", "3.1em")
+            .text("Covering shareholder proposals demanding environmental")
+            .attr("fill", "#6a7272")
+            .attr("font-size", ".8em");
+        let subtitle__2graph2 =  svgTwo.append("text")
+            .attr('class', "waffle1")
+            .attr("x", 67)
+            .attr("dy","4.2em")
+            .text("action within the S&P500 over the period between 2014-2018")
+            .attr("fill", "#6a7272")
+            .attr("font-size", ".8em");
+        // let legendTitle_graph2 =  svgTwo.append("text")
+        //     .attr('class', "waffle1")
+        //     .attr("x", width- 260)
+        //     .attr("dy", height - 100)
+        //     .text("How to read:")
+        //     .attr("fill", "#6a7272")
+        //     .attr("font-size", ".8em");
+        let legend_graph2 = svgTwo.append("svg:image")
+            .attr("class", "waffle1")
+            .attr("x", 380)
+            .attr("y", 76)
+            .attr('width', "55%")
+            .attr('height', "55%")
+            .attr("xlink:href", "Data/img/legend2_waffle.svg");
+
+
         let tooltip2 = svgTwo.append("g")
             .attr("class", "tooltip-graphEnviron")
             .style("display", "none");
         tooltip2.append("rect")
-            .attr("width", 200)
+            .attr("width", 180 )
             .attr("height", 20)
             .attr("fill", "white")
             .style("opacity", 0.5);
         tooltip2.append("text")
-            .attr("x", 10)
+            .attr("x", 5)
             .attr("dy", "1.2em")
-            .style("text-anchor", "start")
+            .style("text-anchor", "center")
             .style("font-family", "Roboto")
             .attr("font-size", "12px");
 
@@ -520,14 +582,18 @@ function render(){
             })
             .on("mousemove", function (d) {
                 let xPosition = d3.mouse(this)[0] + 6;
-                let yPosition = d3.mouse(this)[1] + 6;
+                let yPosition = d3.mouse(this)[1] + 30;
                 tooltip2.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-                tooltip2.select("text").text(d);
-                tooltip2.attr("class", "tooltipEnvironGraph")
+                tooltip2.select("text").text(d)
+                tooltip2.attr("class", "tooltipEnvironGraph");
                 d3.select("tooltip2").moveToFront();
-            });
+            }); // end mousemove
 
-            };// end of waffle function
+
+                rects.on("click", function (d){
+                    console.log(getStrokeText(d)[1])
+                });
+};// end of waffle function
 
     // const waffle2 = function(nrCompanies){
     //
@@ -594,11 +660,11 @@ function render(){
                 counter2 = 0;
             }
             if (i === 1) {
-                waffle(waffle1_companies, waffle1_data);
+                getPropTypes_detail()
                 counter2 = 1;
             }
             if (i === 2)  {
-                //return waffle2(d3.range(62))
+                waffle(waffle1_companies, waffle1_data);
             }
             if (i === 3)  {
                 //return waffle3()
