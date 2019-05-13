@@ -700,7 +700,7 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
                 waffle(waffle1_companies, waffle1_data);
                 d3.select("#Environ_proptexts_para")
                     .classed("Environ_proptexts_ACTIVE", false)
-                    .html(" . ")
+                    .html('What was on the ballot and how did Vanguard vote? Click on the companies to check the proposals. <span style=\"font-weight: bolder; font-size:xx-large; color: #ec5900\"> →\t</span>')
 
                 counter2 = 2;
             }

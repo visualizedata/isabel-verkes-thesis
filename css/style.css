@@ -258,13 +258,22 @@ div.graph-scroll-active #section-JBogle {
 .KMorgan-FLEX-div {
     display: flex;
     flex-direction: row;
-    margin-left: 9%;
+    margin: 3% 0 0 9%;
     max-width: 90%;
     line-height: 1.5em;
 }
 .KMorgan-FLEX-div div {
-    max-width: 40%;
+
+    margin: 0 5% 0 0;
 }
+
+.imageKM1 #text{
+    font-size: x-small
+}
+
+
+
+
 
 #main-title {
     /* HOW DID THE MAIN ASSET MANAGERS VOTE? */
