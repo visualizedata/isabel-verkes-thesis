@@ -200,9 +200,9 @@ div.graph-scroll-active #section-JBogle {
 
 /* part on concentration hereafter */
 
-#title-concentration-graph, #title-concentration-graph2 {
+#title-concentration-graph, #title-concentration-graph2, #title-concentration-graph3, #title-concentration-graph4 {
     margin: 9% 0 0 9%;
-
+    font-family: 'Arvo', serif;
 }
 .concentration-graph {
     display: flex;
@@ -262,8 +262,9 @@ div.graph-scroll-active #section-JBogle {
     max-width: 90%;
     line-height: 1.5em;
 }
-.KMorgan-FLEX-div div {
 
+.KMorgan-FLEX-div div {
+    text-align: justify;
     margin: 0 5% 0 0;
 }
 
@@ -272,8 +273,32 @@ div.graph-scroll-active #section-JBogle {
 }
 
 
+.Exxon-FLEX-div {
+    display: flex;
+    flex-direction: row;
+    margin: 3% 0 0 9%;
+    max-width: 90%;
+    line-height: 1.5em;
+}
+.Exxon-FLEX-div div {
+    text-align: justify;
+    margin: 0 5% 0 0;
+    justify-content: flex-start;
+}
 
+#title-concentration-graph4 {
+    margin: 6% 0 0 9%;
+    font-family: 'Arvo', serif;
+}
 
+.FLEXdiv_beforeBiggraph {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 9%;
+    text-align: justify;
+    max-width: 60%;
+    line-height: 1.5em;
+}
 
 #main-title {
     /* HOW DID THE MAIN ASSET MANAGERS VOTE? */

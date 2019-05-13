@@ -24,7 +24,7 @@ const graph1 = d3.select("#graph1")
     .append("g")
     .attr("transform", "translate(0" + margin.left + "," + margin.top + ")");
 
-const graph2 = d3.select("#graph2")
+const graph2 = d3.select("#graph2_1")
     .append("svg")
     .attr("id", "chart2")
     .attr("width", w)
