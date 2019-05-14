@@ -304,8 +304,7 @@ let updateGraph = function(yearData, graphNr) {
 };
 
 let updateGrap_Environ = function(yearData, graphNr) {
-
-
+    d3.select(".tooltip").html("on <span style='border-bottom:  3px solid darkorange;'> environmental</span> proxy issues")
 
     let fund;
     if (graphNr === graph1) {
@@ -323,6 +322,7 @@ let updateGrap_Environ = function(yearData, graphNr) {
         let againstManFill;
         let proposals = [];
         let countvotedAgainstM = 0;
+
 
         yearData.forEach((datarow) => {
             if (datarow.comp === company) {
@@ -343,25 +343,9 @@ let updateGrap_Environ = function(yearData, graphNr) {
         if (countVotes=== 0) {againstManFill = "#535b5b" }
         else if ((countVotes > 0 ) && (countVotes < 30)) { againstManFill ="#aebd96" }
         else if ((countVotes > 5)) { againstManFill =  "#48a834" }
+        console.log(proposals);
         return [againstManFill, proposals];
     }; // end of get stroke
-
-
-
-        // let againstManFill = "#E1652A";
-        // let prop;
-        //     yearData.forEach( ( datarow ) => {
-        //         if (datarow.comp === company) {
-        //             prop = datarow.prop;
-        //             let propnr = +datarow.propnr;
-        //             let voted = datarow.voted;
-        //             if ( voted === "FOR MGMT" )
-        //                     { againstManFill = "#f2bb20" }
-        //         }
-        // });
-        // return againstManFill;
-    //}; // end of getShStroke
-
 
     let t = d3.transition()
         .duration(1000);
@@ -375,21 +359,21 @@ let updateGrap_Environ = function(yearData, graphNr) {
         .exit()
         .remove();
 
-
+    let numCols2 = 7;
     let blocks = rects
         .data(companies)
         .enter()
         .append("rect")
         .attr('class','blocks')
         .attr("height", 6)
-        .style("stroke", "None")
+        .style("stroke", "#ec5900")
         .attr("y", function(d, i){
-            let rowIndex = Math.floor(i/numCols);
-            return  rowIndex * 15
+            let rowIndex = Math.floor(i/numCols2);
+            return  rowIndex * 25
         })
         .attr("x", function(d, i){
-            let colIndex = i % numCols;
-            return colIndex * 15
+            let colIndex = i % numCols2;
+            return colIndex * 25
         })
         .attr('width', 10)
         .classed('selectedSq',false)
@@ -402,57 +386,56 @@ let updateGrap_Environ = function(yearData, graphNr) {
     blocks.merge(rects)
         .transition(t)
         .attr("x", function(d, i){
-            let colIndex = i % numCols;
-            return colIndex * 15
+            let colIndex = i % numCols2;
+            return colIndex * 25
         })
         .attr("y", function(d, i){
-            let rowIndex = Math.floor(i/numCols);
-            return  rowIndex * 15
+            let rowIndex = Math.floor(i/numCols2);
+            return  rowIndex * 25
         })
-        .attr("width", 12)
-        .attr("height", 12)
-        .style("stroke", "")
+        .attr("width", 20)
+        .attr("height", 20)
+        .style("stroke", "#ec5900")
         .style('fill', (d)=>{return getStrokeText(d)[0]})
         .attr("class", function(d){
             let companyClass = getCompanyClass(d);
             return "c" + companyClass + "__rect"
         });
 
-    // d3.select('.graph-container')
 
-    // blocks.on('mouseover', function(d)  {
-    //     // let companyName = d;
-    //     // let companyClass = getCompanyClass(d);
-    //     //
-    //     // d3.selectAll('.c'+ companyClass + "__rect")
-    //     //     .moveToFront()
-    //     //     .classed('selectedSq',true);
-    //     //
-    //     // tooltip
-    //     //     .transition()
-    //     //     .duration(100)
-    //     //     .style('opacity', 0.9);
-    //     // tooltip
-    //     //     .html(() =>  {return "on proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
-    //     //     .style("left", d + "px")
-    //     //     .style("top", d + "px");
-    //     //
-    //     // console.log(companyName);
-    //     // //d3.select("#propText").html((d)=>{})
+    blocks.on('mouseover', function(d)  {
+        let companyName = d;
+        let companyClass = getCompanyClass(d);
 
-    //})
-    //     .on( 'mouseout', function (d) {
-    //         let companyClass = getCompanyClass(d);
-    //
-    //         d3.selectAll('.c'+ companyClass + "__rect")
-    //             .classed('selectedSq',false);
-    //
-    //         tooltip
-    //             .html(() => {return "on proxy issues at S&P 500 companies" })
-    //             .transition()
-    //             .duration(100)
-    //             .style('opacity', 0.9);
-    //     });
+        d3.selectAll('.c'+ companyClass + "__rect")
+            .moveToFront()
+            .classed('selectedSq',true);
+
+        tooltip
+            .transition()
+            .duration(100)
+            .style('opacity', 0.9);
+        tooltip
+            .html(() =>  {return "on environmental proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
+            .style("left", d + "px")
+            .style("top", d + "px");
+
+        console.log(companyName);
+        d3.select("#propText").html((d)=>{})
+
+    })
+        .on( 'mouseout', function (d) {
+            let companyClass = getCompanyClass(d);
+
+            d3.selectAll('.c'+ companyClass + "__rect")
+                .classed('selectedSq',false);
+
+            tooltip
+                .html(() => {return "on proxy issues at S&P 500 companies" })
+                .transition()
+                .duration(100)
+                .style('opacity', 0.9);
+        });
 
 };
 ///////////////////////////
@@ -530,41 +513,6 @@ d3.csv('Data/StStDataSP500_allyears.csv')
         console.log('data load error')
     });
 
-
-sliderYears.on("onchange", val => {
-    d3.select('#main-title').text("How did the largest asset managers vote in " + val + "?");
-
-    let BrDataUpdate = getYearData(dataBr, val);
-    updateGraph( BrDataUpdate, graph1);
-
-    let VangDataUpdate = getYearData(dataVang, val);
-    updateGraph(VangDataUpdate , graph2);
-
-    let StStDataUpdate = getYearData(dataStSt, val);
-    updateGraph(StStDataUpdate, graph3);
-    // this changes the global variable?
-
-    d3.select("#environ_btn").on('click', function(d) {
-        let environYearData = getdataEnviron(val); // get data for each fund
-        let BrEnviron = environYearData[0];
-        let VangEnviron = environYearData[1];
-        let StStEnviron = environYearData[2];
-
-        updateGrap_Environ(BrEnviron, graph1);
-        updateGrap_Environ(VangEnviron, graph2);
-        updateGrap_Environ(StStEnviron, graph3);
-
-
-        //add title things
-        let selectsq = d3.select('.selectedSq');
-        //console.log("this is the selection: "+ selectsq);
-        //d3.select("#propText").html((d,i)=>{return BrEnviron.prop})
-
-    });
-
-    return thisYear = val;
-
-});
 
 
 //  selection for Environmental props
@@ -646,9 +594,46 @@ d3.select("#environ_btn").on('click', function(d) {
     }
 
 });
-    //add title things
-    // let selectsq = d3.select('.selectedSq');
-    // console.log("this is the selection: "+ selectsq);
 
 
+sliderYears.on("onchange", val => {
+    d3.select('#main-title').text("How did the largest asset managers vote in " + val + "?");
 
+    let BrDataUpdate = getYearData(dataBr, val);
+    updateGraph( BrDataUpdate, graph1);
+
+    let VangDataUpdate = getYearData(dataVang, val);
+    updateGraph(VangDataUpdate , graph2);
+
+    let StStDataUpdate = getYearData(dataStSt, val);
+    updateGraph(StStDataUpdate, graph3);
+    // this changes the global variable?
+
+    d3.select("#environ_btn").on('click', function(d) {
+        let environYearData = getdataEnviron(val); // get data for each fund
+        let BrEnviron = environYearData[0];
+        let VangEnviron = environYearData[1];
+        let StStEnviron = environYearData[2];
+
+        updateGrap_Environ(BrEnviron, graph1);
+        updateGrap_Environ(VangEnviron, graph2);
+        updateGrap_Environ(StStEnviron, graph3);
+
+
+        //add title things
+        let selectsq = d3.select('.selectedSq');
+        //console.log("this is the selection: "+ selectsq);
+        //d3.select("#propText").html((d,i)=>{return BrEnviron.prop})
+
+    });
+
+    return thisYear = val;
+
+});
+
+
+let legend = d3.select("#legend_mainGraph");
+    legend.on("click", function(){
+        d3.select("#legend_mainGraph_IMG")
+            .style("opacity", 1);
+        })

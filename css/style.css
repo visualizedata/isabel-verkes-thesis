@@ -294,7 +294,7 @@ div.graph-scroll-active #section-JBogle {
 .FLEXdiv_beforeBiggraph {
     display: flex;
     flex-direction: row;
-    margin: 0 0 0 9%;
+    margin: 0 0 4% 9%;
     text-align: justify;
     max-width: 60%;
     line-height: 1.5em;
