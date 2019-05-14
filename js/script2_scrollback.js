@@ -129,10 +129,10 @@ function render(){
     oldWidth = innerWidth;
 
     const margin = { top: 10, right: 70, bottom: 30, left: 70 };
-    let width = d3.select('#graph').node().offsetWidth ;
-    let height = d3.select('#graph').node().offsetHeight + 300;
-    //let width = d3.select('#graph').node().offsetWidth - 40;
-    //let height = 300;
+    // let width = d3.select('#graph').node().offsetWidth ;
+    // let height = d3.select('#graph').node().offsetHeight + 300;
+    let width = 500
+    let height = 300;
 
     if (innerWidth <= 925){
         width = innerWidth;
@@ -242,7 +242,7 @@ function render(){
             .attr("font-family", "Source Sans Pro, sans-serif")
             .style("opacity", 0.5)
             .style("font-weight","lighter")
-            .call(d3.axisLeft(y_scale_graph1).ticks(null, 's').tickFormat(d => d + "%"))
+            .call(d3.axisLeft(y_scale_graph1).ticks(5).tickFormat(d => d + "%"))
             .append("text")
             .attr("x", 2)
             .attr("y", y_scale_graph1(y_scale_graph1.ticks().pop()) + 0.5)
@@ -337,7 +337,7 @@ function render(){
             .attr("transform","translate(" + (width) + ")")
             .style("opacity", 0.6)
             .style("font-weight","lighter")
-            .call(d3.axisRight(y_scaleLine).ticks(null, 's').tickFormat(d => d))
+            .call(d3.axisRight(y_scaleLine).ticks(5).tickFormat(d => d))
             .append("text")
             // .attr("x", 2)
             // .attr("y", y_scaleLine(y_scaleLine.ticks().pop()) + 0.5)

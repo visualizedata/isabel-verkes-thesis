@@ -96,6 +96,8 @@ let getCompanyClass = function(d) {return d.split('*').join('').split("!").join(
 let mastergraph = function(yearData, graphNr) {
     // select companies only
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
+    d3.select(".environ_btn")
+        .style("text-decoration", "None");
 
     //console.log(yearData[0]);
     let getShStroke = (company) => {
@@ -197,6 +199,10 @@ let updateGraph = function(yearData, graphNr) {
     console.log(yearData);
     // select companies only
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
+
+    d3.select(".environ_btn")
+        .style("text-decoration", "None");
+
 
     let getShStroke = (company) => {
         let shaStroke = "#C2C2C2";
@@ -305,6 +311,8 @@ let updateGraph = function(yearData, graphNr) {
 
 let updateGrap_Environ = function(yearData, graphNr) {
     d3.select(".tooltip").html("on <span style='border-bottom:  3px solid darkorange;'> environmental</span> proxy issues")
+    d3.select(".environ_btn")
+        .style("text-decoration", "line-through");
 
     let fund;
     if (graphNr === graph1) {
@@ -631,9 +639,24 @@ sliderYears.on("onchange", val => {
 
 });
 
-
+let legendSwitch= "on";
 let legend = d3.select("#legend_mainGraph");
     legend.on("click", function(){
-        d3.select("#legend_mainGraph_IMG")
+        if (legendSwitch === "on")
+        {d3.select("#legend_mainGraph_IMG")
             .style("opacity", 1);
+        d3.select("#legend_mainGraph")
+            .style("text-decoration", "line-through")
+        legendSwitch = "off";
+
+        }
+            else {
+                legendSwitch === "off";
+                d3.select("#legend_mainGraph_IMG")
+                    .style("opacity", 0);
+                d3.select("#legend_mainGraph")
+                    .style("text-decoration", "None")
+                legendSwitch = "on";
+
+            }
         })

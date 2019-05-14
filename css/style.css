@@ -441,3 +441,8 @@ div.graph-scroll-active #section-JBogle {
     stroke-width: 4;
     transform: translate(-2px, -2px);
 }
+
+#legend_mainGraph {
+    width: 100%;
+    height:  100%;
+}
