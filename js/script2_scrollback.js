@@ -468,10 +468,10 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
                 let voteToDisplay;
                 if (voted === "AGAINST MGMT") {
                     countvotedAgainstM += 1;
-                    voteToDisplay = "voted FOR";
+                    voteToDisplay = "voted <span style='font-weight: bolder; border-bottom: 3px solid darkorange;'>FOR</span> in " + datarow.year;
                 } else {
                     //countvotedForM+=1;
-                    voteToDisplay = "voted against in " + datarow.year;}
+                    voteToDisplay = "Vanguard voted against in " + datarow.year;}
                 let sentence = datarow.proposal.toLowerCase();
                 let upper = sentence.charAt(0).toUpperCase() + sentence.substring(1);
                 proposals.push(upper + "  -  " + voteToDisplay);
@@ -480,7 +480,7 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
         let countVotes = (countvotedAgainstM/proposals.length)*100;
         if (countVotes=== 0) {againstManFill = "#535b5b" }
         else if ((countVotes > 0 ) && (countVotes < 30)) { againstManFill ="#aebd96" }
-        else if ((countVotes > 5)) { againstManFill =  "#6fa836" }
+        else if ((countVotes > 5)) { againstManFill =  "#48a834" }
         return [againstManFill, proposals];
     }; // end of get stroke
 
@@ -520,8 +520,8 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
             .style("fill", (d) => {
                 return getStrokeText(d)[0]
             })
-            .style("stroke", "#f22d09")
-            .style("stroke-width", "1.5px");
+            .style("stroke", "#E1652A")
+            .style("stroke-width", "1.7px");
 
         // Graph 2: Prep the tooltip bits, and header
         let titlegraph2 =  svgTwo.append("text")
@@ -557,7 +557,7 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
             .attr("y", 76)
             .attr('width', "55%")
             .attr('height', "55%")
-            .attr("xlink:href", "Data/img/legend2_waffle.svg");
+            .attr("xlink:href", "Data/img/legend2_waffle_4.svg");
 
 
         let tooltip2 = svgTwo.append("g")
@@ -653,7 +653,7 @@ let svgTwo = d3.select('.container-2  #graph2').html('')
                     return "•   " + prop + "<br>"});
                 d3.select("#Environ_proptexts_para")
                     .classed("Environ_proptexts_ACTIVE", true)
-                    .html( "At "+ d + ", shareholder activists proposed to: <br>" + proparray.join(""))
+                    .html( "At <span style='font-weight: bolder; color: #ec5900'> "+ d + "</span>, shareholder activists demanded the company to: <br>" + proparray.join(""))
             });
 
     }; // end getPropgraph

@@ -1173,7 +1173,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2018,CHEVRON CORPORATION,CVX,2,Ratify PricewaterhouseCoopers LLP as,166764100,19,MGMT,7,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
 2018,CHEVRON CORPORATION,CVX,8,Require Independent Board Chairman,166764100,19,SH,7,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
 2018,CHEVRON CORPORATION,CVX,7,Report on Methane Emissions,166764100,19,SH,7,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,1
-2018,CHEVRON CORPORATION,CVX,6,Report on Transition to a Low Carbon Business Model,166764100,19,SH,7,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
+2018,CHEVRON CORPORATION,CVX,6,Report on Transition to a Low Carbon Business Model,166764100,19,SH,7,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,1
 2018,CHEVRON CORPORATION,CVX,1j,Elect Director Michael K. Wirth,166764100,19,MGMT,7,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
 2018,CHEVRON CORPORATION,CVX,1b,Elect Director John B. Frank,166764100,19,MGMT,7,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
 2018,CHEVRON CORPORATION,CVX,5,Report on Risks of Doing Business in Conflict-Affected Areas,166764100,19,SH,7,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
@@ -5263,7 +5263,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2018,THE AES CORPORATION,AES,8,"Elect Director John B. Morse, Jr.",00130H105,13,MGMT,0,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
 2018,THE BANK OF NEW YORK MELLON CORPORATION,BK,3,Ratify KPMG LLP as Auditors,064058100,16,MGMT,2,FOR MGMT,0,Financial Services,47174.57,11.14x,-12.01%,0.0,0
 2018,THE BANK OF NEW YORK MELLON CORPORATION,BK,4,Provide Right to Act by Written Consent,064058100,16,SH,2,FOR MGMT,0,Financial Services,47174.57,11.14x,-12.01%,0.0,0
-2018,THE BANK OF NEW YORK MELLON CORPORATION,BK,5,Report on and Assess Proxy Voting,064058100,16,SH,2,FOR MGMT,0,Financial Services,47174.57,11.14x,-12.01%,0.0,0
+2018,THE BANK OF NEW YORK MELLON CORPORATION,BK,5,Report on and Assess Proxy Voting Policies in Relation to Climate Change Position,064058100,16,SH,2,FOR MGMT,0,Financial Services,47174.57,11.14x,-12.01%,0.0,1
 2018,THE BANK OF NEW YORK MELLON CORPORATION,BK,1h,Elect Director Jennifer B. Morgan,064058100,16,MGMT,2,FOR MGMT,0,Financial Services,47174.57,11.14x,-12.01%,0.0,0
 2018,THE BANK OF NEW YORK MELLON CORPORATION,BK,1b,Elect Director Linda Z. Cook,064058100,16,MGMT,2,FOR MGMT,0,Financial Services,47174.57,11.14x,-12.01%,0.0,0
 2018,THE BANK OF NEW YORK MELLON CORPORATION,BK,1g,"Elect Director Edmund F. ""Ted"" Kelly",064058100,16,MGMT,2,FOR MGMT,0,Financial Services,47174.57,11.14x,-12.01%,0.0,0
@@ -6760,7 +6760,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2017,AMEREN CORPORATION,AEE,1c,Elect Director J. Edward Coleman,023608102,16,MGMT,3,FOR MGMT,0,Utilities,17203.31,25.19x,12.37%,0.0,0
 2017,AMEREN CORPORATION,AEE,5,Report Analyzing Renewable Energy,023608102,16,SH,3,FOR MGMT,0,Utilities,17203.31,25.19x,12.37%,0.0,1
 2017,AMEREN CORPORATION,AEE,4,Ratify PricewaterhouseCoopers LLP as,023608102,16,MGMT,3,FOR MGMT,0,Utilities,17203.31,25.19x,12.37%,0.0,0
-2017,AMEREN CORPORATION,AEE,6,Assess Impact of a 2 Degree Scenario,023608102,16,SH,3,FOR MGMT,0,Utilities,17203.31,25.19x,12.37%,0.0,0
+2017,AMEREN CORPORATION,AEE,6,Assess Impact of a 2 Degree Scenario,023608102,16,SH,3,FOR MGMT,0,Utilities,17203.31,25.19x,12.37%,0.0,1
 2017,AMEREN CORPORATION,AEE,7,Report on Coal Combustion Residual and,023608102,16,SH,3,FOR MGMT,0,Utilities,17203.31,25.19x,12.37%,0.0,0
 2017,AMEREN CORPORATION,AEE,2,Advisory Vote to Ratify Named,023608102,16,MGMT,3,FOR MGMT,0,Utilities,17203.31,25.19x,12.37%,0.0,0
 2017,AMEREN CORPORATION,AEE,1k,Elect Director Stephen R. Wilson,023608102,16,MGMT,3,FOR MGMT,0,Utilities,17203.31,25.19x,12.37%,0.0,0
@@ -7260,7 +7260,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2017,BERKSHIRE HATHAWAY INC.,BRK.B,4,Elect Director Stephen B. Burke,084670702,16,MGMT,3,FOR MGMT,0,Financial Services,504780.82,0.01x,4.35%,0.0,0
 2017,BERKSHIRE HATHAWAY INC.,BRK.B,2,Elect Director Charles T. Munger,084670702,16,MGMT,3,FOR MGMT,0,Financial Services,504780.82,0.01x,4.35%,0.0,0
 2017,BERKSHIRE HATHAWAY INC.,BRK.B,1,Elect Director Warren E. Buffett,084670702,16,MGMT,3,FOR MGMT,0,Financial Services,504780.82,0.01x,4.35%,0.0,0
-2017,BERKSHIRE HATHAWAY INC.,BRK.B,6,Require Divestment from Fossil Fuels,084670702,16,SH,3,FOR MGMT,0,Financial Services,504780.82,0.01x,4.35%,0.0,0
+2017,BERKSHIRE HATHAWAY INC.,BRK.B,6,Require Divestment from Fossil Fuels,084670702,16,SH,3,FOR MGMT,0,Financial Services,504780.82,0.01x,4.35%,0.0,1
 2017,BERKSHIRE HATHAWAY INC.,BRK.B,3,Elect Director Howard G. Buffett,084670702,16,MGMT,3,FOR MGMT,0,Financial Services,504780.82,0.01x,4.35%,0.0,0
 2017,BERKSHIRE HATHAWAY INC.,BRK.B,5,Elect Director Susan L. Decker,084670702,16,MGMT,3,FOR MGMT,0,Financial Services,504780.82,0.01x,4.35%,0.0,0
 2017,BERKSHIRE HATHAWAY INC.,BRK.B,6,"Elect Director William H. Gates, III",084670702,16,MGMT,3,FOR MGMT,0,Financial Services,504780.82,0.01x,4.35%,0.0,0
@@ -8145,7 +8145,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2017,DEVON ENERGY CORPORATION,DVN,4,Elect Director Robert H. Henry,25179M103,17,MGMT,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
 2017,DEVON ENERGY CORPORATION,DVN,6,"Elect Director Robert A. Mosbacher, Jr.",25179M103,17,MGMT,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
 2017,DEVON ENERGY CORPORATION,DVN,7,Elect Director Duane C. Radtke,25179M103,17,MGMT,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
-2017,DEVON ENERGY CORPORATION,DVN,10,Report on Using Oil and Gas Reserve,25179M103,17,SH,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
+2017,DEVON ENERGY CORPORATION,DVN,10,Report on Using Oil and Gas Reserve,25179M103,17,SH,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,1
 2017,DEVON ENERGY CORPORATION,DVN,9,Elect Director John Richels,25179M103,17,MGMT,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
 2017,DEVON ENERGY CORPORATION,DVN,2,Advisory Vote to Ratify Named,25179M103,17,MGMT,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
 2017,DEVON ENERGY CORPORATION,DVN,4,Ratify KPMG LLP as Auditors,25179M103,17,MGMT,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
@@ -11561,7 +11561,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2017,TEXTRON INC.,TXT,1h,Elect Director Ralph D. Heath,883203101,15,MGMT,1,FOR MGMT,0,Aerospace and Defense,12444.49,15.26x,-6.52%,0.0,0
 2017,THE AES CORPORATION,AES,1,Elect Director Andres R. Gluski,00130H105,13,MGMT,2,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
 2017,THE AES CORPORATION,AES,2,Elect Director Charles L. Harrington,00130H105,13,MGMT,2,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
-2017,THE AES CORPORATION,AES,6,Assess Impact of a 2 Degree Scenario,00130H105,13,SH,2,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
+2017,THE AES CORPORATION,AES,6,Assess Impact of a 2 Degree Scenario,00130H105,13,SH,2,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,1
 2017,THE AES CORPORATION,AES,4,Ratify Ernst & Young LLP as Auditors,00130H105,13,MGMT,2,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
 2017,THE AES CORPORATION,AES,2,Advisory Vote to Ratify Named,00130H105,13,MGMT,2,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
 2017,THE AES CORPORATION,AES,9,Elect Director Charles O. Rossotti,00130H105,13,MGMT,2,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
@@ -13890,7 +13890,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2016,CHEVRON CORPORATION,CVX,1k,Elect Director John S. Watson,166764100,21,MGMT,8,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
 2016,CHEVRON CORPORATION,CVX,4,Approve Non-Employee Director Omnibus,166764100,21,MGMT,8,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
 2016,CHEVRON CORPORATION,CVX,5,Report on Lobbying Payments and Policy,166764100,21,SH,8,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
-2016,CHEVRON CORPORATION,CVX,6,Adopt Quantitative GHG Goals for,166764100,21,SH,8,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
+2016,CHEVRON CORPORATION,CVX,6,Adopt Quantitative GHG Goals for,166764100,21,SH,8,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,1
 2016,CHEVRON CORPORATION,CVX,7,Annually Assess Portfolio Impacts of,166764100,21,SH,8,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
 2016,CHEVRON CORPORATION,CVX,8,Annually Report Reserve Replacements,166764100,21,SH,8,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
 2016,CHEVRON CORPORATION,CVX,9,Increase Return of Capital to,166764100,21,SH,8,FOR MGMT,0,Integrated Oil and Gas,220675.33,15.55x,-3.46%,0.0,0
@@ -14396,7 +14396,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2016,DENTSPLY INTERNATIONAL INC.,XRAY,3,Advisory Vote on Golden Parachutes,249030107,5,MGMT,0,FOR MGMT,0,Health Care,8080.7,NM,-44.13%,0.0,0
 2016,DENTSPLY INTERNATIONAL INC.,XRAY,2,Adopt Second Amended and Restated,249030107,5,MGMT,0,FOR MGMT,0,Health Care,8080.7,NM,-44.13%,0.0,0
 2016,DENTSPLY INTERNATIONAL INC.,XRAY,1,Issue Shares in Connection with,249030107,5,MGMT,0,FOR MGMT,0,Health Care,8080.7,NM,-44.13%,0.0,0
-2016,DEVON ENERGY CORPORATION,DVN,7,Cease Using Oil and Gas Reserve,25179M103,15,SH,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
+2016,DEVON ENERGY CORPORATION,DVN,7,Cease Using Oil and Gas Reserve,25179M103,15,SH,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,1
 2016,DEVON ENERGY CORPORATION,DVN,6,"Elect Director Robert A. Mosbacher, Jr.",25179M103,15,MGMT,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
 2016,DEVON ENERGY CORPORATION,DVN,6,Report on Lobbying Payments and Policy,25179M103,15,SH,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
 2016,DEVON ENERGY CORPORATION,DVN,5,Annually Assess Portfolio Impacts of,25179M103,15,SH,4,FOR MGMT,0,Oil and Gas,12735.04,NM,-26.78%,0.0,0
@@ -17718,7 +17718,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2016,THE AES CORPORATION,AES,9,Elect Director Moises Naim,00130H105,13,MGMT,1,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
 2016,THE AES CORPORATION,AES,1.10,Elect Director Charles O. Rossotti,00130H105,13,MGMT,1,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
 2016,THE AES CORPORATION,AES,3,Advisory Vote to Ratify Named,00130H105,13,MGMT,1,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
-2016,THE AES CORPORATION,AES,4,Assess Impact of a 2 Degree Scenario,00130H105,13,SH,1,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
+2016,THE AES CORPORATION,AES,4,Assess Impact of a 2 Degree Scenario,00130H105,13,SH,1,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,1
 2016,THE AES CORPORATION,AES,5,Elect Director Holly K. Koeppel,00130H105,13,MGMT,1,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
 2016,THE AES CORPORATION,AES,6,Elect Director Philip Lader,00130H105,13,MGMT,1,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
 2016,THE AES CORPORATION,AES,4,Elect Director Tarun Khanna,00130H105,13,MGMT,1,FOR MGMT,0,Energy,10285.48,52.31x,45.14%,0.0,0
@@ -19511,7 +19511,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2015,CHEVRON CORPORATION,CVX,9,Report on the Result of Efforts to,166764100,24,SH,10,FOR MGMT,1,Integrated Oil and Gas,220675.33,15.55x,-3.46%,4.166666666666666,0
 2015,CHEVRON CORPORATION,CVX,1b,Elect Director Linnet F. Deily,166764100,24,MGMT,10,FOR MGMT,1,Integrated Oil and Gas,220675.33,15.55x,-3.46%,4.166666666666666,0
 2015,CHEVRON CORPORATION,CVX,10,Proxy Access,166764100,24,SH,10,AGAINST MGMT,1,Integrated Oil and Gas,220675.33,15.55x,-3.46%,4.166666666666666,0
-2015,CHEVRON CORPORATION,CVX,8,Adopt Quantitative GHG Goals for,166764100,24,SH,10,FOR MGMT,1,Integrated Oil and Gas,220675.33,15.55x,-3.46%,4.166666666666666,0
+2015,CHEVRON CORPORATION,CVX,8,Adopt Quantitative GHG Goals for,166764100,24,SH,10,FOR MGMT,1,Integrated Oil and Gas,220675.33,15.55x,-3.46%,4.166666666666666,1
 2015,CHEVRON CORPORATION,CVX,6,Prohibit Political Spending,166764100,24,SH,10,FOR MGMT,1,Integrated Oil and Gas,220675.33,15.55x,-3.46%,4.166666666666666,0
 2015,CHEVRON CORPORATION,CVX,5,Report on Lobbying Payments and Policy,166764100,24,SH,10,FOR MGMT,1,Integrated Oil and Gas,220675.33,15.55x,-3.46%,4.166666666666666,0
 2015,CHEVRON CORPORATION,CVX,1a,"Elect Director Alexander B. Cummings,",166764100,24,MGMT,10,FOR MGMT,1,Integrated Oil and Gas,220675.33,15.55x,-3.46%,4.166666666666666,0
@@ -19758,7 +19758,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2015,DISH NETWORK CORPORATION,DISH,1.11,Elect Director Carl E. Vogel,25470M109,15,MGMT,1,AGAINST MGMT,10,Communications,14932.94,6.40x,-34.77%,66.66666666666666,0
 2015,DISH NETWORK CORPORATION,DISH,2,Ratify Auditors,25470M109,15,MGMT,1,FOR MGMT,10,Communications,14932.94,6.40x,-34.77%,66.66666666666666,0
 2015,DISH NETWORK CORPORATION,DISH,3,Advisory Vote to Ratify Named,25470M109,15,MGMT,1,FOR MGMT,10,Communications,14932.94,6.40x,-34.77%,66.66666666666666,0
-2015,DISH NETWORK CORPORATION,DISH,5,Adopt Quantitative GHG Goals for,25470M109,15,SH,1,FOR MGMT,10,Communications,14932.94,6.40x,-34.77%,66.66666666666666,0
+2015,DISH NETWORK CORPORATION,DISH,5,Adopt Quantitative GHG Goals for,25470M109,15,SH,1,FOR MGMT,10,Communications,14932.94,6.40x,-34.77%,66.66666666666666,1
 2015,DISH NETWORK CORPORATION,DISH,3,Elect Director James DeFranco,25470M109,15,MGMT,1,AGAINST MGMT,10,Communications,14932.94,6.40x,-34.77%,66.66666666666666,0
 2015,DISH NETWORK CORPORATION,DISH,1,Elect Director George R. Brokaw,25470M109,15,MGMT,1,AGAINST MGMT,10,Communications,14932.94,6.40x,-34.77%,66.66666666666666,0
 2015,DOLLAR GENERAL CORPORATION,DG,1a,Elect Director Warren F. Bryant,256677105,9,MGMT,0,FOR MGMT,0,Retail,26998.22,15.16x,9.99%,0.0,0
@@ -19798,7 +19798,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2015,"DOMINION RESOURCES, INC.",D,7,Report on Methane Emissions Management,25746U109,20,SH,7,FOR MGMT,0,Utilities,49635.95,15.77x,-9.64%,0.0,1
 2015,"DOMINION RESOURCES, INC.",D,8,Include Carbon Reduction as a,25746U109,20,SH,7,FOR MGMT,0,Utilities,49635.95,15.77x,-9.64%,0.0,0
 2015,"DOMINION RESOURCES, INC.",D,9,Report on Financial and Physical Risks,25746U109,20,SH,7,FOR MGMT,0,Utilities,49635.95,15.77x,-9.64%,0.0,0
-2015,"DOMINION RESOURCES, INC.",D,10,Adopt Quantitative GHG Goals for,25746U109,20,SH,7,FOR MGMT,0,Utilities,49635.95,15.77x,-9.64%,0.0,0
+2015,"DOMINION RESOURCES, INC.",D,10,Adopt Quantitative GHG Goals for,25746U109,20,SH,7,FOR MGMT,0,Utilities,49635.95,15.77x,-9.64%,0.0,1
 2015,"DOMINION RESOURCES, INC.",D,1.10,Elect Director David A. Wollard,25746U109,20,MGMT,7,FOR MGMT,0,Utilities,49635.95,15.77x,-9.64%,0.0,0
 2015,"DOMINION RESOURCES, INC.",D,4,"Elect Director Thomas F. Farrell, II",25746U109,20,MGMT,7,FOR MGMT,0,Utilities,49635.95,15.77x,-9.64%,0.0,0
 2015,"DOMINION RESOURCES, INC.",D,1,Elect Director William P. Barr,25746U109,20,MGMT,7,FOR MGMT,0,Utilities,49635.95,15.77x,-9.64%,0.0,0
@@ -20011,7 +20011,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2015,EXXON MOBIL CORPORATION,XOM,7,Increase the Number of Females on the,30231G102,22,SH,8,FOR MGMT,1,Integrated Oil and Gas,328712.79,14.28x,-5.95%,4.545454545454546,0
 2015,EXXON MOBIL CORPORATION,XOM,8,Disclose Percentage of Females at Each,30231G102,22,SH,8,FOR MGMT,1,Integrated Oil and Gas,328712.79,14.28x,-5.95%,4.545454545454546,0
 2015,EXXON MOBIL CORPORATION,XOM,9,Report on Lobbying Payments and Policy,30231G102,22,SH,8,FOR MGMT,1,Integrated Oil and Gas,328712.79,14.28x,-5.95%,4.545454545454546,0
-2015,EXXON MOBIL CORPORATION,XOM,10,Adopt Quantitative GHG Goals for,30231G102,22,SH,8,FOR MGMT,1,Integrated Oil and Gas,328712.79,14.28x,-5.95%,4.545454545454546,0
+2015,EXXON MOBIL CORPORATION,XOM,10,Adopt Quantitative GHG Goals for,30231G102,22,SH,8,FOR MGMT,1,Integrated Oil and Gas,328712.79,14.28x,-5.95%,4.545454545454546,1
 2015,EXXON MOBIL CORPORATION,XOM,11,Report on the Result of Efforts to,30231G102,22,SH,8,FOR MGMT,1,Integrated Oil and Gas,328712.79,14.28x,-5.95%,4.545454545454546,0
 2015,EXXON MOBIL CORPORATION,XOM,1.10,Elect Director Steven S. Reinemund,30231G102,22,MGMT,8,FOR MGMT,1,Integrated Oil and Gas,328712.79,14.28x,-5.95%,4.545454545454546,0
 2015,EXXON MOBIL CORPORATION,XOM,4,Elect Director Larry R. Faulkner,30231G102,22,MGMT,8,FOR MGMT,1,Integrated Oil and Gas,328712.79,14.28x,-5.95%,4.545454545454546,0
@@ -21224,7 +21224,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2015,PHILLIPS 66,PSX,1b,"Elect Director Harold W. McGraw, III",718546104,7,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
 2015,PHILLIPS 66,PSX,1a,Elect Director J. Brian Ferguson,718546104,7,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
 2015,PHILLIPS 66,PSX,1c,Elect Director Victoria J. Tschinkel,718546104,7,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
-2015,PHILLIPS 66,PSX,5,Adopt Quantitative GHG Goals for,718546104,7,SH,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
+2015,PHILLIPS 66,PSX,5,Adopt Quantitative GHG Goals for,718546104,7,SH,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,1
 2015,PHILLIPS 66,PSX,4,Declassify the Board of Directors,718546104,7,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
 2015,PHILLIPS 66,PSX,3,Advisory Vote to Ratify Named,718546104,7,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
 2015,PHILLIPS 66,PSX,2,Ratify Ernst & Young LLP as Auditors,718546104,7,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
@@ -22208,7 +22208,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2015,"WAL-MART STORES, INC.",WMT,1a,Elect Director Linda G. Alvarado,931142103,35,MGMT,5,FOR MGMT,9,Hypermarkets and Super Centers,270741.18,53.22x,-3.71%,25.71428571428571,0
 2015,"WAL-MART STORES, INC.",WMT,9,Require Independent Board Chairman,931142103,35,SH,5,AGAINST MGMT,9,Hypermarkets and Super Centers,270741.18,53.22x,-3.71%,25.71428571428571,0
 2015,"WAL-MART STORES, INC.",WMT,8,Report on Incentive Compensation Plans,931142103,35,SH,5,FOR MGMT,9,Hypermarkets and Super Centers,270741.18,53.22x,-3.71%,25.71428571428571,0
-2015,"WAL-MART STORES, INC.",WMT,7,Adopt Quantitative GHG Goals for,931142103,35,SH,5,FOR MGMT,9,Hypermarkets and Super Centers,270741.18,53.22x,-3.71%,25.71428571428571,0
+2015,"WAL-MART STORES, INC.",WMT,7,Adopt Quantitative GHG Goals for,931142103,35,SH,5,FOR MGMT,9,Hypermarkets and Super Centers,270741.18,53.22x,-3.71%,25.71428571428571,1
 2015,"WAL-MART STORES, INC.",WMT,6,Provide Proxy Access Right,931142103,35,SH,5,AGAINST MGMT,9,Hypermarkets and Super Centers,270741.18,53.22x,-3.71%,25.71428571428571,0
 2015,"WAL-MART STORES, INC.",WMT,5,Disclosure of Recoupment Activity from,931142103,35,SH,5,AGAINST MGMT,9,Hypermarkets and Super Centers,270741.18,53.22x,-3.71%,25.71428571428571,0
 2015,"WAL-MART STORES, INC.",WMT,4,Amend Omnibus Stock Plan,931142103,35,MGMT,5,FOR MGMT,9,Hypermarkets and Super Centers,270741.18,53.22x,-3.71%,25.71428571428571,0
@@ -23019,7 +23019,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2014,CONCHO RESOURCES INC.,CXO,2,"Elect Director William H. Easter, III",20605P101,5,MGMT,0,FOR MGMT,0,Oil and Gas,24344.7,18.81x,-11.43%,0.0,0
 2014,CONCHO RESOURCES INC.,CXO,3,Elect Director John P. Surma,20605P101,5,MGMT,0,FOR MGMT,0,Oil and Gas,24344.7,18.81x,-11.43%,0.0,0
 2014,CONCHO RESOURCES INC.,CXO,2,Ratify Auditors,20605P101,5,MGMT,0,FOR MGMT,0,Oil and Gas,24344.7,18.81x,-11.43%,0.0,0
-2014,CONOCOPHILLIPS,COP,6,Adopt Quantitative GHG Goals for,20825C104,15,SH,2,FOR MGMT,0,Oil and Gas,75878.35,13.06x,30.41%,0.0,0
+2014,CONOCOPHILLIPS,COP,6,Adopt Quantitative GHG Goals for,20825C104,15,SH,2,FOR MGMT,0,Oil and Gas,75878.35,13.06x,30.41%,0.0,1
 2014,CONOCOPHILLIPS,COP,5,Report on Lobbying Payments and Policy,20825C104,15,SH,2,FOR MGMT,0,Oil and Gas,75878.35,13.06x,30.41%,0.0,0
 2014,CONOCOPHILLIPS,COP,4,Approve Omnibus Stock Plan,20825C104,15,MGMT,2,FOR MGMT,0,Oil and Gas,75878.35,13.06x,30.41%,0.0,0
 2014,CONOCOPHILLIPS,COP,1a,Elect Director Richard L. Armitage,20825C104,15,MGMT,2,FOR MGMT,0,Oil and Gas,75878.35,13.06x,30.41%,0.0,0
@@ -23247,7 +23247,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2014,EXTRA SPACE STORAGE INC.,EXR,7,Elect Director K. Fred Skousen,30225T102,9,MGMT,0,FOR MGMT,0,Real Estate,12487.07,23.72x,15.78%,0.0,0
 2014,EXXON MOBIL CORPORATION,XOM,1.11,Elect Director Rex W. Tillerson,30231G102,19,MGMT,5,FOR MGMT,0,Integrated Oil and Gas,328712.79,14.28x,-5.95%,0.0,0
 2014,EXXON MOBIL CORPORATION,XOM,7,Report on Lobbying Payments and Policy,30231G102,19,SH,5,FOR MGMT,0,Integrated Oil and Gas,328712.79,14.28x,-5.95%,0.0,0
-2014,EXXON MOBIL CORPORATION,XOM,8,Adopt Quantitative GHG Goals for,30231G102,19,SH,5,FOR MGMT,0,Integrated Oil and Gas,328712.79,14.28x,-5.95%,0.0,0
+2014,EXXON MOBIL CORPORATION,XOM,8,Adopt Quantitative GHG Goals for,30231G102,19,SH,5,FOR MGMT,0,Integrated Oil and Gas,328712.79,14.28x,-5.95%,0.0,1
 2014,EXXON MOBIL CORPORATION,XOM,2,Elect Director Peter Brabeck-Letmathe,30231G102,19,MGMT,5,FOR MGMT,0,Integrated Oil and Gas,328712.79,14.28x,-5.95%,0.0,0
 2014,EXXON MOBIL CORPORATION,XOM,3,Elect Director Ursula M. Burns,30231G102,19,MGMT,5,FOR MGMT,0,Integrated Oil and Gas,328712.79,14.28x,-5.95%,0.0,0
 2014,EXXON MOBIL CORPORATION,XOM,4,Elect Director Larry R. Faulkner,30231G102,19,MGMT,5,FOR MGMT,0,Integrated Oil and Gas,328712.79,14.28x,-5.95%,0.0,0
@@ -23524,7 +23524,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2014,HILTON WORLDWIDE HOLDINGS INC.,HLT,6,Elect Director John G. Schreiber,43300A104,11,MGMT,0,FOR MGMT,0,Hotels and Resorts,21608.09,15.69x,-5.72%,0.0,0
 2014,HILTON WORLDWIDE HOLDINGS INC.,HLT,9,Elect Director William J. Stein,43300A104,11,MGMT,0,FOR MGMT,0,Hotels and Resorts,21608.09,15.69x,-5.72%,0.0,0
 2014,HILTON WORLDWIDE HOLDINGS INC.,HLT,8,Elect Director Douglas M. Steenland,43300A104,11,MGMT,0,FOR MGMT,0,Hotels and Resorts,21608.09,15.69x,-5.72%,0.0,0
-2014,HOLLYFRONTIER CORPORATION,HFC,4,Adopt Quantitative GHG Goals for,436106108,12,SH,1,FOR MGMT,0,Oil and Gas,9825.44,6.87x,25.44%,0.0,0
+2014,HOLLYFRONTIER CORPORATION,HFC,4,Adopt Quantitative GHG Goals for,436106108,12,SH,1,FOR MGMT,0,Oil and Gas,9825.44,6.87x,25.44%,0.0,1
 2014,HOLLYFRONTIER CORPORATION,HFC,1e,Elect Director Robert J. Kostelnik,436106108,12,MGMT,1,FOR MGMT,0,Oil and Gas,9825.44,6.87x,25.44%,0.0,0
 2014,HOLLYFRONTIER CORPORATION,HFC,1d,Elect Director Michael C. Jennings,436106108,12,MGMT,1,FOR MGMT,0,Oil and Gas,9825.44,6.87x,25.44%,0.0,0
 2014,HOLLYFRONTIER CORPORATION,HFC,1c,Elect Director R. Kevin Hardage,436106108,12,MGMT,1,FOR MGMT,0,Oil and Gas,9825.44,6.87x,25.44%,0.0,0
@@ -23740,7 +23740,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2014,MARATHON PETROLEUM CORPORATION,MPC,1d,Elect Director John P. Surma,56585A102,8,MGMT,2,FOR MGMT,0,Oil and Gas,42528.94,7.58x,-3.81%,0.0,0
 2014,MARATHON PETROLEUM CORPORATION,MPC,2,Ratify Auditors,56585A102,8,MGMT,2,FOR MGMT,0,Oil and Gas,42528.94,7.58x,-3.81%,0.0,0
 2014,MARATHON PETROLEUM CORPORATION,MPC,1c,Elect Director John W. Snow,56585A102,8,MGMT,2,FOR MGMT,0,Oil and Gas,42528.94,7.58x,-3.81%,0.0,0
-2014,MARATHON PETROLEUM CORPORATION,MPC,4,Adopt Quantitative GHG Goals for,56585A102,8,SH,2,FOR MGMT,0,Oil and Gas,42528.94,7.58x,-3.81%,0.0,0
+2014,MARATHON PETROLEUM CORPORATION,MPC,4,Adopt Quantitative GHG Goals for,56585A102,8,SH,2,FOR MGMT,0,Oil and Gas,42528.94,7.58x,-3.81%,0.0,1
 2014,MARATHON PETROLEUM CORPORATION,MPC,5,Report on Lobbying Payments and Policy,56585A102,8,SH,2,FOR MGMT,0,Oil and Gas,42528.94,7.58x,-3.81%,0.0,0
 2014,MARATHON PETROLEUM CORPORATION,MPC,3,Advisory Vote to Ratify Named,56585A102,8,MGMT,2,FOR MGMT,0,Oil and Gas,42528.94,7.58x,-3.81%,0.0,0
 2014,MASTERCARD INCORPORATED,MA,1k,Elect Director Jose Octavio Reyes,57636Q104,15,MGMT,0,FOR MGMT,2,IT and Software Services,202944.1,39.86x,31.48%,13.333333333333334,0
@@ -24043,7 +24043,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2014,PHILLIPS 66,PSX,1c,Elect Director Marna C. Whittington,718546104,6,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
 2014,PHILLIPS 66,PSX,1b,Elect Director Glenn F. Tilton,718546104,6,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
 2014,PHILLIPS 66,PSX,1a,"Elect Director William R. Loomis, Jr.",718546104,6,MGMT,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
-2014,PHILLIPS 66,PSX,4,Adopt Quantitative GHG Goals for,718546104,6,SH,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,0
+2014,PHILLIPS 66,PSX,4,Adopt Quantitative GHG Goals for,718546104,6,SH,1,FOR MGMT,0,Oil and Gas,41662.67,6.70x,-7.67%,0.0,1
 2014,PIONEER NATURAL RESOURCES COMPANY,PXD,4,Amend Omnibus Stock Plan,723787107,11,MGMT,0,FOR MGMT,0,Oil and Gas,24376.08,18.62x,-7.29%,0.0,0
 2014,PIONEER NATURAL RESOURCES COMPANY,PXD,8,Elect Director Jim A. Watson,723787107,11,MGMT,0,FOR MGMT,0,Oil and Gas,24376.08,18.62x,-7.29%,0.0,0
 2014,PIONEER NATURAL RESOURCES COMPANY,PXD,2,Ratify Auditors,723787107,11,MGMT,0,FOR MGMT,0,Oil and Gas,24376.08,18.62x,-7.29%,0.0,0
@@ -24621,7 +24621,7 @@ year,issuer_company,ticker_issuer,prop_nr,proposal,cusip,proposals_count,prop_fr
 2014,VALERO ENERGY CORPORATION,VLO,1b,Elect Director Joseph W. Gorder,91913Y100,16,MGMT,3,FOR MGMT,0,Oil and Gas,32243.18,7.23x,-11.22%,0.0,0
 2014,VALERO ENERGY CORPORATION,VLO,1a,Elect Director Jerry D. Choate,91913Y100,16,MGMT,3,FOR MGMT,0,Oil and Gas,32243.18,7.23x,-11.22%,0.0,0
 2014,VALERO ENERGY CORPORATION,VLO,6,Report on Lobbying Payments and Policy,91913Y100,16,SH,3,FOR MGMT,0,Oil and Gas,32243.18,7.23x,-11.22%,0.0,0
-2014,VALERO ENERGY CORPORATION,VLO,5,Adopt Quantitative GHG Goals for,91913Y100,16,SH,3,FOR MGMT,0,Oil and Gas,32243.18,7.23x,-11.22%,0.0,0
+2014,VALERO ENERGY CORPORATION,VLO,5,Adopt Quantitative GHG Goals for,91913Y100,16,SH,3,FOR MGMT,0,Oil and Gas,32243.18,7.23x,-11.22%,0.0,1
 2014,VALERO ENERGY CORPORATION,VLO,4,Pro-rata Vesting of Equity Awards,91913Y100,16,SH,3,FOR MGMT,0,Oil and Gas,32243.18,7.23x,-11.22%,0.0,0
 2014,VALERO ENERGY CORPORATION,VLO,3,Advisory Vote to Ratify Named,91913Y100,16,MGMT,3,FOR MGMT,0,Oil and Gas,32243.18,7.23x,-11.22%,0.0,0
 2014,VALERO ENERGY CORPORATION,VLO,1k,"Elect Director Rayford Wilkins, Jr.",91913Y100,16,MGMT,3,FOR MGMT,0,Oil and Gas,32243.18,7.23x,-11.22%,0.0,0

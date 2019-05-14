@@ -96,6 +96,7 @@ let getCompanyClass = function(d) {return d.split('*').join('').split("!").join(
 let mastergraph = function(yearData, graphNr) {
     // select companies only
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
+
     //console.log(yearData[0]);
     let getShStroke = (company) => {
 
@@ -111,7 +112,7 @@ let mastergraph = function(yearData, graphNr) {
                 let prop = datarow.proposal;
 
                 if ( shaPropCount > 0 )
-                { shaStroke = "#f25c00"}
+                { shaStroke = "#E1652A"}
                 if ( againstMgmt > 0)
                 { againstManFill = "#FFD275" }
                 if (environProp > 0) {
@@ -206,7 +207,7 @@ let updateGraph = function(yearData, graphNr) {
                 let shaPropCount = +datarow.count_sharehold_propo;
                 let againstMgmt = +datarow.count_against_mgmt;
                 if ( shaPropCount > 0 )
-                { shaStroke = "#f25c00"}
+                { shaStroke = "#E1652A"}
                 if ( againstMgmt > 0)
                 { againstManFill = "#FFD275" }
             }
@@ -304,26 +305,62 @@ let updateGraph = function(yearData, graphNr) {
 
 let updateGrap_Environ = function(yearData, graphNr) {
 
-    // select unique companies only
 
+
+    let fund;
+    if (graphNr === graph1) {
+        fund = "BlackRock";
+    } else if (graphNr === graph2) {
+        fund = "Vanguard"
+    } else (fund = "StateStreet")
+
+    // select unique companies only
     let companies = d3.map( yearData, function(d){ return d.comp} ).keys();
 
 
     let getStrokeText = (company) => {
 
-        let againstManFill = "#c2581b";
-        let prop;
-            yearData.forEach( ( datarow ) => {
-                if (datarow.comp === company) {
-                    prop = +datarow.prop;
-                    let propnr = +datarow.propnr;
-                    let voted = datarow.voted;
-                    if ( voted === "FOR MGMT" )
-                            { againstManFill = "#f2bb20" }
-                }
+        let againstManFill;
+        let proposals = [];
+        let countvotedAgainstM = 0;
+
+        yearData.forEach((datarow) => {
+            if (datarow.comp === company) {
+                let voted = datarow.voted;
+                let voteToDisplay;
+                if (voted === "AGAINST MGMT") {
+                    countvotedAgainstM += 1;
+                    voteToDisplay = "voted <span style='font-weight: bolder; border-bottom: 3px solid darkorange;'>FOR</span> in " + datarow.year;
+
+                } else {
+                    voteToDisplay = fund + "voted against in " + datarow.year;}
+                let sentence = datarow.prop.toLowerCase();
+                let upper = sentence.charAt(0).toUpperCase() + sentence.substring(1);
+                proposals.push(upper + "  -  " + voteToDisplay);
+            }
         });
-        return againstManFill;
-    }; // end of getShStroke
+        let countVotes = (countvotedAgainstM/proposals.length)*100;
+        if (countVotes=== 0) {againstManFill = "#535b5b" }
+        else if ((countVotes > 0 ) && (countVotes < 30)) { againstManFill ="#aebd96" }
+        else if ((countVotes > 5)) { againstManFill =  "#48a834" }
+        return [againstManFill, proposals];
+    }; // end of get stroke
+
+
+
+        // let againstManFill = "#E1652A";
+        // let prop;
+        //     yearData.forEach( ( datarow ) => {
+        //         if (datarow.comp === company) {
+        //             prop = datarow.prop;
+        //             let propnr = +datarow.propnr;
+        //             let voted = datarow.voted;
+        //             if ( voted === "FOR MGMT" )
+        //                     { againstManFill = "#f2bb20" }
+        //         }
+        // });
+        // return againstManFill;
+    //}; // end of getShStroke
 
 
     let t = d3.transition()
@@ -362,7 +399,7 @@ let updateGrap_Environ = function(yearData, graphNr) {
         }, false);
 
 
-    let sqs = blocks.merge(rects)
+    blocks.merge(rects)
         .transition(t)
         .attr("x", function(d, i){
             let colIndex = i % numCols;
@@ -374,9 +411,9 @@ let updateGrap_Environ = function(yearData, graphNr) {
         })
         .attr("width", 12)
         .attr("height", 12)
-        .style("stroke", "None")
-        //.style('fill', (d)=>{return getStrokeText(d)})
-        .attr("class",function(d){
+        .style("stroke", "")
+        .style('fill', (d)=>{return getStrokeText(d)[0]})
+        .attr("class", function(d){
             let companyClass = getCompanyClass(d);
             return "c" + companyClass + "__rect"
         });
@@ -426,16 +463,16 @@ let updateGrap_Environ = function(yearData, graphNr) {
 let dataBr;
 d3.csv('Data/BrDataSP500_allyears.csv')
     .then(function(data) {
-
+        let dataMC = data.sort((a, b) => ( +a.marketcap < +b.marketcap ) ? 1 : -1);
         // convert years from strings to numbers
-        data.forEach( function(d) { return d.year = +d.year });
+        dataMC.forEach( function(d) { return d.year = +d.year })
 
         // get data from slider
-        let startYearData = getYearData(data, 2018);
+        let startYearData = getYearData(dataMC, 2018);
 
         // start with a graph
         mastergraph(startYearData, graph1);
-        return dataBr = data;
+        return dataBr = dataMC;
     })
     .catch(function(error){
         console.log('data load error')
@@ -451,15 +488,16 @@ d3.csv('Data/BrDataSP500_allyears.csv')
 let dataVang;
 d3.csv('Data/Vanguard_proposals_all_years.csv')
     .then(function(data) {
-
+        let dataMC = data.sort((a, b) => ( +a.marketcap < +b.marketcap ) ? 1 : -1);
         // convert years from strings to numbers
-        data.forEach( function(d) { return d.year = +d.year });
+        dataMC.forEach( function(d) { return d.year = +d.year });
 
         // start with a graph
-        let startYearData = getYearData(data, 2018);
+        let startYearData = getYearData(dataMC, 2018);
         mastergraph(startYearData, graph2);
 
-        return dataVang = data;
+      dataVang = dataMC;
+
     })
     .catch(function(error){
         console.log('data load error')
@@ -476,14 +514,15 @@ let dataStStSorted;
 d3.csv('Data/StStDataSP500_allyears.csv')
     .then(function(data) {
 
+        let dataMC = data.sort((a, b) => ( +a.marketcap < +b.marketcap ) ? 1 : -1);
         // convert years from strings to numbers
-        data.forEach( function(d) { return d.year = +d.year });
+        dataMC.forEach( function(d) { return d.year = +d.year })
 
         // start with a graph
-        let startYearData = getYearData(data, 2018);
+        let startYearData = getYearData(dataMC, 2018);
         mastergraph(startYearData, graph3);
 
-        dataStSt = data;
+        dataStSt = dataMC;
 
 
     })
