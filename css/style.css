@@ -9,7 +9,7 @@ header {
     /*border-top:2px solid black;*/
     height: 83vh;
     margin-top: 5px;
-    background-image:url("../Data/img/vfinx.png");
+    /*background-image:url("../Data/img/vfinx.png");*/
     background-repeat: no-repeat;
     background-size: 83%;
     background-position: top;
@@ -317,8 +317,8 @@ div.graph-scroll-active #section-JBogle {
 
 .container-all-graphs {
     max-width: 1400px;
-    width: 95%;
-    margin: 0 2% 0 2%;
+    width: 90%;
+    margin: 0 3% 0 3%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -329,14 +329,48 @@ div.graph-scroll-active #section-JBogle {
 .container-graph {
      display: flex;
      flex-direction: column;
-     width: 33%;
+     max-width: 30%;
      align-items: center;
+    justify-content: space-around;
  }
 .GraphFundTitle {
     /* BR ; VANG ; STST above graphs*/
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.63);
+}
+.container-issues {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    margin: 24px 0 0 0;
+}
+.container-graph biggraphRight {
+    margin-right: 0;
+    width: 90%;
+}
+
+#legend_mainGraph_IMG {
+    position: absolute;
+    margin: 150px 10px 0 80%;
+    z-index: 4;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 7px 7px  7px 7px;
+}
+
+#legend_mainGraph {
+    width: 100%;
+    height:  100%;
+    font-size: 0.7em;
+    line-height: 1em;
+}
+
+
+.howtoread {
+    margin: 5% 40% 0 90% ;
+    position: absolute;
+    z-index:3;
+    height: 60%;
 }
 
 .container-graph h3{
@@ -414,14 +448,10 @@ div.graph-scroll-active #section-JBogle {
 
 
 
-.container-issues {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-}
 .issue-text {
-    margin-top: 4px;
+    margin-top: 9px;
     font-family: 'Roboto', sans-serif;
+    font-size: .9em;
 }
 
 /*SLIDER*/
@@ -442,7 +472,3 @@ div.graph-scroll-active #section-JBogle {
     transform: translate(-2px, -2px);
 }
 
-#legend_mainGraph {
-    width: 100%;
-    height:  100%;
-}

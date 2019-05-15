@@ -96,15 +96,13 @@ let getCompanyClass = function(d) {return d.split('*').join('').split("!").join(
 let mastergraph = function(yearData, graphNr) {
     // select companies only
     let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
-    d3.select(".environ_btn")
-        .style("text-decoration", "None");
 
     //console.log(yearData[0]);
     let getShStroke = (company) => {
 
         let shaStroke = "#C2C2C2";
         let againstManFill = "#ffffff";
-        let environPropText = []; // getting the text for the environ proposals, why not an array?
+        let environPropText = [];
 
         yearData.forEach( ( datarow ) => {
             if (datarow.issuer_company === company) {
@@ -122,6 +120,7 @@ let mastergraph = function(yearData, graphNr) {
                 }
             }
         });
+
         return [shaStroke, againstManFill, environPropText];
     }; // end of getShStroke
 
@@ -195,16 +194,18 @@ let mastergraph = function(yearData, graphNr) {
 
 }; // end of Mastergraph1 function
 
+// _updateGraph
 let updateGraph = function(yearData, graphNr) {
-    console.log(yearData);
-    // select companies only
-    let companies = d3.map( yearData, function(d){return d.issuer_company } ).keys();
 
-    d3.select(".environ_btn")
-        .style("text-decoration", "None");
+    // select companies only
+    let companies = d3.map( yearData, function(d){ return d.issuer_company } ).keys();
+
+    //reset heading
+    tooltip.html("on proxy issues at S&P 500 companies");
 
 
     let getShStroke = (company) => {
+
         let shaStroke = "#C2C2C2";
         let againstManFill = "#ffffff";
 
@@ -250,6 +251,7 @@ let updateGraph = function(yearData, graphNr) {
             return colIndex * 15
         })
         .attr('width', 10)
+        .style("fill", "#ffffff")
         .classed('selectedSq',false)
         .classed(function(d){
             let companyClass = getCompanyClass(d);
@@ -276,7 +278,7 @@ let updateGraph = function(yearData, graphNr) {
             return "c" + companyClass + "__rect"
             });
 
-        blocks.on('mouseover', function(d)  {
+        d3.selectAll("rect").on('mouseover', function(d)  {
                 let companyName = d;
                 let companyClass = getCompanyClass(d);
 
@@ -307,12 +309,15 @@ let updateGraph = function(yearData, graphNr) {
                 .style('opacity', 0.9);
         });
 
+    d3.selectAll("#environ_btn")
+        .html("environmental"); // TODO fix this
 };
 
 let updateGrap_Environ = function(yearData, graphNr) {
+
+
     d3.select(".tooltip").html("on <span style='border-bottom:  3px solid darkorange;'> environmental</span> proxy issues")
-    d3.select(".environ_btn")
-        .style("text-decoration", "line-through");
+
 
     let fund;
     if (graphNr === graph1) {
@@ -351,7 +356,7 @@ let updateGrap_Environ = function(yearData, graphNr) {
         if (countVotes=== 0) {againstManFill = "#535b5b" }
         else if ((countVotes > 0 ) && (countVotes < 30)) { againstManFill ="#aebd96" }
         else if ((countVotes > 5)) { againstManFill =  "#48a834" }
-        console.log(proposals);
+        // console.log(proposals);
         return [againstManFill, proposals];
     }; // end of get stroke
 
@@ -384,6 +389,7 @@ let updateGrap_Environ = function(yearData, graphNr) {
             return colIndex * 25
         })
         .attr('width', 10)
+        .style("fill", "#ffffff")
         .classed('selectedSq',false)
         .classed(function(d){
             let companyClass = getCompanyClass(d);
@@ -411,7 +417,8 @@ let updateGrap_Environ = function(yearData, graphNr) {
         });
 
 
-    blocks.on('mouseover', function(d)  {
+    d3.selectAll("rect").on('mouseover', function(d)  {
+         console.log("sdfasdfasdfasdf")
         let companyName = d;
         let companyClass = getCompanyClass(d);
 
@@ -424,12 +431,12 @@ let updateGrap_Environ = function(yearData, graphNr) {
             .duration(100)
             .style('opacity', 0.9);
         tooltip
-            .html(() =>  {return "on environmental proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
+            .html(() =>  {return "on <span style='border-bottom:  3px solid darkorange;'> environmental</span> proxy issues at " + "<span style='color:#FF6116'>" + companyName + "</span>" })
             .style("left", d + "px")
             .style("top", d + "px");
 
-        console.log(companyName);
-        d3.select("#propText").html((d)=>{})
+        // console.log(companyName);
+        // d3.select("#propText").html((d)=>{})
 
     })
         .on( 'mouseout', function (d) {
@@ -439,7 +446,7 @@ let updateGrap_Environ = function(yearData, graphNr) {
                 .classed('selectedSq',false);
 
             tooltip
-                .html(() => {return "on proxy issues at S&P 500 companies" })
+                .html("on environmental proxy issues")
                 .transition()
                 .duration(100)
                 .style('opacity', 0.9);
@@ -582,11 +589,13 @@ const createEnviron = function() {
     console.log(environYearData[0]);
 
 
-}
+};
 
 d3.select("#environ_btn").on('click', function(d) {
 
     if (switchEnviron === "eviron") {
+        d3.select("#environ_btn").style("text-decoration", "None")
+
         switchEnviron = "master";
         let BrDataUpdate = getYearData(dataBr, thisYear);
         updateGraph( BrDataUpdate, graph1);
@@ -596,7 +605,10 @@ d3.select("#environ_btn").on('click', function(d) {
 
         let StStDataUpdate = getYearData(dataStSt, thisYear);
         updateGraph(StStDataUpdate, graph3);
-    } else {
+    }
+        else {
+
+        d3.select("#environ_btn").html("all combined");
         switchEnviron = "eviron";
         return createEnviron()
     }
@@ -605,58 +617,63 @@ d3.select("#environ_btn").on('click', function(d) {
 
 
 sliderYears.on("onchange", val => {
+
+
     d3.select('#main-title').text("How did the largest asset managers vote in " + val + "?");
 
-    let BrDataUpdate = getYearData(dataBr, val);
-    updateGraph( BrDataUpdate, graph1);
+    if (switchEnviron === "master") {
+            let BrDataUpdate = getYearData(dataBr, val);
+            updateGraph( BrDataUpdate, graph1);
 
-    let VangDataUpdate = getYearData(dataVang, val);
-    updateGraph(VangDataUpdate , graph2);
+            let VangDataUpdate = getYearData(dataVang, val);
+            updateGraph(VangDataUpdate , graph2);
 
-    let StStDataUpdate = getYearData(dataStSt, val);
-    updateGraph(StStDataUpdate, graph3);
-    // this changes the global variable?
+            let StStDataUpdate = getYearData(dataStSt, val);
+            updateGraph(StStDataUpdate, graph3);
+            // this changes the global variable?
 
-    d3.select("#environ_btn").on('click', function(d) {
-        let environYearData = getdataEnviron(val); // get data for each fund
-        let BrEnviron = environYearData[0];
-        let VangEnviron = environYearData[1];
-        let StStEnviron = environYearData[2];
+            d3.select("#environ_btn").on('click', function(d) {
+                let environYearData = getdataEnviron(val); // get data for each fund
+                let BrEnviron = environYearData[0];
+                let VangEnviron = environYearData[1];
+                let StStEnviron = environYearData[2];
 
-        updateGrap_Environ(BrEnviron, graph1);
-        updateGrap_Environ(VangEnviron, graph2);
-        updateGrap_Environ(StStEnviron, graph3);
+                updateGrap_Environ(BrEnviron, graph1);
+                updateGrap_Environ(VangEnviron, graph2);
+                updateGrap_Environ(StStEnviron, graph3);
 
 
-        //add title things
-        let selectsq = d3.select('.selectedSq');
-        //console.log("this is the selection: "+ selectsq);
-        //d3.select("#propText").html((d,i)=>{return BrEnviron.prop})
+                //add title things
+                let selectsq = d3.select('.selectedSq');
+                //console.log("this is the selection: "+ selectsq);
+                //d3.select("#propText").html((d,i)=>{return BrEnviron.prop})
+            }); // end of onclick
+    } else {
+        createEnviron()
+    }
+    thisYear = val;
+    }); // end of sliders
 
-    });
 
-    return thisYear = val;
 
-});
 
-let legendSwitch= "on";
-let legend = d3.select("#legend_mainGraph");
-    legend.on("click", function(){
-        if (legendSwitch === "on")
-        {d3.select("#legend_mainGraph_IMG")
-            .style("opacity", 1);
-        d3.select("#legend_mainGraph")
-            .style("text-decoration", "line-through")
-        legendSwitch = "off";
+let legendSwitch= "showIMG";
+let legend_IMG = d3.select("#legend_mainGraph_IMG");
+let legend_butto = d3.select("#legend_mainGraph");
+legend_IMG.style("opacity", 0)
+
+legend_butto.on("click", function(){
+        if (legendSwitch === "showIMG") {
+            legend_IMG.style("opacity", 1);
+            d3.select("#legend_mainGraph")
+                .style("text-decoration", "line-through");
+        legendSwitch = "removeIMG";
 
         }
             else {
-                legendSwitch === "off";
-                d3.select("#legend_mainGraph_IMG")
-                    .style("opacity", 0);
+            legend_IMG.style("opacity", 0);
                 d3.select("#legend_mainGraph")
-                    .style("text-decoration", "None")
-                legendSwitch = "on";
-
+                    .style("text-decoration", "None");
+                legendSwitch = "showIMG";
             }
         })
