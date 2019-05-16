@@ -9,7 +9,7 @@ header {
     /*border-top:2px solid black;*/
     height: 83vh;
     margin-top: 5px;
-    /*background-image:url("../Data/img/vfinx.png");*/
+    background-image:url("../Data/img/vfinx.png");
     background-repeat: no-repeat;
     background-size: 83%;
     background-position: top;
@@ -317,7 +317,7 @@ div.graph-scroll-active #section-JBogle {
 
 .container-all-graphs {
     max-width: 1400px;
-    width: 90%;
+    width: 88%;
     margin: 0 3% 0 3%;
     display: flex;
     flex-direction: row;
@@ -347,15 +347,15 @@ div.graph-scroll-active #section-JBogle {
 }
 .container-graph biggraphRight {
     margin-right: 0;
-    width: 90%;
+    width: 28%;
 }
 
 #legend_mainGraph_IMG {
     position: absolute;
-    margin: 150px 10px 0 80%;
+    margin: 150px 10px 0 73%;
     z-index: 4;
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 7px 7px  7px 7px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 8px 7px 4px 7px;
 }
 
 #legend_mainGraph {
@@ -367,7 +367,7 @@ div.graph-scroll-active #section-JBogle {
 
 
 .howtoread {
-    margin: 5% 40% 0 90% ;
+    margin: 5% 5% 0 90% ;
     position: absolute;
     z-index:3;
     height: 60%;
